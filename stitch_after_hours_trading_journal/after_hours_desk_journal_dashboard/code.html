@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>After Hours' Desk Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d2e4ff",
+                        "secondary": "#006c46",
+                        "primary-fixed-dim": "#abc9f2",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149",
+                        "background": "#faf9fc",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "outline": "#73777f",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-tertiary-container": "#ff7967",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eeedf1",
+                        "tertiary-container": "#780001",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "surface-container-low": "#f4f3f6",
+                        "surface-variant": "#e3e2e5",
+                        "on-primary-fixed": "#001c37",
+                        "surface-tint": "#436084",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "on-primary-container": "#87a4cc",
+                        "on-tertiary-fixed": "#410000",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#abc9f2",
+                        "outline-variant": "#c3c6cf",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#faf9fc",
+                        "on-secondary-fixed-variant": "#005234",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "secondary-container": "#94f3bf",
+                        "inverse-surface": "#2f3033",
+                        "primary": "#002444",
+                        "surface-dim": "#dad9dd",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#002112",
+                        "on-surface-variant": "#43474e",
+                        "secondary-fixed": "#97f6c2",
+                        "primary-container": "#1a3a5c",
+                        "surface-bright": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "24px",
+                        "sidebar_width": "168px",
+                        "unit": "4px",
+                        "card_padding": "20px",
+                        "container_gap": "24px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "h3": ["Work Sans"],
+                        "h1": ["Work Sans"],
+                        "body-md": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { background-color: #faf9fc; }
+        .sidebar-active { 
+            background-color: #f8fafc;
+            border-left: 3px solid #002444;
+            color: #002444;
+            font-weight: 600;
+        }
+        .view-hidden { display: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+<!-- Fixed SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] flex flex-col z-40 overflow-y-auto font-['Work_Sans'] text-sm tracking-tight">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+            After Hours' Desk
+            <span class="block text-[10px] font-medium normal-case text-slate-500">Journal</span>
+</div>
+<div class="flex flex-col flex-1">
+<a class="sidebar-active flex items-center py-3 px-4 transition-all duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('quotes')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="trending_up">trending_up</span>
+                Quotes
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('overview')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('tradelog')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="list_alt">list_alt</span>
+                Trade Log
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('gallery')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="image">image</span>
+                Gallery
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('calendar')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="calendar_today">calendar_today</span>
+                Calendar
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('analytics')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="analytics">analytics</span>
+                Analytics
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#" onclick="showView('checklist')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="fact_check">fact_check</span>
+                Checklist
+            </a>
+<a class="mt-auto flex items-center text-slate-500 font-medium py-4 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 border-t border-slate-100" href="#" onclick="showView('addtrade')">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="add_box">add_box</span>
+                Add Trade
+            </a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex justify-between items-center px-8 z-30 ml-[168px] font-['Work_Sans'] text-sm font-medium">
+<div class="flex items-center gap-6">
+<span class="text-primary font-bold text-lg">Journal Dashboard</span>
+<div class="h-4 w-px bg-slate-300"></div>
+<div class="flex items-center text-secondary font-semibold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="payments">payments</span>
+                Live USD/PHP: 56.24
+            </div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-primary transition-colors" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">TR</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[168px] pt-16 min-h-screen p-8 bg-background">
+<!-- 1. VIEW: Quotes -->
+<section class="max-w-5xl mx-auto py-12" id="view-quotes">
+<div class="glass-card p-16 rounded-xl text-center mb-16 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary-container">
+<div class="h-full bg-primary w-2/3 transition-all duration-500"></div>
+</div>
+<span class="material-symbols-outlined text-primary-container text-6xl mb-6 opacity-20" data-icon="format_quote">format_quote</span>
+<h1 class="font-h1 text-primary mb-8 italic leading-relaxed">
+                    "The goal of a successful trader is to make the best trades. Money is secondary."
+                </h1>
+<p class="font-h3 text-slate-500">— Alexander Elder</p>
+<div class="mt-12 flex items-center justify-center gap-2 text-slate-400 font-label-caps">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                    Next rotation in: 02h 45m 12s
+                </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 bg-white border border-slate-200 rounded-lg shadow-sm">
+<p class="text-body-md text-slate-600 italic">"Amateurs hope. Professionals work."</p>
+<p class="text-xs font-bold text-primary mt-2 uppercase tracking-wider">Jesse Livermore</p>
+</div>
+<div class="p-6 bg-white border border-slate-200 rounded-lg shadow-sm">
+<p class="text-body-md text-slate-600 italic">"Markets are never wrong – opinions often are."</p>
+<p class="text-xs font-bold text-primary mt-2 uppercase tracking-wider">William O'Neil</p>
+</div>
+<div class="p-6 bg-white border border-slate-200 rounded-lg shadow-sm">
+<p class="text-body-md text-slate-600 italic">"Cut your losses. Let your profits run."</p>
+<p class="text-xs font-bold text-primary mt-2 uppercase tracking-wider">David Ricardo</p>
+</div>
+<div class="p-6 bg-white border border-slate-200 rounded-lg shadow-sm">
+<p class="text-body-md text-slate-600 italic">"Risk comes from not knowing what you're doing."</p>
+<p class="text-xs font-bold text-primary mt-2 uppercase tracking-wider">Warren Buffett</p>
+</div>
+</div>
+</section>
+<!-- 2. VIEW: Overview -->
+<section class="view-hidden" id="view-overview">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-white p-6 border border-slate-200 rounded-lg shadow-sm">
+<p class="text-label-caps text-slate-500 mb-2">TOTAL TRADES</p>
+<h2 class="text-h1 text-primary">142</h2>
+<p class="text-xs text-secondary font-semibold mt-1">+12 this month</p>
+</div>
+<div class="bg-white p-6 border border-slate-200 rounded-lg shadow-sm">
+<p class="text-label-caps text-slate-500 mb-2">WIN RATE</p>
+<h2 class="text-h1 text-secondary">64.2%</h2>
+<div class="w-full bg-slate-100 h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[64.2%]"></div>
+</div>
+</div>
+<div class="bg-white p-6 border border-slate-200 rounded-lg shadow-sm">
+<p class="text-label-caps text-slate-500 mb-2">TOTAL P&amp;L</p>
+<h2 class="text-h1 text-secondary">+$4,281.50</h2>
+<p class="text-xs text-slate-400 mt-1">≈ ₱240,791.56</p>
+</div>
+<div class="bg-white p-6 border border-slate-200 rounded-lg shadow-sm">
+<p class="text-label-caps text-slate-500 mb-2">BEST TRADE</p>
+<h2 class="text-h1 text-primary">+$890.00</h2>
+<p class="text-xs text-slate-400 mt-1">XAUUSD | Buy</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 bg-white p-6 border border-slate-200 rounded-lg h-[400px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-primary">Cumulative P&amp;L</h3>
+<span class="text-xs font-bold text-slate-400 uppercase">Last 30 Days</span>
+</div>
+<div class="flex-1 bg-slate-50 rounded flex items-end p-4 gap-2">
+<!-- Simplified CSS visualization representing a chart -->
+<div class="w-full flex items-end gap-1 h-full">
+<div class="bg-primary/20 w-full h-[20%]"></div>
+<div class="bg-primary/20 w-full h-[25%]"></div>
+<div class="bg-primary/20 w-full h-[22%]"></div>
+<div class="bg-primary/20 w-full h-[35%]"></div>
+<div class="bg-primary/20 w-full h-[45%]"></div>
+<div class="bg-primary w-full h-[60%]"></div>
+<div class="bg-primary w-full h-[55%]"></div>
+<div class="bg-primary w-full h-[70%]"></div>
+<div class="bg-primary w-full h-[85%]"></div>
+<div class="bg-primary w-full h-[80%]"></div>
+</div>
+</div>
+</div>
+<div class="bg-white p-6 border border-slate-200 rounded-lg flex flex-col items-center justify-center">
+<h3 class="font-h3 text-primary mb-8 w-full text-left">Win/Loss Ratio</h3>
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ba1a1a" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#006c46" stroke-dasharray="64, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-h2 text-primary">64%</span>
+<span class="text-[10px] font-bold text-slate-400">WIN RATE</span>
+</div>
+</div>
+<div class="mt-8 flex gap-8">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-xs text-slate-600">91 Wins</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="text-xs text-slate-600">51 Losses</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. VIEW: Trade Log -->
+<section class="view-hidden" id="view-tradelog">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-h1 text-primary">Trade Log</h2>
+<div class="flex gap-2 p-1 bg-slate-100 rounded-lg">
+<button class="px-4 py-1.5 text-xs font-bold bg-white text-primary rounded shadow-sm">Daily</button>
+<button class="px-4 py-1.5 text-xs font-bold text-slate-500 hover:text-primary transition-colors">Weekly</button>
+<button class="px-4 py-1.5 text-xs font-bold text-slate-500 hover:text-primary transition-colors">Monthly</button>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 border-b border-slate-200">
+<tr>
+<th class="px-6 py-4 text-label-caps text-slate-500">Date/Time</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">Pair</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">Dir</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">Session</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">P&amp;L</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">Execution</th>
+<th class="px-6 py-4 text-label-caps text-slate-500">Grade</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4 text-body-md text-slate-900">Oct 24, 09:15</td>
+<td class="px-6 py-4 font-bold text-primary">XAUUSD</td>
+<td class="px-6 py-4">
+<span class="bg-secondary/10 text-secondary px-2 py-0.5 rounded text-[10px] font-bold">BUY</span>
+</td>
+<td class="px-6 py-4 text-slate-500 text-xs">NY Open</td>
+<td class="px-6 py-4 font-bold text-secondary">+$420.00</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+</td>
+<td class="px-6 py-4 font-bold text-primary">A</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-4 text-body-md text-slate-900">Oct 23, 14:30</td>
+<td class="px-6 py-4 font-bold text-primary">USDJPY</td>
+<td class="px-6 py-4">
+<span class="bg-error/10 text-error px-2 py-0.5 rounded text-[10px] font-bold">SELL</span>
+</td>
+<td class="px-6 py-4 text-slate-500 text-xs">London</td>
+<td class="px-6 py-4 font-bold text-error">-$150.00</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-slate-300 text-sm" data-icon="cancel">cancel</span>
+</td>
+<td class="px-6 py-4 font-bold text-primary">C</td>
+</tr>
+<!-- More rows would be here -->
+</tbody>
+</table>
+</div>
+</section>
+<!-- 4. VIEW: Gallery -->
+<section class="view-hidden" id="view-gallery">
+<h2 class="text-h1 text-primary mb-8">Trade Gallery</h2>
+<div class="mb-12">
+<div class="flex items-center gap-4 mb-6">
+<h3 class="font-h3 text-primary">Week 42 - October</h3>
+<div class="h-px flex-1 bg-slate-200"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="group relative bg-white border border-slate-200 rounded-lg overflow-hidden cursor-pointer">
+<img class="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="high resolution technical trading chart on a monitor with candlesticks and volume indicators" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIWEp4DYPuBLUN5mDRIi-uZN1ampwi__7fFDmGZ56GrkPO8CP3Yu0Hgm2YgtmLoCjITp7N9xGvdfje_EaIVVit2h9HdT5hBLDJ9wGNMOfZD7IRWRWTYG6oDWWyZieMC9reTf-mkhxjLhIRN7llT49-qCscP0V2Hlx5hWbxce350_1HswhC57O2QLnDDgjdNQEZXuQJ-sQHzfr5k1ObGKAF_pNAd0idvjrY4H_5VoGtpwUCHy3j2duH1mlmkn2_MKvn7GwL3cN77yda"/>
+<div class="absolute top-2 right-2 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded">PROFIT</div>
+<div class="p-4">
+<p class="font-bold text-primary">XAUUSD Breakout</p>
+<p class="text-xs text-slate-400">Oct 24, 2023</p>
+</div>
+</div>
+<div class="group relative bg-white border border-slate-200 rounded-lg overflow-hidden cursor-pointer">
+<img class="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="financial workspace with dual monitors showing stock data in a clean professional office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuAOHxeu227j96LZKJyOUHblvh2wonsQVvDuWpjeX_uSbXKMMjg0UmZ3gao-ga5WwBsiV8xysbXhNFTpVmFIbehRj-OlwSgwCWRcAL5RpV-ESPAx8JUxw-OPB5jU6F9CrR17p1AXS-mjEyAAMavHJQm8fwr_wOrsWKVNUp_TqH6liRylsC-nNM4EdvwjbG0J1WVQAyalVLw3zI0ZeE5BzX7W0zgrx91w8LLY3t7dPFZ-Mrhloyrg7Lv_AVxg1nc9y8Z3mVLQ4l3sQy"/>
+<div class="absolute top-2 right-2 bg-error text-white text-[10px] font-bold px-2 py-1 rounded">LOSS</div>
+<div class="p-4">
+<p class="font-bold text-primary">USDJPY Retest Fail</p>
+<p class="text-xs text-slate-400">Oct 23, 2023</p>
+</div>
+</div>
+<div class="group relative bg-white border border-slate-200 rounded-lg overflow-hidden cursor-pointer">
+<img class="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="complex technical analysis chart on a sleek interface with dark mode aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVAERqiqxY5P7lw-Yv85N37tXlUgnBIhK7ty3GcDi3Me5aAF3Rw-XC9qsY2L5KnfEWZree2FVTDe5uzZYDMKrzKMfbe9LOuHVVWWnmb2Q_iIQv0PzvKXMYPEU9Zdj8L0ETSnO_3k5fzeYVF8FXZummmO4JzlZjmvWpaX1724X23a1tPg3FMumwWX3wKHGRwMmmUgCpYDhOuRxbm0uO_A4Cx-WvxlrYn9lkjE2KDO4PcCrIKReX4UjlfiPsAeXJgASeIjMfHesdzcsf"/>
+<div class="absolute top-2 right-2 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded">PROFIT</div>
+<div class="p-4">
+<p class="font-bold text-primary">EURUSD Scalp</p>
+<p class="text-xs text-slate-400">Oct 21, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. VIEW: Calendar -->
+<section class="view-hidden" id="view-calendar">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-h1 text-primary">October 2023</h2>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center border border-slate-200 rounded hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-8">
+<div class="grid grid-cols-7 border-b border-slate-100 bg-slate-50">
+<div class="py-4 text-center text-label-caps text-slate-400">SUN</div>
+<div class="py-4 text-center text-label-caps text-slate-400">MON</div>
+<div class="py-4 text-center text-label-caps text-slate-400">TUE</div>
+<div class="py-4 text-center text-label-caps text-slate-400">WED</div>
+<div class="py-4 text-center text-label-caps text-slate-400">THU</div>
+<div class="py-4 text-center text-label-caps text-slate-400">FRI</div>
+<div class="py-4 text-center text-label-caps text-slate-400">SAT</div>
+</div>
+<div class="grid grid-cols-7 grid-rows-5 h-[600px]">
+<!-- Sample Days -->
+<div class="border-r border-b border-slate-100 p-2 opacity-30 text-xs font-bold">28</div>
+<div class="border-r border-b border-slate-100 p-2 opacity-30 text-xs font-bold">29</div>
+<div class="border-r border-b border-slate-100 p-2 opacity-30 text-xs font-bold">30</div>
+<div class="border-r border-b border-slate-100 p-4 bg-secondary/5 group cursor-pointer transition-colors hover:bg-secondary/10">
+<span class="text-xs font-bold text-slate-400">01</span>
+<div class="mt-4 text-secondary font-bold text-sm">+$210</div>
+<div class="text-[10px] text-slate-400 uppercase">2 TRADES</div>
+</div>
+<div class="border-r border-b border-slate-100 p-4">
+<span class="text-xs font-bold text-slate-400">02</span>
+</div>
+<div class="border-r border-b border-slate-100 p-4 bg-error/5 group cursor-pointer transition-colors hover:bg-error/10">
+<span class="text-xs font-bold text-slate-400">03</span>
+<div class="mt-4 text-error font-bold text-sm">-$85</div>
+</div>
+<!-- Filler for layout demo -->
+<div class="border-b border-slate-100 p-4"></div>
+<!-- Repeat logic for rest of days... -->
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-6">
+<h4 class="font-h3 text-primary mb-4">Details for October 1st</h4>
+<div class="text-slate-500 italic text-sm">Select a day on the calendar to view trade specifics and session notes.</div>
+</div>
+</section>
+<!-- 6. VIEW: Analytics -->
+<section class="view-hidden" id="view-analytics">
+<h2 class="text-h1 text-primary mb-8">Performance Analytics</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-white p-8 border border-slate-200 rounded-xl shadow-sm">
+<h3 class="font-h3 text-primary mb-8">P&amp;L by Session</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">Asian Session</span>
+<span class="text-secondary">+$1,120</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[45%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">London Session</span>
+<span class="text-secondary">+$2,840</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[85%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="text-slate-500 uppercase">NY Session</span>
+<span class="text-error">-$450</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full w-[20%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-8 border border-slate-200 rounded-xl shadow-sm">
+<h3 class="font-h3 text-primary mb-8">Trade Efficiency (PnL/Pair)</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<span class="w-20 text-xs font-bold text-primary">XAUUSD</span>
+<div class="flex-1 h-8 bg-secondary/20 border-l-4 border-secondary flex items-center px-4 text-xs font-bold text-secondary">+$3,200</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-20 text-xs font-bold text-primary">EURUSD</span>
+<div class="flex-1 h-8 bg-secondary/10 border-l-4 border-secondary flex items-center px-4 text-xs font-bold text-secondary">+$940</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-20 text-xs font-bold text-primary">USDJPY</span>
+<div class="flex-1 h-8 bg-error/10 border-l-4 border-error flex items-center px-4 text-xs font-bold text-error">-$1,250</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="w-20 text-xs font-bold text-primary">GBPUSD</span>
+<div class="flex-1 h-8 bg-secondary/5 border-l-4 border-secondary flex items-center px-4 text-xs font-bold text-secondary">+$420</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. VIEW: Checklist -->
+<section class="view-hidden max-w-3xl mx-auto" id="view-checklist">
+<div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+<div class="bg-primary p-8 text-white">
+<h2 class="text-h2 mb-4">Pre-Session Protocol</h2>
+<div class="flex items-center gap-4">
+<div class="flex-1 h-2 bg-white/20 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-1/2"></div>
+</div>
+<span class="text-xs font-bold uppercase tracking-wider">50% Complete</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<label class="flex items-center p-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="ml-4 text-body-md text-slate-700">Check Forex Factory for high-impact news (Red Folders)</span>
+</label>
+<label class="flex items-center p-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="ml-4 text-body-md text-slate-700">Identify Higher Timeframe (Daily/H4) trend &amp; bias</span>
+</label>
+<label class="flex items-center p-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="ml-4 text-body-md text-slate-700">Mark Key Support/Resistance and Liquidity pools</span>
+</label>
+<label class="flex items-center p-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="ml-4 text-body-md text-slate-700">Review yesterday's trade mistakes &amp; lessons</span>
+</label>
+<label class="flex items-center p-4 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer border border-transparent hover:border-slate-100">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="ml-4 text-body-md text-slate-700">Clear desk, turn off phone notifications</span>
+</label>
+<div class="pt-6 mt-6 border-t border-slate-100">
+<textarea class="w-full rounded-lg border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary p-4 text-sm" placeholder="Session intentions &amp; mental state notes..." rows="4"></textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. VIEW: Add Trade -->
+<section class="view-hidden max-w-4xl mx-auto" id="view-addtrade">
+<h2 class="text-h1 text-primary mb-8">Journal New Trade</h2>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Asset Pair</label>
+<select class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary text-sm font-bold">
+<option>XAUUSD (Gold)</option>
+<option>EURUSD</option>
+<option>GBPUSD</option>
+<option>USDJPY</option>
+<option>BTCUSD</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Direction</label>
+<div class="flex gap-2">
+<button class="flex-1 py-2 border border-slate-200 rounded-lg text-xs font-bold hover:bg-secondary/5 hover:border-secondary transition-colors" type="button">BUY</button>
+<button class="flex-1 py-2 border border-slate-200 rounded-lg text-xs font-bold hover:bg-error/5 hover:border-error transition-colors" type="button">SELL</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Entry Date</label>
+<input class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary text-sm" type="datetime-local"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-100">
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Entry Price</label>
+<input class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary text-sm font-mono" placeholder="0.0000" step="0.0001" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Exit Price</label>
+<input class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary text-sm font-mono" placeholder="0.0000" step="0.0001" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Lot Size</label>
+<input class="w-full rounded-lg border-slate-200 focus:ring-primary focus:border-primary text-sm font-mono" placeholder="0.10" step="0.01" type="number"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Result P&amp;L ($)</label>
+<input class="w-full bg-white rounded-lg border-slate-200 text-sm font-bold text-slate-400" placeholder="Auto-calculated" readonly="" type="text"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-label-caps text-slate-500">Execution Quality Rubric</label>
+<div class="grid grid-cols-4 gap-4">
+<div class="p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-primary transition-all text-center">
+<span class="block text-h2 font-black text-slate-300 mb-1">A</span>
+<span class="text-[10px] text-slate-500 uppercase">Flawless</span>
+</div>
+<div class="p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-primary transition-all text-center">
+<span class="block text-h2 font-black text-slate-300 mb-1">B</span>
+<span class="text-[10px] text-slate-500 uppercase">Disciplined</span>
+</div>
+<div class="p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-primary transition-all text-center">
+<span class="block text-h2 font-black text-slate-300 mb-1">C</span>
+<span class="text-[10px] text-slate-500 uppercase">Impulsive</span>
+</div>
+<div class="p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-primary transition-all text-center">
+<span class="block text-h2 font-black text-slate-300 mb-1">D</span>
+<span class="text-[10px] text-slate-500 uppercase">Mistake</span>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-label-caps text-slate-500">Evidence (Screenshots)</label>
+<div class="w-full border-2 border-dashed border-slate-200 rounded-xl p-12 flex flex-col items-center justify-center text-slate-400 hover:border-primary hover:text-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="cloud_upload">cloud_upload</span>
+<p class="text-sm">Drag and drop MT4/TradingView screenshots here</p>
+</div>
+</div>
+<div class="flex justify-end gap-4 pt-8">
+<button class="px-8 py-3 text-sm font-bold text-slate-500 hover:text-primary transition-colors" type="button">Cancel</button>
+<button class="px-10 py-3 bg-primary text-white rounded-lg text-sm font-bold shadow-lg hover:shadow-primary/20 active:scale-95 transition-all" type="submit">Archive Trade</button>
+</div>
+</form>
+</section>
+</main>
+<script>
+        function showView(viewId) {
+            // Hide all views
+            document.querySelectorAll('main > section').forEach(view => {
+                view.classList.add('view-hidden');
+            });
+            // Show target view
+            document.getElementById('view-' + viewId).classList.remove('view-hidden');
+            
+            // Update sidebar styles
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('sidebar-active');
+                link.classList.add('text-slate-500', 'font-medium', 'px-[19px]');
+                link.classList.remove('bg-slate-50', 'border-l-[3px]', 'border-slate-900', 'text-slate-900', 'font-semibold', 'px-4');
+            });
+
+            // Find clicked element (hack for simple demo, in real app event would be passed)
+            const links = Array.from(document.querySelectorAll('nav a'));
+            const activeLink = links.find(l => l.getAttribute('onclick').includes(viewId));
+            if(activeLink) {
+                activeLink.classList.add('sidebar-active');
+                activeLink.classList.remove('text-slate-500', 'px-[19px]');
+            }
+
+            window.scrollTo(0,0);
+        }
+
+        // Simple Countdown Timer simulation
+        function startCountdown() {
+            let hours = 2, minutes = 45, seconds = 12;
+            setInterval(() => {
+                seconds--;
+                if(seconds < 0) { seconds = 59; minutes--; }
+                if(minutes < 0) { minutes = 59; hours--; }
+                const display = document.querySelector('[data-icon="schedule"]').parentElement;
+                if(display) {
+                    display.innerHTML = `<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> Next rotation in: ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+                }
+            }, 1000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', startCountdown);
+    </script>
+</body></html>

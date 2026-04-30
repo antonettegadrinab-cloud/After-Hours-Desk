@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checklist - After Hours' Desk Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "on-surface-variant": "#43474e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-low": "#f4f3f6",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "surface-dim": "#dad9dd",
+                        "outline-variant": "#c3c6cf",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005234",
+                        "primary-container": "#1a3a5c",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "secondary-fixed": "#97f6c2",
+                        "surface": "#faf9fc",
+                        "on-primary-container": "#87a4cc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c46",
+                        "on-secondary-fixed": "#002112",
+                        "background": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "primary-fixed": "#d2e4ff",
+                        "primary": "#002444",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-tertiary-container": "#ff7967",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "secondary-container": "#94f3bf",
+                        "outline": "#73777f",
+                        "tertiary-container": "#780001",
+                        "primary-fixed-dim": "#abc9f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c37",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9fc",
+                        "inverse-primary": "#abc9f2",
+                        "on-tertiary-fixed": "#410000",
+                        "surface-tint": "#436084",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "sidebar_width": "168px",
+                        "container_gap": "24px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "card_padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Work Sans"],
+                        "h3": ["Work Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        body {
+            background-color: #faf9fc;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] flex flex-col z-40 overflow-y-auto">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+<div class="leading-tight">After Hours'</div>
+<div class="text-xs font-medium text-slate-500 normal-case tracking-normal">Journal</div>
+</div>
+<nav class="flex-1">
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">trending_up</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Quotes</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Overview</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">list_alt</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Trade Log</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">image</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Gallery</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">calendar_today</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Calendar</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Analytics</span>
+</a>
+<a class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">fact_check</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Checklist</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined mr-3">add_box</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Add Trade</span>
+</a>
+</nav>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex justify-between items-center px-8 z-30 ml-[168px]">
+<h1 class="font-h2 text-h2 text-primary">Trading Session Checklist</h1>
+<div class="flex items-center gap-6">
+<span class="font-data-mono text-data-mono text-secondary">Live USD/PHP: 56.24</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[168px] pt-24 px-8 pb-12 min-h-screen bg-background">
+<div class="max-w-4xl mx-auto space-y-stack-lg">
+<!-- Progress Section -->
+<div class="bg-white border border-outline-variant p-card_padding rounded shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-center mb-stack-sm">
+<h3 class="font-h3 text-h3 text-primary uppercase tracking-wider text-xs">Readiness Score</h3>
+<span class="font-data-mono text-data-mono text-secondary">62.5% Complete</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 62.5%"></div>
+</div>
+</div>
+<!-- Checklist Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-container_gap">
+<!-- Main Checklist Column -->
+<div class="lg:col-span-2 space-y-stack-md">
+<div class="bg-white border border-outline-variant rounded shadow-[0px_2px_4px_rgba(26,58,92,0.04)] overflow-hidden">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Pre-Market Routine</span>
+<button class="text-primary font-body-md font-semibold hover:underline text-xs flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">restart_alt</span>
+                                Reset All
+                            </button>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Item 1 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface line-through text-slate-400">Review Daily/Weekly Economic Calendar</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface line-through text-slate-400">Identify Key S/R Levels on HTF (D1/H4)</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface line-through text-slate-400">Check Correlated Pairs &amp; DXY Bias</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface line-through text-slate-400">Verify Risk Exposure Across Open Positions</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 5 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface line-through text-slate-400">Clean Charts: Remove Irrelevant Markups</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 6 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface">Confirm Setup Alignment with Trading Plan</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 7 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface">Review Journal Notes from Previous Session</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+<!-- Item 8 -->
+<div class="flex items-center p-4 hover:bg-slate-50 transition-colors group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all cursor-pointer" type="checkbox"/>
+<span class="ml-4 flex-1 font-body-md text-on-surface">Mental State Check: No Emotional Interference</span>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error hover:bg-error-container p-1 rounded">
+<span class="material-symbols-outlined !text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Add Item Input -->
+<div class="p-4 bg-slate-50/50 border-t border-outline-variant">
+<div class="flex gap-2">
+<input class="flex-1 bg-white border border-outline rounded px-4 py-2 font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Add custom criteria..." type="text"/>
+<button class="bg-primary text-white px-4 py-2 rounded font-body-md font-semibold hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined !text-sm">add</span>
+                                    Add
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Session Context/Sidebar -->
+<div class="space-y-stack-md">
+<!-- Session Notes -->
+<div class="bg-white border border-outline-variant p-card_padding rounded shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<h3 class="font-h3 text-h3 text-primary mb-stack-sm text-sm uppercase tracking-wider">Session Notes</h3>
+<textarea class="w-full h-48 bg-white border border-outline rounded p-3 font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none" placeholder="Observe market sentiment, personal mood, or specific pair focus for today..."></textarea>
+<div class="mt-4 flex justify-between items-center">
+<span class="text-[10px] uppercase font-bold text-slate-400">Last saved 2m ago</span>
+<button class="text-primary text-xs font-semibold hover:underline">Clear Notes</button>
+</div>
+</div>
+<!-- Strategy Snapshot -->
+<div class="bg-white border border-outline-variant p-card_padding rounded shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<h3 class="font-h3 text-h3 text-primary mb-stack-sm text-sm uppercase tracking-wider">Focus Tags</h3>
+<div class="flex flex-wrap gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Breakout</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">London Open</span>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Low Vol</span>
+</div>
+</div>
+<!-- Market Hours Reference -->
+<div class="relative h-40 rounded overflow-hidden border border-outline-variant">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="professional workspace with multiple monitors showing financial candle charts in a moody low light environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsCn1Clt46p7Yl1dKq5nsYmruEdPGyw5alAbLKTRr9Vw7ZVQGgJtyA4MmUva0HQmRIZF-YL8XPlm3OWY8ntl7-9TyabTEDkqsWAk_HnpC1kwdWLWe0gy10IOR0uWerg_eS-oXJbHZSAW14uqlWu0Q-gHhaBNBdFcEZIimvBlUWy9K6_jf1jcWEjuf4bg4W5qBYaqBn8Ki2fhQ6ftjL4URQmuIOalM2RHJNDAvYUqBNNGPMH1vMKnMxT5Zf6aVrMLsbqkGPWPdjJAsS"/>
+<div class="absolute inset-0 bg-primary/60 backdrop-blur-[2px] flex flex-col justify-center items-center text-white p-4">
+<span class="font-label-caps text-label-caps text-secondary-fixed">Next Major Session</span>
+<span class="font-h1 text-h1 mt-1">NY Open</span>
+<span class="font-data-mono text-data-mono text-primary-fixed">In 04h 12m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Utility -->
+<div class="flex justify-between items-center pt-8 border-t border-outline-variant">
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-500">Current Session</span>
+<span class="font-data-mono text-sm">2023-10-24 PRE-MKT</span>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase font-bold text-slate-500">Account Status</span>
+<span class="font-data-mono text-sm text-secondary">Operational</span>
+</div>
+</div>
+<button class="bg-surface-container text-primary border border-outline px-6 py-2.5 rounded font-body-md font-bold hover:bg-surface-container-high transition-colors active:scale-95">
+                    Save Session Readiness
+                </button>
+</div>
+</div>
+</main>
+</body></html>

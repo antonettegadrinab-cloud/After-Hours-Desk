@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "on-surface-variant": "#43474e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-low": "#f4f3f6",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "surface-dim": "#dad9dd",
+                        "outline-variant": "#c3c6cf",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005234",
+                        "primary-container": "#1a3a5c",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "secondary-fixed": "#97f6c2",
+                        "surface": "#faf9fc",
+                        "on-primary-container": "#87a4cc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c46",
+                        "on-secondary-fixed": "#002112",
+                        "background": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "primary-fixed": "#d2e4ff",
+                        "primary": "#002444",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-tertiary-container": "#ff7967",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "secondary-container": "#94f3bf",
+                        "outline": "#73777f",
+                        "tertiary-container": "#780001",
+                        "primary-fixed-dim": "#abc9f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c37",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9fc",
+                        "inverse-primary": "#abc9f2",
+                        "on-tertiary-fixed": "#410000",
+                        "surface-tint": "#436084",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "sidebar_width": "168px",
+                        "container_gap": "24px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "card_padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Work Sans"],
+                        "h3": ["Work Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- Fixed SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white z-40 flex flex-col overflow-y-auto shadow-[2px_0px_4px_rgba(26,58,92,0.04)] font-['Work_Sans'] text-sm tracking-tight">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mt-8 mb-10">
+            After Hours' Desk
+            <span class="block text-[10px] opacity-50 font-normal tracking-normal capitalize">Journal</span>
+</div>
+<nav class="flex-1">
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">trending_up</span> Quotes
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span> Overview
+            </a>
+<a class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">list_alt</span> Trade Log
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">image</span> Gallery
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">calendar_today</span> Calendar
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span> Analytics
+            </a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">fact_check</span> Checklist
+            </a>
+</nav>
+<div class="p-4 mb-6">
+<button class="w-full bg-primary text-white py-3 rounded flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+<span class="text-xs font-bold uppercase tracking-wider">Add Trade</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md z-30 flex justify-between items-center px-8 font-['Work_Sans'] text-sm font-medium">
+<div class="flex items-center gap-4">
+<span class="font-h2 text-h2 text-primary">Trade Log</span>
+<div class="h-4 w-px bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/30">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[11px] font-bold text-on-surface-variant tracking-wide">MARKET OPEN</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<span class="block text-[10px] text-slate-400 uppercase tracking-widest font-bold">Live Conversion</span>
+<span class="text-primary font-bold">Live USD/PHP: 56.24</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold">
+                    JD
+                </div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-[168px] pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto p-stack-lg">
+<!-- Filters & Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-stack-lg gap-4">
+<div class="flex items-center gap-2 p-1 bg-surface-container rounded-lg w-fit">
+<button class="px-4 py-1.5 bg-white text-primary shadow-sm rounded font-semibold text-xs transition-all">All</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:bg-white/50 rounded font-medium text-xs transition-all">Daily</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:bg-white/50 rounded font-medium text-xs transition-all">Weekly</button>
+<button class="px-4 py-1.5 text-on-surface-variant hover:bg-white/50 rounded font-medium text-xs transition-all">Monthly</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-white border border-outline-variant rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all w-64" placeholder="Search pairs or sessions..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-white text-on-surface hover:bg-slate-50 rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filters
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-white text-on-surface hover:bg-slate-50 rounded-lg text-sm font-medium transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Trade Log Table Card -->
+<div class="bg-white border border-slate-200 rounded-xl shadow-[0px_2px_4px_rgba(26,58,92,0.04)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-slate-200">
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer hover:text-primary transition-colors">
+<div class="flex items-center gap-1">Date <span class="material-symbols-outlined text-[14px]">arrow_downward</span></div>
+</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer">Pair</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer">Direction</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer">Session</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase cursor-pointer">Result</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">P&amp;L (USD)</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">P&amp;L (PHP)</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase text-center">Grade</th>
+<th class="py-4 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase text-center">Again?</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant uppercase">Chart</th>
+</tr>
+</thead>
+<tbody>
+<!-- Monthly Group Header -->
+<tr class="bg-slate-50/50">
+<td class="py-3 px-6" colspan="10">
+<div class="flex items-center gap-2">
+<span class="font-h3 text-h3 text-primary">OCTOBER 2023</span>
+<span class="text-xs text-on-surface-variant bg-slate-200/50 px-2 py-0.5 rounded">12 Trades</span>
+</div>
+</td>
+</tr>
+<!-- Weekly Group Header -->
+<tr class="border-t border-slate-100">
+<td class="py-2 px-8" colspan="10">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em]">Week 42 (Oct 16 - Oct 22)</span>
+</td>
+</tr>
+<!-- Trade Row 1 -->
+<tr class="group hover:bg-slate-50 transition-colors border-b border-slate-100">
+<td class="py-4 px-6 font-data-mono text-data-mono text-on-surface">Oct 18, 14:20</td>
+<td class="py-4 px-4 font-bold text-primary">EURUSD</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider">Buy</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant text-[11px] font-bold uppercase">London</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-secondary/10 text-secondary text-[11px] font-bold uppercase">Win</span>
+</td>
+<td class="py-4 px-4 text-right font-data-mono text-secondary">+$1,240.00</td>
+<td class="py-4 px-4 text-right font-data-mono text-secondary">₱69,737.60</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary text-white text-[11px] font-bold">A</span>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="py-4 px-6">
+<div class="w-12 h-8 rounded border border-slate-200 overflow-hidden cursor-pointer hover:ring-2 ring-primary/20 transition-all">
+<img class="w-full h-full object-cover" data-alt="professional financial trading chart with candlesticks and technical analysis indicators on a clean dark interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8y7SdjZIgmPUWA7J04uN_RHjhiGgEfFmuKe4E9ETpmaLZgrupegeHgf2D077xK3JOrtCAmmY96K-0BbikwxvHjLhKN1y-qdGUPJacP_QaoJz3Q8SirfYfvsMkBtGFFJG9xqA0D2tYt5rtQv3FN1zvBmzyAeeezdCVQaldjw-O3Z0FYRBCk_ID5SzyntxXEhFAu_zyoQiVKbR63kaoxr0K3TH6PMqTAssKOGGDdrV8dldvAqF8fUIiUje9c0i2-Rdud8NTOayXWz6Z"/>
+</div>
+</td>
+</tr>
+<!-- Trade Row 2 -->
+<tr class="group hover:bg-slate-50 transition-colors border-b border-slate-100">
+<td class="py-4 px-6 font-data-mono text-data-mono text-on-surface">Oct 17, 20:45</td>
+<td class="py-4 px-4 font-bold text-primary">GBPUSD</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-error-container text-on-error-container text-[11px] font-bold uppercase tracking-wider">Sell</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-primary-container text-on-primary-container text-[11px] font-bold uppercase">New York</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-error/10 text-error text-[11px] font-bold uppercase">Loss</span>
+</td>
+<td class="py-4 px-4 text-right font-data-mono text-error">-$450.00</td>
+<td class="py-4 px-4 text-right font-data-mono text-error">-₱25,308.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-slate-300 text-slate-500 text-[11px] font-bold">C</span>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">cancel</span>
+</td>
+<td class="py-4 px-6">
+<div class="w-12 h-8 rounded border border-slate-200 overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="forex trading terminal showing complex price action and trend lines on multiple monitors in a dim room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHadyQVLMicWM9f72Yzi62YVI6NwuCWDCEcmFljw_sBmtRUkUJZu4gDQS-E7BtxIayUuu8V_ei1inVMzWoQ6f5tG9LsU60DgYWchjq5tT3vSq03HMiDgQ_4aNy4azUdjC9KF2W7btFYS8lY4cafjuJKzdDiq_MiwBi8ZHSJa1kScXwq1BcNtkcfC4sEYfNj9VdeOkeW4uLrnGBvWMx37HUh5yXVkOLa-lmTU8Cjb4jTsyy7L10TQfOqwY8DDucJ9p9COAMO2kUKI0u"/>
+</div>
+</td>
+</tr>
+<!-- Weekly Group Header -->
+<tr class="border-t border-slate-100">
+<td class="py-2 px-8" colspan="10">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-[0.1em]">Week 41 (Oct 09 - Oct 15)</span>
+</td>
+</tr>
+<!-- Trade Row 3 -->
+<tr class="group hover:bg-slate-50 transition-colors border-b border-slate-100">
+<td class="py-4 px-6 font-data-mono text-data-mono text-on-surface">Oct 12, 10:15</td>
+<td class="py-4 px-4 font-bold text-primary">USDJPY</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider">Buy</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface-variant text-[11px] font-bold uppercase">Asian</span>
+</td>
+<td class="py-4 px-4">
+<span class="px-2.5 py-1 rounded bg-slate-200 text-slate-600 text-[11px] font-bold uppercase">B.E.</span>
+</td>
+<td class="py-4 px-4 text-right font-data-mono text-slate-500">$0.00</td>
+<td class="py-4 px-4 text-right font-data-mono text-slate-500">₱0.00</td>
+<td class="py-4 px-4 text-center">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-full border border-primary text-primary text-[11px] font-bold">B</span>
+</td>
+<td class="py-4 px-4 text-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="py-4 px-6">
+<div class="w-12 h-8 rounded border border-slate-200 overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="close-up of financial data screen with glowing digits and line charts in deep blue and teal tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsv01LNHgGG_x8KwXwe53BJs7xn7DUsxo_mmQKYSY-UYB86noP8tgIqX9zRqOeJeyCiB6U0vqOJ5TtphbAtk-TKJS8NnY1d_mtnEOEKo8hhyW-DG510bOGNY__kkSmdX5MLRpXG1ysQVuagirhDUWARo3YEXhxcNUWtB7o_xQJanQmwRXmDidRBeO1gGN01Sx2PgguJoYaCwu1TKlMhktQnppjOcnjurSf_3PN5Ko0KrNUB-szMjoawA4eomNpFz-OTMHqaHtJ4Dvh"/>
+</div>
+</td>
+</tr>
+<!-- Summary Row for Group -->
+<tr class="bg-surface-container-lowest font-semibold">
+<td class="py-4 px-6 text-right font-h3 text-h3 text-primary" colspan="5">Week 41 Performance:</td>
+<td class="py-4 px-4 text-right font-data-mono text-secondary">+$1,850.00</td>
+<td class="py-4 px-4 text-right font-data-mono text-secondary">₱104,044.00</td>
+<td colspan="3"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Footer -->
+<div class="p-6 border-t border-slate-200 flex items-center justify-between bg-white">
+<span class="text-xs text-on-surface-variant font-medium">Showing 1-12 of 156 trades</span>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-outline-variant rounded hover:bg-slate-50 text-slate-400 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-white text-xs font-bold rounded">1</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant text-xs font-medium hover:bg-slate-50 rounded">2</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant text-xs font-medium hover:bg-slate-50 rounded">3</button>
+<span class="text-slate-400 mx-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant text-xs font-medium hover:bg-slate-50 rounded">13</button>
+<button class="p-2 border border-outline-variant rounded hover:bg-slate-50 text-slate-600">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Insights Bento Section -->
+<div class="mt-stack-lg grid grid-cols-1 md:grid-cols-4 gap-container_gap">
+<div class="col-span-1 bg-white border border-slate-200 p-card_padding rounded-xl shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Win Rate</span>
+<div class="flex items-end justify-between">
+<span class="text-h1 font-h1 text-primary">64.2%</span>
+<div class="w-12 h-12">
+<!-- Circular Gauge Placeholder SVG -->
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="text-slate-100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="64.2, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="col-span-1 bg-white border border-slate-200 p-card_padding rounded-xl shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total P&amp;L (Monthly)</span>
+<span class="text-h1 font-h1 text-secondary">+$8,420.50</span>
+<div class="mt-2 h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-3/4"></div>
+</div>
+</div>
+<div class="col-span-1 bg-white border border-slate-200 p-card_padding rounded-xl shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Avg. Execution Grade</span>
+<span class="text-h1 font-h1 text-primary">B+</span>
+<span class="block text-[10px] text-slate-400 mt-1">Maintaining discipline</span>
+</div>
+<div class="col-span-1 bg-primary text-white p-card_padding rounded-xl shadow-lg flex flex-col justify-between">
+<div>
+<span class="block text-[10px] font-bold opacity-60 uppercase tracking-widest mb-1">Quote of the Day</span>
+<p class="text-xs font-medium leading-relaxed italic">"The goal of a successful trader is to make the best trades. Money is secondary."</p>
+</div>
+<span class="block text-[10px] font-bold uppercase tracking-widest mt-4 self-end">— Alexander Elder</span>
+</div>
+</div>
+</div>
+</main>
+</body></html>

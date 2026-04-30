@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Overview - After Hours' Desk Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        body {
+            background-color: #F8F9FA;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "on-surface-variant": "#43474e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-low": "#f4f3f6",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "surface-dim": "#dad9dd",
+                        "outline-variant": "#c3c6cf",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005234",
+                        "primary-container": "#1a3a5c",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "secondary-fixed": "#97f6c2",
+                        "surface": "#faf9fc",
+                        "on-primary-container": "#87a4cc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c46",
+                        "on-secondary-fixed": "#002112",
+                        "background": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "primary-fixed": "#d2e4ff",
+                        "primary": "#002444",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-tertiary-container": "#ff7967",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "secondary-container": "#94f3bf",
+                        "outline": "#73777f",
+                        "tertiary-container": "#780001",
+                        "primary-fixed-dim": "#abc9f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c37",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9fc",
+                        "inverse-primary": "#abc9f2",
+                        "on-tertiary-fixed": "#410000",
+                        "surface-tint": "#436084",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "sidebar_width": "168px",
+                        "container_gap": "24px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "card_padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Work Sans"],
+                        "h3": ["Work Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Fixed SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] flex flex-col z-40 overflow-y-auto">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+            After Hours' Desk
+            <span class="block text-[10px] font-medium tracking-normal normal-case text-slate-500">Journal</span>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">trending_up</span>
+<span class="font-body-md text-body-md">Quotes</span>
+</a>
+<a class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-body-md text-body-md">Overview</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">list_alt</span>
+<span class="font-body-md text-body-md">Trade Log</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">image</span>
+<span class="font-body-md text-body-md">Gallery</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">calendar_today</span>
+<span class="font-body-md text-body-md">Calendar</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">fact_check</span>
+<span class="font-body-md text-body-md">Checklist</span>
+</a>
+<a class="mt-8 flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined mr-3">add_box</span>
+<span class="font-body-md text-body-md">Add Trade</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 border-b border-slate-200 bg-white/80 backdrop-blur-md flex justify-between items-center px-8 z-30 ml-[168px]">
+<div class="flex items-center gap-2">
+<h1 class="font-h1 text-h1 text-primary">Overview</h1>
+<span class="text-on-surface-variant font-body-md text-body-md ml-4 px-3 py-1 bg-surface-container rounded-full">Quarter 3, 2024</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-data-mono text-data-mono text-secondary">Live USD/PHP: 56.24</span>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white text-xs font-bold">JD</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[168px] pt-16 min-h-screen p-stack-lg">
+<div class="max-w-[1440px] mx-auto space-y-container_gap">
+<!-- KPI Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-container_gap">
+<!-- Total Trades -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Trades</span>
+<span class="material-symbols-outlined text-slate-400">query_stats</span>
+</div>
+<div class="font-h1 text-h1 text-primary">142</div>
+<div class="mt-2 text-[12px] text-secondary flex items-center font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+                        +12% from last month
+                    </div>
+</div>
+<!-- Win Rate -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Win Rate</span>
+<span class="material-symbols-outlined text-slate-400">show_chart</span>
+</div>
+<div class="font-h1 text-h1 text-secondary">64.8%</div>
+<div class="mt-2 w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 64.8%"></div>
+</div>
+</div>
+<!-- Total P&L -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total P&amp;L</span>
+<span class="material-symbols-outlined text-slate-400">payments</span>
+</div>
+<div class="font-h1 text-h1 text-secondary">$ 12,450.00</div>
+<div class="mt-1 font-data-mono text-data-mono text-slate-500">₱ 700,188.00</div>
+</div>
+<!-- Best Trade -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-start mb-stack-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Best Trade</span>
+<span class="material-symbols-outlined text-slate-400">workspace_premium</span>
+</div>
+<div class="font-h1 text-h1 text-primary">+$ 2,840</div>
+<div class="mt-1 font-body-md text-body-md text-on-surface-variant flex gap-2">
+<span class="bg-primary-fixed px-2 rounded-sm text-[10px] font-bold text-primary tracking-wider uppercase">XAUUSD</span>
+<span class="text-secondary font-semibold">RR 1:4.5</span>
+</div>
+</div>
+</section>
+<!-- Main Charts Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-container_gap">
+<!-- Cumulative P&L Line Chart -->
+<div class="lg:col-span-2 bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-primary">Cumulative P&amp;L</h3>
+<div class="flex gap-2">
+<button class="text-[11px] px-3 py-1 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors">Daily</button>
+<button class="text-[11px] px-3 py-1 bg-primary text-white rounded-lg">Monthly</button>
+</div>
+</div>
+<!-- Placeholder for Chart.js Line Chart -->
+<div class="relative h-[300px] w-full flex flex-col justify-end">
+<div class="absolute inset-0 flex items-end">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0,35 Q10,30 20,32 T40,20 T60,25 T80,10 T100,5" fill="none" stroke="#006c46" stroke-width="0.5"></path>
+<path d="M0,35 Q10,30 20,32 T40,20 T60,25 T80,10 T100,5 L100,40 L0,40 Z" fill="url(#pnlGradient)"></path>
+<defs>
+<lineargradient id="pnlGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#006c46" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#006c46" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<!-- Simple grid lines simulated -->
+<div class="w-full h-full flex flex-col justify-between absolute pointer-events-none opacity-20">
+<div class="border-b border-slate-400 w-full h-0"></div>
+<div class="border-b border-slate-400 w-full h-0"></div>
+<div class="border-b border-slate-400 w-full h-0"></div>
+<div class="border-b border-slate-400 w-full h-0"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-400 font-medium">
+<span>JUN 01</span><span>JUN 08</span><span>JUN 15</span><span>JUN 22</span><span>JUN 30</span>
+</div>
+</div>
+</div>
+<!-- Win/Loss Doughnut Chart -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)] flex flex-col">
+<h3 class="font-h3 text-h3 text-primary mb-6">Trade Outcome</h3>
+<div class="flex-grow flex items-center justify-center relative">
+<svg class="w-48 h-48 transform -rotate-90">
+<!-- Loss -->
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#ba1a1a" stroke-dasharray="502" stroke-dashoffset="150" stroke-width="24"></circle>
+<!-- BE -->
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#73777f" stroke-dasharray="502" stroke-dashoffset="450" stroke-width="24"></circle>
+<!-- Win -->
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#006c46" stroke-dasharray="502" stroke-dashoffset="200" stroke-width="24"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-h2 font-h2 text-primary">142</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Trades</span>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-3 gap-2">
+<div class="text-center">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Wins</div>
+<div class="text-secondary font-data-mono">92</div>
+</div>
+<div class="text-center border-x border-slate-100">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Losses</div>
+<div class="text-error font-data-mono">42</div>
+</div>
+<div class="text-center">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold mb-1">B/E</div>
+<div class="text-outline font-data-mono">8</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-container_gap">
+<!-- Session Performance Bar Chart -->
+<div class="lg:col-span-2 bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<h3 class="font-h3 text-h3 text-primary mb-6">P&amp;L by Session</h3>
+<div class="h-[200px] flex items-end justify-between px-8 gap-12">
+<div class="flex flex-col items-center w-full group">
+<div class="w-full bg-slate-100 rounded-t-sm h-24 relative overflow-hidden group-hover:bg-slate-200 transition-colors">
+<div class="absolute bottom-0 w-full bg-secondary h-[70%]"></div>
+</div>
+<span class="text-[11px] font-bold text-on-surface-variant mt-4 uppercase">Asia</span>
+</div>
+<div class="flex flex-col items-center w-full group">
+<div class="w-full bg-slate-100 rounded-t-sm h-32 relative overflow-hidden group-hover:bg-slate-200 transition-colors">
+<div class="absolute bottom-0 w-full bg-secondary h-[90%]"></div>
+</div>
+<span class="text-[11px] font-bold text-on-surface-variant mt-4 uppercase">London</span>
+</div>
+<div class="flex flex-col items-center w-full group">
+<div class="w-full bg-slate-100 rounded-t-sm h-28 relative overflow-hidden group-hover:bg-slate-200 transition-colors">
+<div class="absolute bottom-0 w-full bg-secondary h-[45%]"></div>
+</div>
+<span class="text-[11px] font-bold text-on-surface-variant mt-4 uppercase">New York</span>
+</div>
+<div class="flex flex-col items-center w-full group">
+<div class="w-full bg-slate-100 rounded-t-sm h-40 relative overflow-hidden group-hover:bg-slate-200 transition-colors">
+<div class="absolute bottom-0 w-full bg-secondary h-[65%]"></div>
+</div>
+<span class="text-[11px] font-bold text-on-surface-variant mt-4 uppercase">Overlap</span>
+</div>
+</div>
+</div>
+<!-- Recent Tags / Strategies Strategy Analysis -->
+<div class="bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<h3 class="font-h3 text-h3 text-primary mb-4">Top Strategies</h3>
+<div class="space-y-stack-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-body-md font-semibold text-primary">Bullish Breakout</span>
+<span class="text-[11px] text-on-surface-variant">42 Trades</span>
+</div>
+<div class="bg-secondary-container/30 px-2 py-1 rounded text-[11px] font-bold text-on-secondary-container">74% WR</div>
+</div>
+<div class="w-full h-[1px] bg-slate-100"></div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-body-md font-semibold text-primary">Mean Reversion</span>
+<span class="text-[11px] text-on-surface-variant">28 Trades</span>
+</div>
+<div class="bg-secondary-container/30 px-2 py-1 rounded text-[11px] font-bold text-on-secondary-container">58% WR</div>
+</div>
+<div class="w-full h-[1px] bg-slate-100"></div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-body-md font-semibold text-primary">FVG Fill</span>
+<span class="text-[11px] text-on-surface-variant">15 Trades</span>
+</div>
+<div class="bg-error-container/30 px-2 py-1 rounded text-[11px] font-bold text-on-error-container">40% WR</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trade Feed (Brief) -->
+<section class="bg-white border border-slate-200 rounded-lg shadow-[0px_2px_4px_rgba(26,58,92,0.04)] overflow-hidden">
+<div class="p-card_padding border-b border-slate-100 flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-primary">Recent Trades</h3>
+<button class="text-primary font-bold text-[12px] hover:underline">View Full Log</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-[10px] font-bold uppercase text-on-surface-variant tracking-widest">
+<th class="px-6 py-4">Ticker</th>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Type</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">RR</th>
+<th class="px-6 py-4 text-right">Net P&amp;L</th>
+</tr>
+</thead>
+<tbody class="text-body-md divide-y divide-slate-50">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">NAS100</td>
+<td class="px-6 py-4 text-slate-500">Jun 24, 2024</td>
+<td class="px-6 py-4"><span class="bg-error-container text-error px-2 py-0.5 rounded text-[10px] font-bold">SHORT</span></td>
+<td class="px-6 py-4"><span class="text-secondary font-medium">WIN</span></td>
+<td class="px-6 py-4 font-data-mono">1:3.2</td>
+<td class="px-6 py-4 text-right text-secondary font-data-mono">+$ 1,420.00</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">GBPUSD</td>
+<td class="px-6 py-4 text-slate-500">Jun 23, 2024</td>
+<td class="px-6 py-4"><span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold">LONG</span></td>
+<td class="px-6 py-4"><span class="text-error font-medium">LOSS</span></td>
+<td class="px-6 py-4 font-data-mono">1:-1.0</td>
+<td class="px-6 py-4 text-right text-error font-data-mono">-$ 450.00</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-bold text-primary">XAUUSD</td>
+<td class="px-6 py-4 text-slate-500">Jun 23, 2024</td>
+<td class="px-6 py-4"><span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold">LONG</span></td>
+<td class="px-6 py-4"><span class="text-secondary font-medium">WIN</span></td>
+<td class="px-6 py-4 font-data-mono">1:2.5</td>
+<td class="px-6 py-4 text-right text-secondary font-data-mono">+$ 890.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button for Adding Trade -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform group">
+<span class="material-symbols-outlined !text-3xl">add</span>
+<span class="absolute right-full mr-4 bg-primary-container text-white px-3 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Add New Trade</span>
+</button>
+</div>
+</body></html>

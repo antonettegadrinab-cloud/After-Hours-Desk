@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "on-surface-variant": "#43474e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-low": "#f4f3f6",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "surface-dim": "#dad9dd",
+                        "outline-variant": "#c3c6cf",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005234",
+                        "primary-container": "#1a3a5c",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "secondary-fixed": "#97f6c2",
+                        "surface": "#faf9fc",
+                        "on-primary-container": "#87a4cc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c46",
+                        "on-secondary-fixed": "#002112",
+                        "background": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "primary-fixed": "#d2e4ff",
+                        "primary": "#002444",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-tertiary-container": "#ff7967",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "secondary-container": "#94f3bf",
+                        "outline": "#73777f",
+                        "tertiary-container": "#780001",
+                        "primary-fixed-dim": "#abc9f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c37",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9fc",
+                        "inverse-primary": "#abc9f2",
+                        "on-tertiary-fixed": "#410000",
+                        "surface-tint": "#436084",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "sidebar_width": "168px",
+                        "container_gap": "24px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "card_padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Work Sans"],
+                        "h3": ["Work Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        body {
+            background-color: #faf9fc;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] flex flex-col z-40 overflow-y-auto">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+<span class="block">After Hours'</span>
+<span class="block text-slate-500 font-medium">Desk</span>
+</div>
+<nav class="flex-1">
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="trending_up">trending_up</span>
+<span class="font-body-md text-body-md">Quotes</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Overview</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="list_alt">list_alt</span>
+<span class="font-body-md text-body-md">Trade Log</span>
+</a>
+<a class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="image">image</span>
+<span class="font-body-md text-body-md">Gallery</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-body-md">Calendar</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="fact_check">fact_check</span>
+<span class="font-body-md text-body-md">Checklist</span>
+</a>
+<div class="mt-6 px-4">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-2 rounded-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add_box">add_box</span>
+<span class="text-xs font-bold uppercase tracking-wider">Add Trade</span>
+</button>
+</div>
+</nav>
+</aside>
+<!-- Top Navigation Bar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex justify-between items-center px-8 z-30 ml-[168px]">
+<div>
+<h1 class="font-h1 text-h1 text-primary">Gallery</h1>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-data-mono text-data-mono text-secondary">Live USD/PHP: 56.24</span>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a financial trader in a dark studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARMi7bESZyXAqvyBaonaUqlsS31WXPAmAchWnUm3CBQndYSgqxP0KBSXcpo4Js1eY6vIoQEySSX6yAG93ELqfq3OdtNA0ISdmDopaMh0Lt2Li_vjmPRR5eSeZ7Tz6R0Xgt8XAo0BTEO4gfWcFTlYkvzcRiaZYNJMqaxcQygGFri-crCmbzS1M3H0Hg6xOMXAyVE5M3r2Qr3ndkIOmAcpnht_05iok4GuTsUkXxahqXKLoZ-itUxk0tilx_IqsiKsagwX3PbS9UWcW2"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[168px] pt-16 min-h-screen">
+<div class="p-8 max-w-[1400px] mx-auto">
+<!-- Filter Bar Component -->
+<section class="bg-white border border-outline-variant rounded-xl p-4 mb-8 shadow-[0px_2px_4px_rgba(26,58,92,0.04)] flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pair</label>
+<select class="bg-transparent border-none focus:ring-0 font-body-md text-primary pr-8 cursor-pointer">
+<option>All Pairs</option>
+<option>EUR/USD</option>
+<option>GBP/JPY</option>
+<option>XAU/USD</option>
+<option>BTC/USDT</option>
+</select>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Direction</label>
+<select class="bg-transparent border-none focus:ring-0 font-body-md text-primary pr-8 cursor-pointer">
+<option>All Directions</option>
+<option>Long</option>
+<option>Short</option>
+</select>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Result</label>
+<select class="bg-transparent border-none focus:ring-0 font-body-md text-primary pr-8 cursor-pointer">
+<option>All Results</option>
+<option>Win</option>
+<option>Loss</option>
+<option>Break-Even</option>
+</select>
+</div>
+<div class="ml-auto flex items-center gap-2">
+<button class="px-4 py-2 bg-primary text-white rounded-lg font-body-md font-semibold text-sm hover:bg-primary-container transition-colors">
+                        Apply Filters
+                    </button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+</button>
+</div>
+</section>
+<!-- Gallery Grid: Week 42 (Profitable) -->
+<section class="mb-12">
+<div class="flex items-center gap-4 mb-6 bg-secondary-container/30 p-4 rounded-xl border-l-4 border-secondary">
+<div class="flex flex-col">
+<h2 class="font-h2 text-h2 text-on-secondary-container">Week 42</h2>
+<span class="font-body-md text-sm text-on-secondary-container opacity-80">Oct 16 - Oct 20, 2023</span>
+</div>
+<div class="ml-auto text-right">
+<div class="font-data-mono text-h2 text-secondary">+$1,420.50</div>
+<div class="font-label-caps text-label-caps text-secondary uppercase">Weekly Profit</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Trade Card 1 -->
+<div class="group relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_4px_rgba(26,58,92,0.04)] hover:shadow-lg transition-shadow">
+<div class="aspect-video relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="clean financial trading chart on dark mode interface with candlesticks and technical analysis indicators" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYfL9nlde51uRJF4M8ayYK_b5y2bOV6BY94Ra88QxlKZSJVlV94LYdcgzMwQWZTPYeSKCw-yvvu96t6JRuiua-bMnDmJh4YjRK0w-F6qnF9gH20upoKH2pesVp4TCIjOb8ikI4IQl1RXBe3BH6S-ABKONH1NWEcC5CmbAEP2fkxR-8eWN2BmBvrNT6IMLXXs6XtbtXApsVIL8-BmXvDTCEE88U4DU2YKNGyIKWXbDhiO9Pf92L5s8dkUzAcRGCW0cudR5vchr2dy6o"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded uppercase">Win</span>
+<span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold px-2 py-1 rounded uppercase">Long</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3 text-primary">EUR/USD</h3>
+<span class="font-data-mono text-data-mono text-secondary">+$420.00</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs text-on-surface-variant">Oct 19, 14:30</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary border border-outline-variant uppercase">Grade A</div>
+</div>
+</div>
+</div>
+<!-- Trade Card 2 -->
+<div class="group relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_4px_rgba(26,58,92,0.04)] hover:shadow-lg transition-shadow">
+<div class="aspect-video relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="trading chart showing bullish divergence with volume bars and moving averages on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAydtxXzk993qgoCBJqpLQUYVAIhpV2Vh83Q69PSDADhTWLzgzuOWt2hrETrroLyAZFMBPNnGdRT-fKDCPXpc7P1M-KUw0cBec5GGkaCLHOfYzi5MT0qGHjahakvGDBrqGvyXRaYElp2SUVtW-BdBT9TzYgOxHMh8uUmo9Gjavb--mevYAKGtSQ6j1-cExZ0H7bYxvITyU2HNzAsCbIe3wICeq5R1Un1hq6CRkUe9ufMeUu-lNk3Ov-31klXIe-gUOHIEAzJgpIbkaa"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded uppercase">Win</span>
+<span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold px-2 py-1 rounded uppercase">Short</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3 text-primary">XAU/USD</h3>
+<span class="font-data-mono text-data-mono text-secondary">+$1,120.50</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs text-on-surface-variant">Oct 18, 08:15</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary border border-outline-variant uppercase">Grade A+</div>
+</div>
+</div>
+</div>
+<!-- Trade Card 3 -->
+<div class="group relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_4px_rgba(26,58,92,0.04)] hover:shadow-lg transition-shadow">
+<div class="aspect-video relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="forex trading terminal with multiple currency pairs and data visualizations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5hwT5pxOui3Og3P8KXjbPQvk5_1NSKX1tJEXxCxWOw9NGwebqvElIBP0q-RJOSMFyenfm2lbRej4FVyGqkdlemUgGFAB-jKEehSLXp25SfFis9NCZuOo0Hc3WkKkxH-XlXV5XZcLBeM1eW0ZikC-qcjpuPGUacTG0YhdsoZzuoVZCb3W7YpSkWtC9GbDZJI2-ABELBcha6VRcbuGY8HLN7WRvBLNCd8DtoaP4dpQPZLFfRBwE3arBdbYU-TjOVjkYlke0vqggJZ5T"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-error text-white text-[10px] font-bold px-2 py-1 rounded uppercase">Loss</span>
+<span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold px-2 py-1 rounded uppercase">Long</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3 text-primary">GBP/JPY</h3>
+<span class="font-data-mono text-data-mono text-error">-$120.00</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs text-on-surface-variant">Oct 17, 11:00</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary border border-outline-variant uppercase">Grade C</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Gallery Grid: Week 41 (Loss) -->
+<section class="mb-12">
+<div class="flex items-center gap-4 mb-6 bg-error-container/20 p-4 rounded-xl border-l-4 border-error">
+<div class="flex flex-col">
+<h2 class="font-h2 text-h2 text-on-error-container">Week 41</h2>
+<span class="font-body-md text-sm text-on-error-container opacity-80">Oct 09 - Oct 13, 2023</span>
+</div>
+<div class="ml-auto text-right">
+<div class="font-data-mono text-h2 text-error">-$450.25</div>
+<div class="font-label-caps text-label-caps text-error uppercase">Weekly Loss</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Trade Card 4 -->
+<div class="group relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_4px_rgba(26,58,92,0.04)] hover:shadow-lg transition-shadow">
+<div class="aspect-video relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="detailed close up of financial candlestick chart with red and green bars on a white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf994cq7SHDI-0NQuWoGsLmKsMyQETqjVBhBMUMOBzPcZSl9kw2mn_tYZhZzYp8LhXBz21yRLAmHp6G6zPqxIjoyO5t6yYQd9kIcyyHtdIisbgKBxFf9ruaRQbrT0sDA6s1WLMtdqPmA8XZF2kUCMqUp0paqR-QS1bGUJiPN9mZHAtrEEmAYW8-K3du_KihsobSC4ECcqxKEdizIO2SCYuoCkIjXgD-lEswym5MXLfuTDg2YYYhp1mAlLCCWp-SCA2HvpvLb42g3IO"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-error text-white text-[10px] font-bold px-2 py-1 rounded uppercase">Loss</span>
+<span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold px-2 py-1 rounded uppercase">Short</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3 text-primary">BTC/USDT</h3>
+<span class="font-data-mono text-data-mono text-error">-$300.25</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs text-on-surface-variant">Oct 12, 22:45</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary border border-outline-variant uppercase">Grade B</div>
+</div>
+</div>
+</div>
+<!-- Trade Card 5 -->
+<div class="group relative bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0px_2px_4px_rgba(26,58,92,0.04)] hover:shadow-lg transition-shadow">
+<div class="aspect-video relative overflow-hidden bg-slate-100">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="technical stock market graphs with complex data points and lines against a minimal layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMtYLxL_l5JvlKiDAt3i3d5Y4fEjycIWE1sM87tFDhQclGAaqoF6t9EiFcmK5ppJAyCvppCT3_U25m4pcPybszoHOGi5X1edX9QbsMwF5KDnsHv9DfNYgOeTolm3h1pGggtzEo8uKzsKDK2N9BN8UMc7lXNOL3RxgjEPbOsNfHID6UArwGVBsy1NO1n3rWsOahEaYpVeBa7KdlS5nSYv7lQQUopW6gy2LLy1lvcC7zjq9xPiyuzDV_EFawda8xWTSzYjDSS9AASWdF"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-zoom-in">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="fullscreen">fullscreen</span>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-outline text-white text-[10px] font-bold px-2 py-1 rounded uppercase">BE</span>
+<span class="bg-white/90 backdrop-blur text-primary text-[10px] font-bold px-2 py-1 rounded uppercase">Long</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h3 text-h3 text-primary">EUR/USD</h3>
+<span class="font-data-mono text-data-mono text-outline">$0.00</span>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="calendar_today">calendar_today</span>
+<span class="font-body-md text-xs text-on-surface-variant">Oct 10, 09:30</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-low rounded text-[10px] font-bold text-primary border border-outline-variant uppercase">Grade B+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Lightbox Backdrop (Hidden by Default) -->
+<div class="fixed inset-0 bg-primary/95 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+<button class="absolute top-6 right-8 text-white hover:text-outline-variant transition-colors">
+<span class="material-symbols-outlined text-4xl" data-icon="close">close</span>
+</button>
+<button class="absolute left-8 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined text-5xl" data-icon="arrow_back_ios">arrow_back_ios</span>
+</button>
+<button class="absolute right-8 top-1/2 -translate-y-1/2 text-white hover:bg-white/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined text-5xl" data-icon="arrow_forward_ios">arrow_forward_ios</span>
+</button>
+<div class="max-w-[90vw] max-h-[819px] flex flex-col items-center">
+<img class="w-full h-full object-contain shadow-2xl rounded-lg" data-alt="high resolution trading chart full screen view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyCMcL9FUiNRyFuOFLjnxF_zKqgo1V_Z_M_8ToID5d-v7IN-9FdNPDe8-4UiiYIxPFo1UGQ8sq5TXdZnEWtrDw5roQqaxr8Pc-eiTI4K3K75USsqGQvFkzjwLbgyMn0tbxEHHtGIf4DJNI62_WUjvZS8_eeOsh38wRxqReAsM1YtS12gDFMGiUx3KfvrwDumjeOBTKCkIOHpSFZqK6x9qL7yG0PGNWm8Op_XF9Ui7pfKH-WIZaBDohD5u4m3MYThynDrX_napM9ms1"/>
+<div class="mt-6 text-center text-white">
+<div class="font-h2 text-h2 mb-2">EUR/USD - Buy @ 1.05420</div>
+<div class="font-body-md text-white/70">Breakout strategy from consolidation zone. Profit Target 1 hit.</div>
+</div>
+</div>
+</div>
+</body></html>

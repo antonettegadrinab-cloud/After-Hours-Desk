@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        body {
+            background-color: #faf9fc;
+            -webkit-font-smoothing: antialiased;
+        }
+        .chart-grid {
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2f3033",
+                      "on-surface-variant": "#43474e",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e9e8eb",
+                      "surface-container-low": "#f4f3f6",
+                      "secondary-fixed-dim": "#7bd9a7",
+                      "surface-dim": "#dad9dd",
+                      "outline-variant": "#c3c6cf",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#8e130c",
+                      "surface-container-highest": "#e3e2e5",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005234",
+                      "primary-container": "#1a3a5c",
+                      "on-surface": "#1a1c1e",
+                      "on-background": "#1a1c1e",
+                      "surface-variant": "#e3e2e5",
+                      "secondary-fixed": "#97f6c2",
+                      "surface": "#faf9fc",
+                      "on-primary-container": "#87a4cc",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "secondary": "#006c46",
+                      "on-secondary-fixed": "#002112",
+                      "background": "#faf9fc",
+                      "tertiary": "#4f0000",
+                      "primary-fixed": "#d2e4ff",
+                      "primary": "#002444",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#eeedf1",
+                      "inverse-on-surface": "#f1f0f3",
+                      "on-tertiary-container": "#ff7967",
+                      "on-primary-fixed-variant": "#2a486b",
+                      "secondary-container": "#94f3bf",
+                      "outline": "#73777f",
+                      "tertiary-container": "#780001",
+                      "primary-fixed-dim": "#abc9f2",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#001c37",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#faf9fc",
+                      "inverse-primary": "#abc9f2",
+                      "on-tertiary-fixed": "#410000",
+                      "surface-tint": "#436084",
+                      "tertiary-fixed-dim": "#ffb4a9",
+                      "tertiary-fixed": "#ffdad5",
+                      "on-secondary-container": "#007149"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "sidebar_width": "168px",
+                      "container_gap": "24px",
+                      "stack-lg": "24px",
+                      "unit": "4px",
+                      "card_padding": "20px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "h1": ["Work Sans"],
+                      "h3": ["Work Sans"],
+                      "label-caps": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "h2": ["Work Sans"],
+                      "data-mono": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] flex flex-col z-40 overflow-y-auto">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+            After Hours' Desk
+            <span class="block text-[10px] font-medium text-slate-400 tracking-normal normal-case">Journal</span>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="trending_up">trending_up</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Quotes</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Overview</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="list_alt">list_alt</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Trade Log</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="image">image</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Gallery</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Calendar</span>
+</div>
+<div class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="analytics">analytics</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Analytics</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="fact_check">fact_check</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Checklist</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3" data-icon="add_box">add_box</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Add Trade</span>
+</div>
+</nav>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex justify-between items-center px-8 z-30 ml-[168px]">
+<div class="flex items-center gap-4">
+<h1 class="font-h1 text-h1 text-primary">Analytics</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="px-4 py-1.5 bg-slate-50 rounded-full border border-slate-200 text-slate-900 font-data-mono text-data-mono">
+                Live USD/PHP: 56.24
+            </div>
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of a male trader in business casual attire with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvv8G1PNKeCy1SIcL3U389ikf_2J-qQCM-Ar2-ID0wKrscFIGh0EAPlmRLTPNMZLiFDR54nCly0ntwtMa9klj0p0xozCs_4REoYFKFqPewe78gf6sdJ8RnVleeVOIllV3K9-aI0ujyWyS_uUevzP012qXOLwNEqRhbl5M18GQRoiongwlvZvyZrnKnMQbxLlluRROEqo0pDb8t8cMacHNg8fjZHF2lf4-IFQhNGDPNM-o_QAZbVDnwCrj4h_LlrX8dhWgtHD0M3mSL"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[168px] pt-24 pb-12 px-8 max-w-[1440px]">
+<!-- Key Performance Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-white border border-slate-200 rounded-lg p-6 shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">WIN RATE</p>
+<div class="flex items-baseline gap-2">
+<h2 class="font-h1 text-h1 text-primary">64.2%</h2>
+<span class="text-secondary text-xs font-bold font-data-mono">+2.1%</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-6 shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">TOTAL P&amp;L (USD)</p>
+<div class="flex items-baseline gap-2">
+<h2 class="font-h1 text-h1 text-secondary">$12,450.80</h2>
+<span class="text-secondary text-xs font-bold font-data-mono">▲</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-6 shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">AVG. RR RATIO</p>
+<div class="flex items-baseline gap-2">
+<h2 class="font-h1 text-h1 text-primary">1:2.4</h2>
+<span class="text-slate-400 text-xs font-medium font-data-mono">Target 1:3</span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 rounded-lg p-6 shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<p class="text-label-caps font-label-caps text-on-surface-variant mb-1 uppercase">TRADES THIS MONTH</p>
+<div class="flex items-baseline gap-2">
+<h2 class="font-h1 text-h1 text-primary">42</h2>
+<span class="text-error text-xs font-bold font-data-mono">-8%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Chart 1: Cumulative P&L -->
+<div class="col-span-12 bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-h2 text-h2 text-primary">Cumulative Performance Overview</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Combined equity curve in USD with PHP adjustment overlay</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-semibold text-slate-500">USD Equity</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-0.5 bg-slate-400 border-t border-dashed border-slate-400"></span>
+<span class="text-xs font-semibold text-slate-500">PHP Adjusted</span>
+</div>
+</div>
+</div>
+<!-- Chart Mockup SVG -->
+<div class="h-[400px] w-full relative chart-grid border-l border-b border-slate-100 p-4">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none">
+<!-- USD Solid Line -->
+<path d="M0,350 L50,340 L100,320 L150,335 L200,280 L250,260 L300,290 L350,210 L400,190 L450,215 L500,150 L550,130 L600,145 L650,110 L700,90 L750,120 L800,40 L850,55 L900,20 L1000,10" fill="none" stroke="#002444" stroke-width="2.5" vector-effect="non-scaling-stroke"></path>
+<!-- PHP Dashed Line -->
+<path d="M0,350 L50,345 L100,328 L150,342 L200,290 L250,275 L300,305 L350,230 L400,215 L450,235 L500,175 L550,160 L600,178 L650,145 L700,130 L750,155 L800,85 L850,98 L900,65 L1000,60" fill="none" stroke="#94a3b8" stroke-dasharray="6,4" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+</svg>
+<!-- Y Axis Labels -->
+<div class="absolute left-[-40px] top-0 h-full flex flex-col justify-between text-[10px] text-slate-400 font-data-mono">
+<span>15k</span>
+<span>12k</span>
+<span>9k</span>
+<span>6k</span>
+<span>3k</span>
+<span>0</span>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-4 text-[10px] text-slate-400 font-data-mono uppercase tracking-widest">
+<span>JAN 01</span>
+<span>JAN 15</span>
+<span>FEB 01</span>
+<span>FEB 15</span>
+<span>MAR 01</span>
+<span>MAR 15</span>
+<span>APR 01</span>
+</div>
+</div>
+<!-- Chart 2: P&L by Session -->
+<div class="col-span-12 lg:col-span-6 bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="mb-6">
+<h3 class="font-h3 text-h3 text-primary">Performance by Session</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Profit distribution across major market sessions</p>
+</div>
+<div class="h-[280px] w-full flex items-end gap-6 px-4 pb-4 border-b border-slate-100">
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 rounded-t h-[60%] group-hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">$1,420</span>
+</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">ASIA</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary rounded-t h-[95%] relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-primary">$4,850</span>
+</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">LONDON</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-100 rounded-t h-[80%] group-hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">$3,120</span>
+</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">NEW YORK</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-slate-50 rounded-t h-[40%] group-hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-bold text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">$890</span>
+</div>
+<span class="text-label-caps font-label-caps text-on-surface-variant">OVERLAP</span>
+</div>
+</div>
+</div>
+<!-- Chart 3: P&L by Currency Pair -->
+<div class="col-span-12 lg:col-span-6 bg-white border border-slate-200 rounded-lg p-card_padding shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<div class="mb-6">
+<h3 class="font-h3 text-h3 text-primary">Strategy Efficiency per Pair</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Net P&amp;L distribution by currency instrument</p>
+</div>
+<div class="space-y-4">
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+<span>EURUSD</span>
+<span class="text-secondary">+$4,230.00</span>
+</div>
+<div class="w-full h-2 bg-slate-50 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+<span>GBPUSD</span>
+<span class="text-secondary">+$2,810.00</span>
+</div>
+<div class="w-full h-2 bg-slate-50 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+<span>USDJPY</span>
+<span class="text-error">-$1,120.00</span>
+</div>
+<div class="w-full h-2 bg-slate-50 rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full ml-auto" style="width: 30%;"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+<span>AUDUSD</span>
+<span class="text-secondary">+$1,450.00</span>
+</div>
+<div class="w-full h-2 bg-slate-50 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+<span>XAUUSD</span>
+<span class="text-error">-$430.00</span>
+</div>
+<div class="w-full h-2 bg-slate-50 rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full ml-auto" style="width: 15%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Card: Strategy Insights -->
+<div class="col-span-12 bg-primary text-white rounded-lg p-8 flex flex-col md:flex-row gap-12 items-center">
+<div class="flex-1">
+<div class="inline-flex items-center px-3 py-1 bg-white/10 border border-white/20 rounded-full mb-4">
+<span class="material-symbols-outlined text-[14px] mr-2" data-icon="lightbulb">lightbulb</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Algorithmic Insight</span>
+</div>
+<h2 class="font-h1 text-h1 mb-4">Your "London Breakout" strategy is performing 28% above your baseline mean.</h2>
+<p class="text-white/70 text-body-lg font-body-lg max-w-xl">
+                        Statistical variance suggests increasing position size by 0.5% on GBP-based pairs during the first 2 hours of the London session to capitalize on current volatility cycles.
+                    </p>
+</div>
+<div class="w-full md:w-auto flex gap-4">
+<button class="px-6 py-3 bg-white text-primary font-bold rounded hover:bg-slate-100 transition-all active:scale-95">
+                        Review Strategy
+                    </button>
+<button class="px-6 py-3 border border-white/30 text-white font-bold rounded hover:bg-white/10 transition-all active:scale-95">
+                        Dismiss
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>After Hours' Desk Journal - Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3033",
+                        "on-surface-variant": "#43474e",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e9e8eb",
+                        "surface-container-low": "#f4f3f6",
+                        "secondary-fixed-dim": "#7bd9a7",
+                        "surface-dim": "#dad9dd",
+                        "outline-variant": "#c3c6cf",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#8e130c",
+                        "surface-container-highest": "#e3e2e5",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005234",
+                        "primary-container": "#1a3a5c",
+                        "on-surface": "#1a1c1e",
+                        "on-background": "#1a1c1e",
+                        "surface-variant": "#e3e2e5",
+                        "secondary-fixed": "#97f6c2",
+                        "surface": "#faf9fc",
+                        "on-primary-container": "#87a4cc",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary": "#006c46",
+                        "on-secondary-fixed": "#002112",
+                        "background": "#faf9fc",
+                        "tertiary": "#4f0000",
+                        "primary-fixed": "#d2e4ff",
+                        "primary": "#002444",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eeedf1",
+                        "inverse-on-surface": "#f1f0f3",
+                        "on-tertiary-container": "#ff7967",
+                        "on-primary-fixed-variant": "#2a486b",
+                        "secondary-container": "#94f3bf",
+                        "outline": "#73777f",
+                        "tertiary-container": "#780001",
+                        "primary-fixed-dim": "#abc9f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001c37",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf9fc",
+                        "inverse-primary": "#abc9f2",
+                        "on-tertiary-fixed": "#410000",
+                        "surface-tint": "#436084",
+                        "tertiary-fixed-dim": "#ffb4a9",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-container": "#007149"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "sidebar_width": "168px",
+                        "container_gap": "24px",
+                        "stack-lg": "24px",
+                        "unit": "4px",
+                        "card_padding": "20px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Work Sans"],
+                        "h3": ["Work Sans"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Work Sans"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h1": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h2": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        body {
+            background-color: #faf9fc;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Fixed SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[168px] border-r border-slate-200 bg-white shadow-[2px_0px_4px_rgba(26,58,92,0.04)] z-40 overflow-y-auto flex flex-col">
+<div class="text-sm font-bold uppercase tracking-widest text-slate-900 px-4 mb-10 pt-8">
+            After Hours' Desk
+            <span class="block text-[10px] font-medium opacity-50 tracking-normal">Journal</span>
+</div>
+<nav class="flex-1">
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="trending_up">trending_up</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Quotes</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Overview</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="list_alt">list_alt</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Trade Log</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="image">image</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Gallery</span>
+</div>
+<!-- ACTIVE: Calendar -->
+<div class="flex items-center text-slate-900 font-semibold bg-slate-50 border-l-[3px] border-slate-900 py-3 px-4 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Calendar</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="analytics">analytics</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Analytics</span>
+</div>
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="fact_check">fact_check</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Checklist</span>
+</div>
+<div class="mt-4 border-t border-slate-100 pt-4">
+<div class="flex items-center text-slate-500 font-medium py-3 px-[19px] hover:bg-slate-50 transition-colors duration-200 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-3 text-[20px]" data-icon="add_box">add_box</span>
+<span class="font-['Work_Sans'] text-sm tracking-tight">Add Trade</span>
+</div>
+</div>
+</nav>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-168px)] h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 flex justify-between items-center px-8 z-30 ml-[168px]">
+<div class="flex items-center gap-4">
+<h1 class="font-h1 text-h1 text-primary">Monthly Performance</h1>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-['Work_Sans'] text-sm font-semibold text-secondary">Live USD/PHP: 56.24</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-slate-900 transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer hover:text-slate-900 transition-colors" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male trader in a minimalist office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnEI8lia_36ZX_9vEWaqBVAAV2BlKvz5rAGcBiyHW3clbdPbE-yZwEcHe-3gW3JOmQlhm9bnUEB6DKxYmdXScPPwv6dsICDIqqLeupSfK_-X6wF4yyBgBxxOXaCRa0UhqFEux7bmW8QxHmHkdBXy9UX46nUwezcrJDYmkQGLYbFxUT32PaSx7dOhkQnH-aGansIAdfDv6agZ1JftYvBv620W1jNbHwyqFisQsaF0FkuzP14WPh1gHvvVX7Ogm7FB-swwlAQNRA7t9M"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[168px] pt-16 min-h-screen p-stack-lg flex flex-col gap-container_gap">
+<!-- Calendar Section -->
+<section class="bg-white border border-slate-200 shadow-[0px_2px_4px_rgba(26,58,92,0.04)] rounded-DEFAULT">
+<!-- Calendar Header -->
+<div class="flex items-center justify-between p-card_padding border-b border-slate-100">
+<div class="flex items-center gap-4">
+<h2 class="font-h2 text-h2 text-slate-900">October 2023</h2>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-slate-50 rounded transition-colors border border-slate-200">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-1 hover:bg-slate-50 rounded transition-colors border border-slate-200">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 items-center">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary/10 border border-secondary rounded-full"></div>
+<span class="text-label-caps font-label-caps text-slate-500 uppercase">Profit Days</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-error/10 border border-error rounded-full"></div>
+<span class="text-label-caps font-label-caps text-slate-500 uppercase">Loss Days</span>
+</div>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="text-right">
+<div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Net P&amp;L</div>
+<div class="text-body-lg font-data-mono text-secondary">+$4,235.10</div>
+</div>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid grid-cols-7 border-b border-slate-200">
+<!-- Day Labels -->
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Sun</div>
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Mon</div>
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Tue</div>
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Wed</div>
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Thu</div>
+<div class="py-3 text-center border-r border-slate-100 font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Fri</div>
+<div class="py-3 text-center font-label-caps text-label-caps text-slate-400 uppercase bg-slate-50/50">Sat</div>
+</div>
+<div class="grid grid-cols-7 grid-rows-5 min-h-[500px]">
+<!-- Row 1 -->
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">24</div>
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">25</div>
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">26</div>
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">27</div>
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">28</div>
+<div class="p-2 border-r border-b border-slate-100 bg-slate-50/20 text-slate-300">29</div>
+<div class="p-2 border-b border-slate-100 bg-slate-50/20 text-slate-300">30</div>
+<!-- Row 2 -->
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">1</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-secondary/5 border-l-4 border-l-secondary">
+<span class="text-body-md font-semibold text-slate-900">2</span>
+<span class="text-data-mono text-secondary">+$840.00</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-error/5 border-l-4 border-l-error">
+<span class="text-body-md font-semibold text-slate-900">3</span>
+<span class="text-data-mono text-error">-$210.00</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-secondary/5 border-l-4 border-l-secondary">
+<span class="text-body-md font-semibold text-slate-900">4</span>
+<span class="text-data-mono text-secondary">+$1,120.50</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">5</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-secondary/5 border-l-4 border-l-secondary">
+<span class="text-body-md font-semibold text-slate-900">6</span>
+<span class="text-data-mono text-secondary">+$450.00</span>
+</div>
+<div class="p-3 border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">7</span>
+</div>
+<!-- Row 3 (Selected Day example) -->
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">8</span>
+</div>
+<div class="p-3 border-r border-b border-slate-200 flex flex-col justify-between bg-slate-900 text-white ring-2 ring-inset ring-primary">
+<span class="text-body-md font-semibold">9</span>
+<span class="text-data-mono text-secondary-fixed">+$2,450.00</span>
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+</div>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-error/5 border-l-4 border-l-error">
+<span class="text-body-md font-semibold text-slate-900">10</span>
+<span class="text-data-mono text-error">-$145.20</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">11</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-secondary/5 border-l-4 border-l-secondary">
+<span class="text-body-md font-semibold text-slate-900">12</span>
+<span class="text-data-mono text-secondary">+$310.00</span>
+</div>
+<div class="p-3 border-r border-b border-slate-100 flex flex-col justify-between bg-secondary/5 border-l-4 border-l-secondary">
+<span class="text-body-md font-semibold text-slate-900">13</span>
+<span class="text-data-mono text-secondary">+$675.30</span>
+</div>
+<div class="p-3 border-b border-slate-100 flex flex-col justify-between">
+<span class="text-body-md font-semibold text-slate-400">14</span>
+</div>
+<!-- Empty cells for brevity -->
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">15</div>
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">16</div>
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">17</div>
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">18</div>
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">19</div>
+<div class="p-3 border-r border-b border-slate-100 text-slate-400">20</div>
+<div class="p-3 border-b border-slate-100 text-slate-400">21</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">22</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">23</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">24</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">25</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">26</div>
+<div class="p-3 border-r border-slate-100 text-slate-400">27</div>
+<div class="p-3 text-slate-400">28</div>
+</div>
+</section>
+<!-- Detail Panel Section (Contextual to selected day Oct 9) -->
+<section class="grid grid-cols-12 gap-container_gap mb-stack-lg">
+<div class="col-span-12">
+<div class="flex items-center gap-3 mb-stack-sm">
+<span class="material-symbols-outlined text-slate-900" data-icon="event_note">event_note</span>
+<h3 class="font-h3 text-h3 text-slate-900">Trade Details for October 9, 2023</h3>
+</div>
+</div>
+<!-- Trade 1 -->
+<div class="col-span-6 bg-white border border-slate-200 p-card_padding rounded-DEFAULT shadow-[0px_2px_4px_rgba(26,58,92,0.04)] flex gap-4">
+<div class="w-32 h-32 flex-shrink-0 bg-slate-100 border border-slate-200 overflow-hidden rounded-lg">
+<img alt="Trade Chart" class="w-full h-full object-cover" data-alt="clean dark mode financial chart with green candlesticks and white trendlines on a professional trading terminal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlubRz1GBbUQhp4y3h_G3cIIwFzKxKxnjQXTYg-xaYLdnCrSDpCQbprTGiVZ0lWagg2DtD-lCW_AE8gZoKTRDD4kxhp6aYFU5HT3NUcaz5nYPoQv5FNEq_JN70OMDYc2c0hlJkQmJ2f2hAXmA2OP3SJiwqsd996lRcq5-r-Jbf9LYfzxzArMoiMcPBwEmQRpstnriQln7I8O-weOp3s05jV_DwBv8K8uBHbTdP53b0QNxJhkwS604W2FgbGwIMWPx5JmGno2QMhCZz"/>
+</div>
+<div class="flex flex-col justify-between flex-1">
+<div>
+<div class="flex justify-between items-start">
+<span class="text-h3 font-h3 text-slate-900">$NVDA</span>
+<span class="text-data-mono text-secondary">+$1,820.00</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="px-2 py-0.5 bg-secondary/5 text-secondary text-[10px] font-bold rounded uppercase">Breakout</span>
+<span class="px-2 py-0.5 bg-slate-50 text-slate-500 text-[10px] font-bold rounded uppercase">Long</span>
+</div>
+<p class="text-body-md text-slate-500 mt-2 line-clamp-2">Perfect entry on the 5m bull flag consolidation. Exit at 2:1 R/R ratio target.</p>
+</div>
+<div class="flex items-center justify-between text-[11px] text-slate-400 font-medium pt-2 border-t border-slate-50">
+<span>Time: 09:42 AM</span>
+<span class="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+                            Full Journal <span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Trade 2 -->
+<div class="col-span-6 bg-white border border-slate-200 p-card_padding rounded-DEFAULT shadow-[0px_2px_4px_rgba(26,58,92,0.04)] flex gap-4">
+<div class="w-32 h-32 flex-shrink-0 bg-slate-100 border border-slate-200 overflow-hidden rounded-lg">
+<img alt="Trade Chart" class="w-full h-full object-cover" data-alt="detailed stock market chart with volume bars and indicators on a gray background, scholarly and minimalist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2vy1TieqlF42DJpVCKAieSHgfWdzgNUFmDC60PXUs7cpC3rn3FRRYt073mJHxtDN_VW7Bb2ALlcYLMsj6_ppo0dJOLmepFA84hbe7DeRuy7ZOaRH-syz3f11sYI4vDXZNvn8rW6ETEKSka_hSANIm-37wSfqevadYn9BHDpvkxl75kQ15dXVY6l6v3wI2tUR9yrU7lx6ixswaUu3GbjDQTLgWnuaXUPjnCqrGp-T4M3bpnklZ-6JXCKUR8MvvWe88s1gRNSNHdrnf"/>
+</div>
+<div class="flex flex-col justify-between flex-1">
+<div>
+<div class="flex justify-between items-start">
+<span class="text-h3 font-h3 text-slate-900">$TSLA</span>
+<span class="text-data-mono text-secondary">+$630.00</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="px-2 py-0.5 bg-secondary/5 text-secondary text-[10px] font-bold rounded uppercase">Scalp</span>
+<span class="px-2 py-0.5 bg-slate-50 text-slate-500 text-[10px] font-bold rounded uppercase">Short</span>
+</div>
+<p class="text-body-md text-slate-500 mt-2 line-clamp-2">VWAP rejection confirmed with high volume. Quick in and out in 15 minutes.</p>
+</div>
+<div class="flex items-center justify-between text-[11px] text-slate-400 font-medium pt-2 border-t border-slate-50">
+<span>Time: 11:15 AM</span>
+<span class="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+                            Full Journal <span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Insights Bento Grid -->
+<section class="grid grid-cols-12 gap-container_gap mb-stack-lg">
+<div class="col-span-4 bg-white border border-slate-200 p-card_padding rounded-DEFAULT shadow-[0px_2px_4px_rgba(26,58,92,0.04)]">
+<h4 class="text-label-caps font-label-caps text-slate-400 uppercase mb-4">Win Rate Gauge</h4>
+<div class="flex flex-col items-center justify-center py-4">
+<!-- Custom SVG Gauge -->
+<div class="relative w-32 h-32">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-slate-100" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="175" stroke-dashoffset="44" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-h1 font-h1 text-slate-900">68%</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Success</span>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-8 bg-slate-900 text-white p-card_padding rounded-DEFAULT shadow-lg flex flex-col justify-between overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="relative z-10">
+<h4 class="text-label-caps font-label-caps text-slate-400 uppercase mb-1">Monthly Goal Progress</h4>
+<div class="text-h1 font-h1 mb-6">$4,235.10 / $6,000.00</div>
+<div class="w-full h-3 bg-white/10 rounded-full overflow-hidden mb-4">
+<div class="h-full bg-secondary w-[70%]"></div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div>
+<div class="text-[10px] font-bold text-slate-400 uppercase mb-1">Avg Winner</div>
+<div class="text-body-lg font-data-mono text-secondary-fixed">$412.00</div>
+</div>
+<div>
+<div class="text-[10px] font-bold text-slate-400 uppercase mb-1">Avg Loser</div>
+<div class="text-body-lg font-data-mono text-error-container">-$185.00</div>
+</div>
+<div>
+<div class="text-[10px] font-bold text-slate-400 uppercase mb-1">Profit Factor</div>
+<div class="text-body-lg font-data-mono">2.23</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
