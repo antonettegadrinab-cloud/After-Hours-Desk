@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px
+    }
+
+    .app {
+      display: flex;
+      min-height: 560px;
+      border: 0.5px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff
+    }
+
+    .sidebar {
+      width: 168px;
+      flex-shrink: 0;
+      background: #f7f7f7;
+      border-right: 0.5px solid #e0e0e0;
+      display: flex;
+      flex-direction: column
+    }
+
+    .sb-brand {
+      padding: 14px 14px 10px;
+      border-bottom: 0.5px solid #e0e0e0
+    }
+
+    .sb-brand-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111
+    }
+
+    .sb-brand-sub {
+      font-size: 10px;
+      color: #999;
+      margin-top: 1px
+    }
+
+    .sb-sec {
+      padding: 10px 8px 3px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    .sb-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      margin: 1px 4px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #666;
+      border: none;
+      background: transparent;
+      width: calc(100% - 8px);
+      text-align: left
+    }
+
+    .sb-item:hover {
+      background: #ececec;
+      color: #111
+    }
+
+    .sb-item.active {
+      background: #fff;
+      color: #111;
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .07)
+    }
+
+    .sb-icon {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0
+    }
+
+    .sb-bottom {
+      margin-top: auto;
+      padding: 10px 8px;
+      border-top: 0.5px solid #e0e0e0
+    }
+
+    .rate-box {
+      background: #fff;
+      border: 0.5px solid #e0e0e0;
+      border-radius: 7px;
+      padding: 7px 9px
+    }
+
+    .rate-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .rate-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111
+    }
+
+    .rate-sub {
+      font-size: 9px;
+      color: #aaa;
+      margin-top: 2px
+    }
+
+    .rate-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #aaa;
+      display: inline-block
+    }
+
+    .rate-dot.live {
+      background: #0a7a50;
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 0.5px solid #e0e0e0;
+      flex-shrink: 0
+    }
+
+    .topbar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111
+    }
+
+    .btn {
+      font-size: 11px;
+      padding: 5px 12px;
+      border: 0.5px solid #d0d0d0;
+      border-radius: 7px;
+      cursor: pointer;
+      background: #fff;
+      color: #111;
+      font-weight: 500
+    }
+
+    .btn:hover {
+      background: #f5f5f5
+    }
+
+    .btn-p {
+      background: #111;
+      color: #fff;
+      border-color: #111
+    }
+
+    .btn-p:hover {
+      background: #333
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px
+    }
+
+    .panel {
+      display: none
+    }
+
+    .panel.active {
+      display: block
+    }
+
+    .quote-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      text-align: center;
+      padding: 20px
+    }
+
+    .quote-icon {
+      font-size: 44px;
+      margin-bottom: 16px;
+      opacity: .2;
+      line-height: 1
+    }
+
+    .quote-text {
+      font-size: 19px;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.65;
+      max-width: 500px;
+      margin-bottom: 12px
+    }
+
+    .quote-author {
+      font-size: 12px;
+      color: #999
+    }
+
+    .quote-cat {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: #f0f0f0;
+      color: #666;
+      margin-top: 10px
+    }
+
+    .quote-timer {
+      font-size: 10px;
+      color: #ccc;
+      margin-top: 14px;
+      letter-spacing: .02em
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .kpi {
+      background: #f7f7f7;
+      border-radius: 8px;
+      padding: 10px 12px
+    }
+
+    .kpi-lbl {
+      font-size: 9px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 3px
+    }
+
+    .kpi-val {
+      font-size: 17px;
+      font-weight: 600;
+      color: #111
+    }
+
+    .kpi-sub {
+      font-size: 10px;
+      color: #aaa;
+      margin-top: 2px
+    }
+
+    .pos {
+      color: #0a7a50
+    }
+
+    .neg {
+      color: #c0392b
+    }
+
+    .cc {
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px
+    }
+
+    .cc-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 8px
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px
+    }
+
+    th {
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      padding: 7px 9px;
+      border-bottom: 0.5px solid #e8e8e8;
+      background: #f9f9f9;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-align: left;
+      white-space: nowrap
+    }
+
+    td {
+      padding: 7px 9px;
+      border-bottom: 0.5px solid #f0f0f0;
+      color: #222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: middle
+    }
+
+    tr:last-child td {
+      border-bottom: none
+    }
+
+    tr:hover td {
+      background: #fafafa
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 100px
+    }
+
+    .buy {
+      background: #e6f7f0;
+      color: #0a7a50
+    }
+
+    .sell {
+      background: #fdeaea;
+      color: #c0392b
+    }
+
+    .win-b {
+      background: #e6f7f0;
+      color: #0a7a50
+    }
+
+    .loss-b {
+      background: #fdeaea;
+      color: #c0392b
+    }
+
+    .s-Asia {
+      background: #efedfe;
+      color: #4a3db5
+    }
+
+    .s-London {
+      background: #e5f0fb;
+      color: #1a5fa0
+    }
+
+    .s-NY {
+      background: #fef4e5;
+      color: #a06010
+    }
+
+    .s-OL {
+      background: #eaf3de;
+      color: #3a6a10
+    }
+
+    .wl-win {
+      color: #0a7a50;
+      font-weight: 600
+    }
+
+    .wl-loss {
+      color: #c0392b;
+      font-weight: 600
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ccc;
+      font-size: 11px;
+      padding: 1px 4px
+    }
+
+    .del-btn:hover {
+      color: #c0392b
+    }
+
+    .empty {
+      text-align: center;
+      color: #bbb;
+      font-size: 12px;
+      padding: 2.5rem 0
+    }
+
+    .grp-hdr {
+      background: #f7f7f7;
+      font-size: 10px;
+      font-weight: 600;
+      color: #888;
+      padding: 6px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: .04em
+    }
+
+    .thumb-xs {
+      width: 28px;
+      height: 20px;
+      object-fit: cover;
+      border-radius: 3px;
+      border: 0.5px solid #e0e0e0;
+      cursor: pointer;
+      vertical-align: middle
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 9px;
+      margin-bottom: 9px
+    }
+
+    .fld {
+      display: flex;
+      flex-direction: column;
+      gap: 3px
+    }
+
+    .fld label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: .03em
+    }
+
+    .fld input,
+    .fld select,
+    .fld textarea {
+      font-size: 12px;
+      padding: 6px 8px;
+      border: 0.5px solid #e0e0e0;
+      border-radius: 7px;
+      background: #f9f9f9;
+      color: #111;
+      width: 100%
+    }
+
+    .fld textarea {
+      resize: none;
+      font-family: inherit
+    }
+
+    .upload-zone {
+      border: 1.5px dashed #d5d5d5;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      cursor: pointer;
+      background: #f9f9f9
+    }
+
+    .upload-zone:hover {
+      background: #f0f0f0
+    }
+
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px
+    }
+
+    .ph-wrap {
+      position: relative;
+      display: inline-block
+    }
+
+    .ph-thumb {
+      width: 58px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 0.5px solid #e0e0e0;
+      cursor: pointer
+    }
+
+    .ph-rm {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #c0392b;
+      color: #fff;
+      border: none;
+      font-size: 9px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 10px;
+      flex-wrap: wrap
+    }
+
+    .pill {
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 0.5px solid #d5d5d5;
+      cursor: pointer;
+      background: transparent;
+      color: #888;
+      font-weight: 500
+    }
+
+    .pill.active {
+      background: #111;
+      color: #fff;
+      border-color: #111
+    }
+
+    .rubric-wrap {
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px
+    }
+
+    .rubric-title {
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 10px
+    }
+
+    .rubric-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 9px
+    }
+
+    .rubric-lbl {
+      font-size: 11px;
+      font-weight: 500;
+      color: #444;
+      width: 140px;
+      flex-shrink: 0
+    }
+
+    .rubric-stars {
+      display: flex;
+      gap: 3px
+    }
+
+    .star-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 0.5px solid #e0e0e0;
+      background: #f7f7f7;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ccc;
+      font-weight: 600
+    }
+
+    .star-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111
+    }
+
+    .rubric-desc {
+      font-size: 10px;
+      color: #aaa;
+      flex: 1
+    }
+
+    .rubric-score-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0 2px;
+      border-top: 0.5px solid #f0f0f0;
+      margin-top: 2px
+    }
+
+    .rubric-grade {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 100px
+    }
+
+    .grade-A {
+      background: #e6f7f0;
+      color: #0a7a50
+    }
+
+    .grade-B {
+      background: #e5f0fb;
+      color: #1a5fa0
+    }
+
+    .grade-C {
+      background: #fef4e5;
+      color: #a06010
+    }
+
+    .grade-D {
+      background: #fdeaea;
+      color: #c0392b
+    }
+
+    .would-take {
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px
+    }
+
+    .wt-btns {
+      display: flex;
+      gap: 8px;
+      margin-top: 7px
+    }
+
+    .wt-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 0.5px solid #e0e0e0;
+      cursor: pointer;
+      background: #f9f9f9;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888
+    }
+
+    .wt-btn.yes.active {
+      background: #e6f7f0;
+      color: #0a7a50;
+      border-color: #b5e2d0
+    }
+
+    .wt-btn.no.active {
+      background: #fdeaea;
+      color: #c0392b;
+      border-color: #f5c0c0
+    }
+
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px
+    }
+
+    .cal-dow {
+      font-size: 9px;
+      font-weight: 600;
+      color: #aaa;
+      text-align: center;
+      padding: 3px 0;
+      text-transform: uppercase
+    }
+
+    .cal-day {
+      min-height: 50px;
+      border: 0.5px solid #ebebeb;
+      border-radius: 7px;
+      padding: 4px 5px;
+      background: #fff
+    }
+
+    .cal-day.empty {
+      background: transparent;
+      border-color: transparent
+    }
+
+    .cal-day.today {
+      border-color: #2563eb
+    }
+
+    .cal-day.has-t {
+      cursor: pointer
+    }
+
+    .cal-day.has-t:hover {
+      background: #f7f7f7
+    }
+
+    .cal-day-num {
+      font-size: 9px;
+      color: #aaa;
+      margin-bottom: 2px
+    }
+
+    .cal-day.today .cal-day-num {
+      color: #2563eb;
+      font-weight: 700
+    }
+
+    .cw {
+      background: #edfaf3
+    }
+
+    .cl {
+      background: #fef0f0
+    }
+
+    .cb {
+      background: #f9f9f9
+    }
+
+    .cp {
+      color: #0a7a50;
+      font-size: 10px;
+      font-weight: 600
+    }
+
+    .cn {
+      color: #c0392b;
+      font-size: 10px;
+      font-weight: 600
+    }
+
+    .cct {
+      font-size: 9px;
+      color: #bbb
+    }
+
+    .dd {
+      margin-top: 10px;
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px;
+      overflow: hidden
+    }
+
+    .gal-week-header {
+      padding: 8px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 8px
+    }
+
+    .gal-week-pos {
+      background: #edfaf3;
+      color: #0a7a50
+    }
+
+    .gal-week-neg {
+      background: #fef0f0;
+      color: #c0392b
+    }
+
+    .gal-week-neutral {
+      background: #f5f5f5;
+      color: #888
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px
+    }
+
+    .gcard {
+      border: 0.5px solid #e8e8e8;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff
+    }
+
+    .gcard-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      cursor: pointer;
+      display: block
+    }
+
+    .gcard-img:hover {
+      opacity: .85
+    }
+
+    .gcard-body {
+      padding: 7px 9px;
+      border-top: 0.5px solid #f0f0f0
+    }
+
+    .gcard-multi {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #e8e8e8
+    }
+
+    .gcard-multi img {
+      width: 100%;
+      height: 48px;
+      object-fit: cover;
+      cursor: pointer;
+      display: block
+    }
+
+    .gcard-multi img:hover {
+      opacity: .85
+    }
+
+    .cl-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 0;
+      border-bottom: 0.5px solid #f0f0f0
+    }
+
+    .cl-item:last-child {
+      border-bottom: none
+    }
+
+    .cl-item input[type=checkbox] {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      accent-color: #0a7a50
+    }
+
+    .cl-lbl {
+      font-size: 12px;
+      color: #222;
+      flex: 1
+    }
+
+    .cl-lbl.chk {
+      text-decoration: line-through;
+      color: #ccc
+    }
+
+    .pb-track {
+      height: 4px;
+      background: #f0f0f0;
+      border-radius: 100px;
+      flex: 1
+    }
+
+    .pb-fill {
+      height: 4px;
+      border-radius: 100px;
+      background: #0a7a50;
+      transition: width .3s
+    }
+
+    .lb {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .82);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column
+    }
+
+    .lb.open {
+      display: flex
+    }
+
+    .lb img {
+      max-width: 88%;
+      max-height: 74vh;
+      border-radius: 10px;
+      object-fit: contain
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer
+    }
+
+    .lb-nav {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px
+    }
+
+    .lb-nav button {
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 4px 14px;
+      border-radius: 7px
+    }
+
+    .lb-info {
+      color: #fff;
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center
+    }
+
+    .lb-ctr {
+      color: rgba(255, 255, 255, .4);
+      font-size: 11px;
+      margin-top: 4px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <div class="sb-brand">
+        <div class="sb-brand-title">TradeLog Pro</div>
+        <div class="sb-brand-sub">Forex &amp; Gold Journal</div>
+      </div>
+      <div class="sb-sec">Main</div>
+      <button class="sb-item active" onclick="nav('quotes',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 3.5h4v3.5H2zM8 3.5h4v3.5H8z" />
+          <path d="M6 7c0 1-.9 1.8-2 1.8M12 7c0 1-.9 1.8-2 1.8" />
+        </svg>
+        Quotes
+      </button>
+      <button class="sb-item" onclick="nav('overview',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="1" width="5" height="5" rx="1" />
+          <rect x="8" y="1" width="5" height="5" rx="1" />
+          <rect x="1" y="8" width="5" height="5" rx="1" />
+          <rect x="8" y="8" width="5" height="5" rx="1" />
+        </svg>
+        Overview
+      </button>
+      <button class="sb-item" onclick="nav('log',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="1" width="12" height="12" rx="1.5" />
+          <line x1="4" y1="4.5" x2="10" y2="4.5" />
+          <line x1="4" y1="7" x2="10" y2="7" />
+          <line x1="4" y1="9.5" x2="7" y2="9.5" />
+        </svg>
+        Trade Log
+      </button>
+      <button class="sb-item" onclick="nav('gallery',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="1" width="5.5" height="5.5" rx="1" />
+          <rect x="7.5" y="1" width="5.5" height="5.5" rx="1" />
+          <rect x="1" y="7.5" width="5.5" height="5.5" rx="1" />
+          <rect x="7.5" y="7.5" width="5.5" height="5.5" rx="1" />
+        </svg>
+        Gallery
+      </button>
+      <button class="sb-item" onclick="nav('calendar',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="1" y="2" width="12" height="11" rx="1.5" />
+          <line x1="1" y1="5.5" x2="13" y2="5.5" />
+          <line x1="4" y1="1" x2="4" y2="4" />
+          <line x1="10" y1="1" x2="10" y2="4" />
+        </svg>
+        Calendar
+      </button>
+      <button class="sb-item" onclick="nav('trend',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="1,11 4,7 7,9 11,3 13,5" />
+        </svg>
+        Analytics
+      </button>
+      <div class="sb-sec">Tools</div>
+      <button class="sb-item" onclick="nav('checklist',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="2,7 5,10 12,3" />
+        </svg>
+        Checklist
+      </button>
+      <button class="sb-item" onclick="nav('add',this)">
+        <svg class="sb-icon" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="7" cy="7" r="6" />
+          <line x1="7" y1="4" x2="7" y2="10" />
+          <line x1="4" y1="7" x2="10" y2="7" />
+        </svg>
+        Add Trade
+      </button>
+      <div class="sb-bottom">
+        <div class="rate-box">
+          <div class="rate-lbl">USD/PHP <span class="rate-dot" id="rateDot"></span></div>
+          <div class="rate-val" id="rateVal">—</div>
+          <div class="rate-sub" id="rateSub">Fetching live rate…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-title" id="topbarTitle">Quotes</div>
+        <button class="btn btn-p" onclick="nav('add',document.querySelectorAll('.sb-item')[7])">+ Add Trade</button>
+      </div>
+      <div class="content">
+
+        <div id="panel-quotes" class="panel active">
+          <div class="quote-wrap">
+            <div class="quote-icon">"</div>
+            <div class="quote-text" id="qText"></div>
+            <div class="quote-author" id="qAuthor"></div>
+            <div class="quote-cat" id="qCat"></div>
+            <div class="quote-timer" id="qTimer"></div>
+          </div>
+        </div>
+
+        <div id="panel-overview" class="panel">
+          <div class="kpi-row">
+            <div class="kpi">
+              <div class="kpi-lbl">Total trades</div>
+              <div class="kpi-val" id="k-total">0</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Win rate</div>
+              <div class="kpi-val" id="k-wr">—</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Total P&L</div>
+              <div class="kpi-val" id="k-pnl">$0.00</div>
+              <div class="kpi-sub" id="k-php"></div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-lbl">Best trade</div>
+              <div class="kpi-val pos" id="k-best">—</div>
+            </div>
+          </div>
+          <div class="cc">
+            <div class="cc-title">Cumulative P&L — USD</div>
+            <div style="position:relative;height:155px"><canvas id="ovChart"></canvas></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="cc">
+              <div class="cc-title">P&L by session</div>
+              <div style="position:relative;height:130px"><canvas id="sessChart"></canvas></div>
+            </div>
+            <div class="cc">
+              <div class="cc-title">Win / Loss</div>
+              <div style="position:relative;height:130px"><canvas id="wlChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-log" class="panel">
+          <div class="filter-pills">
+            <button class="pill active" onclick="setView('all',this)">All</button>
+            <button class="pill" onclick="setView('daily',this)">Daily</button>
+            <button class="pill" onclick="setView('weekly',this)">Weekly</button>
+            <button class="pill" onclick="setView('monthly',this)">Monthly</button>
+            <input type="date" id="filterDate"
+              style="display:none;font-size:11px;padding:3px 8px;border:0.5px solid #e0e0e0;border-radius:6px;background:#f9f9f9;color:#111"
+              onchange="renderLog()">
+          </div>
+          <div id="logWrap"></div>
+        </div>
+
+        <div id="panel-gallery" class="panel">
+          <div style="display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap">
+            <select id="gal-pair" onchange="renderGallery()"
+              style="font-size:11px;padding:4px 8px;border:0.5px solid #e0e0e0;border-radius:6px;background:#f9f9f9;color:#111">
+              <option value="">All pairs</option>
+            </select>
+            <select id="gal-dir" onchange="renderGallery()"
+              style="font-size:11px;padding:4px 8px;border:0.5px solid #e0e0e0;border-radius:6px;background:#f9f9f9;color:#111">
+              <option value="">All directions</option>
+              <option>Buy</option>
+              <option>Sell</option>
+            </select>
+            <select id="gal-res" onchange="renderGallery()"
+              style="font-size:11px;padding:4px 8px;border:0.5px solid #e0e0e0;border-radius:6px;background:#f9f9f9;color:#111">
+              <option value="">All results</option>
+              <option value="win">Wins</option>
+              <option value="loss">Losses</option>
+            </select>
+          </div>
+          <div id="galWrap"></div>
+        </div>
+
+        <div id="panel-calendar" class="panel">
+          <div class="cal-nav">
+            <button class="btn" onclick="chMon(-1)">&#8592;</button>
+            <span style="font-size:13px;font-weight:600;color:#111" id="calTitle"></span>
+            <button class="btn" onclick="chMon(1)">&#8594;</button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div id="dayDetail"></div>
+        </div>
+
+        <div id="panel-trend" class="panel">
+          <div class="cc">
+            <div class="cc-title">Cumulative P&L — USD vs PHP ÷ 100</div>
+            <div style="display:flex;gap:14px;margin-bottom:8px;font-size:10px;color:#888">
+              <span style="display:flex;align-items:center;gap:4px"><span
+                  style="width:10px;height:2px;background:#0a7a50;display:inline-block"></span>USD</span>
+              <span style="display:flex;align-items:center;gap:4px"><span
+                  style="width:10px;height:0;border-top:2px dashed #1a5fa0;display:inline-block"></span>PHP ÷ 100</span>
+            </div>
+            <div style="position:relative;height:190px"><canvas id="trendChart"></canvas></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="cc">
+              <div class="cc-title">P&L by session</div>
+              <div style="position:relative;height:140px"><canvas id="sessChart2"></canvas></div>
+            </div>
+            <div class="cc">
+              <div class="cc-title">P&L by pair</div>
+              <div style="position:relative;height:140px"><canvas id="pairChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-checklist" class="panel">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <div class="pb-track" style="flex:1">
+              <div class="pb-fill" id="clPb" style="width:0%"></div>
+            </div>
+            <span style="font-size:12px;font-weight:600" id="clScore">0/0</span>
+            <button class="btn" onclick="resetCl()">Reset</button>
+          </div>
+          <div class="tbl-wrap" style="margin-bottom:12px">
+            <div style="padding:0 12px" id="clItems"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:14px">
+            <input type="text" id="clNew" placeholder="Add custom item…"
+              style="flex:1;font-size:12px;padding:6px 9px;border:0.5px solid #e0e0e0;border-radius:7px;background:#f9f9f9;color:#111">
+            <button class="btn" onclick="addClItem()">Add</button>
+          </div>
+          <div
+            style="font-size:9px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">
+            Session notes</div>
+          <textarea
+            style="width:100%;font-size:12px;padding:8px 10px;border:0.5px solid #e0e0e0;border-radius:7px;background:#f9f9f9;color:#111;resize:none;font-family:inherit"
+            rows="4" placeholder="Pre-session plan, market thoughts, post-session review…"></textarea>
+        </div>
+
+        <div id="panel-add" class="panel">
+          <div style="border:0.5px solid #e8e8e8;border-radius:8px;padding:14px">
+            <div class="form-grid">
+              <div class="fld"><label>Date</label><input type="date" id="f-date"></div>
+              <div class="fld"><label>Pair</label>
+                <select id="f-pair">
+                  <option>XAUUSD (Gold)</option>
+                  <option>EUR/USD</option>
+                  <option>GBP/USD</option>
+                  <option>USD/JPY</option>
+                  <option>AUD/USD</option>
+                  <option>USD/CAD</option>
+                  <option>NZD/USD</option>
+                  <option>EUR/JPY</option>
+                  <option>GBP/JPY</option>
+                </select>
+              </div>
+              <div class="fld"><label>Session</label>
+                <select id="f-session">
+                  <option value="Asia">Asia</option>
+                  <option value="London">London</option>
+                  <option value="New York">New York</option>
+                  <option value="Overlap">London/NY</option>
+                </select>
+              </div>
+              <div class="fld"><label>Direction</label><select id="f-dir">
+                  <option>Buy</option>
+                  <option>Sell</option>
+                </select></div>
+              <div class="fld"><label>Result</label>
+                <select id="f-result">
+                  <option value="">— Select —</option>
+                  <option value="Win">✅ Win</option>
+                  <option value="Loss">❌ Loss</option>
+                  <option value="Breakeven">⚖️ Breakeven</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="fld"><label>Entry</label><input type="number" id="f-entry" step="any" placeholder="0.00">
+              </div>
+              <div class="fld"><label>Exit</label><input type="number" id="f-exit" step="any" placeholder="0.00"></div>
+              <div class="fld"><label>Lots</label><input type="number" id="f-lot" step="any" placeholder="0.01"></div>
+              <div class="fld"><label>P&L USD (manual)</label><input type="number" id="f-pnl" step="any"
+                  placeholder="Auto or manual"></div>
+            </div>
+            <div class="fld" style="margin-bottom:9px"><label>Notes / Strategy</label><textarea id="f-notes" rows="2"
+                placeholder="Setup, entry reason, lessons…"></textarea></div>
+            <div class="rubric-wrap">
+              <div class="rubric-title">Execution Quality Rubric</div>
+              <div id="rubricRows"></div>
+              <div class="rubric-score-row">
+                <div>
+                  <div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px">
+                    Total score</div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <div style="font-size:18px;font-weight:700;color:#111" id="rubricTotal">0 / 20</div>
+                    <div class="rubric-grade" id="rubricGrade" style="background:#f0f0f0;color:#aaa">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="would-take">
+              <div style="font-size:9px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.05em">Would
+                I take this trade again?</div>
+              <div class="wt-btns">
+                <button class="wt-btn yes" id="wtYes" onclick="setWT('yes')">✅ YES — System is working</button>
+                <button class="wt-btn no" id="wtNo" onclick="setWT('no')">❌ NO — Execution problem</button>
+              </div>
+            </div>
+            <div class="fld" style="margin-bottom:12px;margin-top:10px">
+              <label>Trade screenshots (up to 4)</label>
+              <div class="upload-zone" onclick="document.getElementById('photoInput').click()"
+                ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+                <div style="font-size:12px;color:#999">Click to upload or drag &amp; drop</div>
+                <div style="font-size:10px;color:#bbb;margin-top:2px">PNG, JPG, WEBP — max 4</div>
+              </div>
+              <input type="file" id="photoInput" accept="image/*" multiple style="display:none"
+                onchange="handleFiles(this.files)">
+              <div class="photo-grid" id="photoPreview"></div>
+            </div>
+            <button class="btn btn-p" onclick="addTrade()">+ Save Trade</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="lb" id="lb" onclick="lbBg(event)">
+    <button class="lb-close" onclick="closeLB()">✕</button>
+    <img id="lbImg" src="" alt="screenshot">
+    <div class="lb-nav"><button onclick="lbStep(-1)">&#8592;</button><button onclick="lbStep(1)">&#8594;</button></div>
+    <div class="lb-info" id="lbInfo"></div>
+    <div class="lb-ctr" id="lbCtr"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    // ── STATE ──────────────────────────────
+    let trades = [], pending = [], logView = 'all', wtChoice_ = '';
+    let ovC = null, sC = null, wlC = null, tC = null, s2C = null, pC = null;
+    const now = new Date(), todayStr = now.toISOString().split('T')[0];
+    let cY = now.getFullYear(), cM = now.getMonth(), lbImgs = [], lbI = 0;
+    let liveRate = 61.28; // fallback from today's known rate
+    document.getElementById('f-date').value = todayStr;
+
+    // ── LIVE RATE ──────────────────────────
+    async function fetchRate() {
+      try {
+        // Use a CORS-friendly free forex API
+        const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        if (res.ok) {
+          const d = await res.json();
+          if (d.rates && d.rates.PHP) {
+            liveRate = parseFloat(d.rates.PHP.toFixed(4));
+            document.getElementById('rateVal').textContent = '₱' + liveRate.toFixed(2);
+            document.getElementById('rateSub').textContent = 'Live · auto-updated';
+            document.getElementById('rateDot').className = 'rate-dot live';
+            renderStats();
+            return;
+          }
+        }
+      } catch (e) { }
+      // fallback: use known today's rate
+      document.getElementById('rateVal').textContent = '₱' + liveRate.toFixed(2);
+      document.getElementById('rateSub').textContent = 'Apr 28, 2026 (cached)';
+      document.getElementById('rateDot').className = 'rate-dot';
+    }
+    fetchRate();
+    setInterval(fetchRate, 60 * 60 * 1000); // refresh every hour
+
+    // ── QUOTES ─────────────────────────────
+    const QUOTES = [
+      { text: 'The goal of a successful trader is to make the best trades. Money is secondary.', author: 'Alexander Elder', cat: 'Mindset' },
+      { text: 'Risk comes from not knowing what you are doing.', author: 'Warren Buffett', cat: 'Risk' },
+      { text: 'The market is a device for transferring money from the impatient to the patient.', author: 'Warren Buffett', cat: 'Discipline' },
+      { text: 'Do not anticipate and move without market confirmation.', author: 'Jesse Livermore', cat: 'Discipline' },
+      { text: 'Losers average losers.', author: 'Paul Tudor Jones', cat: 'Risk' },
+      { text: 'I\'m always thinking about losing money as opposed to making money.', author: 'Paul Tudor Jones', cat: 'Risk' },
+      { text: 'Cut your losses and let your profits run.', author: 'Trading Proverb', cat: 'Discipline' },
+      { text: 'Plan the trade and trade the plan.', author: 'Trading Proverb', cat: 'Discipline' },
+      { text: 'Markets are never wrong — opinions often are.', author: 'Jesse Livermore', cat: 'Wisdom' },
+      { text: 'It\'s not about being right or wrong. It\'s about how much you make when you\'re right.', author: 'George Soros', cat: 'Mindset' },
+      { text: 'Emotional discipline separates successful traders from everyone else.', author: 'Mark Douglas', cat: 'Discipline' },
+      { text: 'A peak performance trader is totally focused on the present moment.', author: 'Mark Douglas', cat: 'Mindset' },
+      { text: 'Trade the market in front of you, not the market you want.', author: 'Unknown', cat: 'Wisdom' },
+      { text: 'Every loss is a tuition fee. Make sure you get your money\'s worth.', author: 'Unknown', cat: 'Motivation' },
+      { text: 'The best investment you can make is in yourself.', author: 'Warren Buffett', cat: 'Motivation' },
+      { text: 'In trading, the impossible happens about twice a year.', author: 'Henri M. Simoes', cat: 'Wisdom' },
+      { text: 'You will never find a perfect entry point. Stop waiting and start trading.', author: 'Unknown', cat: 'Motivation' },
+      { text: 'Be patient with winning trades and impatient with losing trades.', author: 'Michael Covel', cat: 'Discipline' },
+      { text: 'The elements of good trading are cutting losses, cutting losses, and cutting losses.', author: 'Ed Seykota', cat: 'Risk' },
+      { text: 'Win or lose, everybody gets what they want out of the market.', author: 'Ed Seykota', cat: 'Wisdom' },
+    ];
+    const QUOTE_MS = 4 * 60 * 60 * 1000;
+    let qIdx = Math.floor(Math.random() * QUOTES.length), qSetAt = Date.now();
+
+    function showQuote() {
+      const q = QUOTES[qIdx];
+      document.getElementById('qText').textContent = '\u201C' + q.text + '\u201D';
+      document.getElementById('qAuthor').textContent = '\u2014 ' + q.author;
+      document.getElementById('qCat').textContent = q.cat;
+    }
+    function startQTimer() {
+      setInterval(() => {
+        const rem = QUOTE_MS - (Date.now() - qSetAt);
+        if (rem <= 0) { qIdx = (qIdx + 1) % QUOTES.length; qSetAt = Date.now(); showQuote(); }
+        const h = Math.floor(Math.max(0, rem) / 3600000), m = Math.floor((Math.max(0, rem) % 3600000) / 60000), s = Math.floor((Math.max(0, rem) % 60000) / 1000);
+        document.getElementById('qTimer').textContent = `Next quote in ${h}h ${m}m ${s}s`;
+      }, 1000);
+    }
+    showQuote(); startQTimer();
+
+    // ── RUBRIC ─────────────────────────────
+    const RUBRIC_ITEMS = [
+      { key: 'plan', label: 'Followed Plan', descs: ['No Discipline', 'Poor Discipline', 'Partial Discipline', 'Minor Deviation', 'Perfect Discipline'] },
+      { key: 'entry', label: 'Entry Accuracy', descs: ['Very Poor Entry', 'Poor Entry', 'Average Entry', 'Good Entry', 'Sniper Entry'] },
+      { key: 'timing', label: 'Timing', descs: ['Terrible Timing', 'Bad Timing', 'Noticeable Mistake', 'Slightly Early/Late', 'Perfect Timing'] },
+      { key: 'emotion', label: 'Emotional Control', descs: ['No Control', 'High Emotion', 'Moderate Emotion', 'Slight Emotion', 'Fully Controlled'] },
+    ];
+    let rubricVals = { plan: 0, entry: 0, timing: 0, emotion: 0 };
+
+    function buildRubric() {
+      document.getElementById('rubricRows').innerHTML = RUBRIC_ITEMS.map(item => `
+    <div class="rubric-row">
+      <div class="rubric-lbl">${item.label}</div>
+      <div class="rubric-stars" id="stars-${item.key}">
+        ${[1, 2, 3, 4, 5].map(n => `<button class="star-btn" onclick="setRubric('${item.key}',${n})">${n}</button>`).join('')}
+      </div>
+      <div class="rubric-desc" id="desc-${item.key}">—</div>
+    </div>`).join('');
+    }
+    function setRubric(key, val) {
+      rubricVals[key] = val;
+      const item = RUBRIC_ITEMS.find(r => r.key === key);
+      document.querySelectorAll(`#stars-${key} .star-btn`).forEach((b, i) => b.classList.toggle('active', i < val));
+      document.getElementById(`desc-${key}`).textContent = item.descs[val - 1];
+      updateRubricScore();
+    }
+    function updateRubricScore() {
+      const total = Object.values(rubricVals).reduce((a, b) => a + b, 0);
+      document.getElementById('rubricTotal').textContent = total + ' / 20';
+      let grade = '', cls = '';
+      if (total >= 16) { grade = 'A — Professional'; cls = 'grade-A'; }
+      else if (total >= 11) { grade = 'B — Decent'; cls = 'grade-B'; }
+      else if (total >= 6) { grade = 'C — Inconsistent'; cls = 'grade-C'; }
+      else if (total >= 4) { grade = 'D — Undisciplined'; cls = 'grade-D'; }
+      const el = document.getElementById('rubricGrade');
+      el.textContent = grade || '—'; el.className = 'rubric-grade ' + (cls || '');
+      if (!cls) { el.style.background = '#f0f0f0'; el.style.color = '#aaa'; } else { el.style.background = ''; el.style.color = ''; }
+    }
+    function resetRubric() { rubricVals = { plan: 0, entry: 0, timing: 0, emotion: 0 }; buildRubric(); updateRubricScore(); }
+    function setWT(v) { wtChoice_ = v; document.getElementById('wtYes').classList.toggle('active', v === 'yes'); document.getElementById('wtNo').classList.toggle('active', v === 'no'); }
+
+    // ── HELPERS ────────────────────────────
+    function phpR() { return liveRate; }
+    function fU(v) { return (v >= 0 ? '+$' : '-$') + Math.abs(v).toFixed(2); }
+    function fP(v) { const p = v * phpR(); return (p >= 0 ? '+₱' : '-₱') + Math.abs(p).toFixed(2); }
+    function sKey(s) { return s === 'New York' ? 'NY' : s === 'Overlap' ? 'OL' : s || 'Asia'; }
+    function sCls(s) { return 's-' + sKey(s); }
+    function getWK(d) { const dt = new Date(d), day = dt.getDay(), diff = dt.getDate() - day + (day === 0 ? -6 : 1), m = new Date(dt.setDate(diff)); return m.toISOString().split('T')[0]; }
+    function getMK(d) { return d.slice(0, 7); }
+    function wkLbl(k) { const d = new Date(k), e = new Date(d); e.setDate(e.getDate() + 6); return 'Week ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' – ' + e.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+    function moLbl(k) { const [y, m] = k.split('-'); return new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }); }
+
+    const TITLES = { quotes: 'Quotes', overview: 'Overview', log: 'Trade Log', gallery: 'Gallery', calendar: 'Calendar', trend: 'Analytics', checklist: 'Pre-trade Checklist', add: 'Add Trade' };
+
+    // ── NAV ────────────────────────────────
+    function nav(n, btn) {
+      document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + n).classList.add('active');
+      document.getElementById('topbarTitle').textContent = TITLES[n] || n;
+      if (n === 'overview') renderOverview();
+      if (n === 'log') renderLog();
+      if (n === 'gallery') renderGallery();
+      if (n === 'calendar') renderCal();
+      if (n === 'trend') renderTrend();
+      if (n === 'checklist') renderCl();
+    }
+
+    // ── PHOTOS ─────────────────────────────
+    function handleFiles(f) { Array.from(f).slice(0, 4 - pending.length).forEach(file => { if (!file.type.startsWith('image/')) return; const r = new FileReader(); r.onload = e => { pending.push(e.target.result); renderPP(); }; r.readAsDataURL(file); }); }
+    function handleDrop(e) { e.preventDefault(); handleFiles(e.dataTransfer.files); }
+    function renderPP() { document.getElementById('photoPreview').innerHTML = pending.map((s, i) => `<div class="ph-wrap"><img class="ph-thumb" src="${s}" onclick="openLBs('${s}')" alt="p"><button class="ph-rm" onclick="rmPh(${i})">✕</button></div>`).join(''); }
+    function rmPh(i) { pending.splice(i, 1); renderPP(); }
+    function openLBs(src) { lbImgs = [{ src, info: '' }]; lbI = 0; showLB(); }
+    function openLBt(tid, idx) { const t = trades.find(x => x.id === tid); if (!t || !t.photos.length) return; const hp = t.pnl !== null && !isNaN(t.pnl); lbImgs = t.photos.map(s => ({ src: s, info: t.pair + ' · ' + t.dir + ' · ' + t.session + (hp ? ' · ' + fU(t.pnl) : '') })); lbI = idx; showLB(); }
+    function openLBa(imgs, i) { lbImgs = imgs; lbI = i; showLB(); }
+    function showLB() { const x = lbImgs[lbI]; document.getElementById('lbImg').src = x.src; document.getElementById('lbInfo').textContent = x.info || ''; document.getElementById('lbCtr').textContent = lbImgs.length > 1 ? (lbI + 1) + ' / ' + lbImgs.length : ''; document.getElementById('lb').classList.add('open'); }
+    function closeLB() { document.getElementById('lb').classList.remove('open'); }
+    function lbBg(e) { if (e.target === document.getElementById('lb')) closeLB(); }
+    function lbStep(d) { lbI = (lbI + d + lbImgs.length) % lbImgs.length; showLB(); }
+
+    // ── ADD TRADE ──────────────────────────
+    function addTrade() {
+      const date = document.getElementById('f-date').value;
+      const pair = document.getElementById('f-pair').value;
+      const dir = document.getElementById('f-dir').value, session = document.getElementById('f-session').value;
+      const result = document.getElementById('f-result').value;
+      const entry = parseFloat(document.getElementById('f-entry').value), exit = parseFloat(document.getElementById('f-exit').value), lot = parseFloat(document.getElementById('f-lot').value);
+      const mp = document.getElementById('f-pnl').value, notes = document.getElementById('f-notes').value.trim();
+      if (!date || !pair) { alert('Fill in date and pair.'); return; }
+      let pnl = null;
+      if (mp !== '') { pnl = parseFloat(mp); }
+      else if (!isNaN(entry) && !isNaN(exit) && !isNaN(lot)) { const d = dir === 'Buy' ? exit - entry : entry - exit; if (pair.includes('JPY')) pnl = parseFloat((d * lot * 1000).toFixed(2)); else if (pair.includes('XAU') || pair.includes('Gold')) pnl = parseFloat((d * lot * 100).toFixed(2)); else pnl = parseFloat((d * lot * 100000).toFixed(2)); }
+      const execScore = Object.values(rubricVals).reduce((a, b) => a + b, 0);
+      let grade = '';
+      if (execScore >= 16) grade = 'A'; else if (execScore >= 11) grade = 'B'; else if (execScore >= 6) grade = 'C'; else if (execScore >= 4) grade = 'D';
+      trades.unshift({ date, pair, dir, session, result, entry, exit, lot, pnl, notes, photos: [...pending], rubric: { ...rubricVals }, execScore, grade, wouldTakeAgain: wtChoice_, id: Date.now() });
+      pending = []; renderPP(); resetRubric(); setWT('');
+      ['f-entry', 'f-exit', 'f-lot', 'f-pnl', 'f-notes'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f-result').value = ''; document.getElementById('f-date').value = todayStr;
+      updPairF(); renderStats();
+      nav('log', document.querySelectorAll('.sb-item')[2]);
+    }
+    function deleteTrade(id) { trades = trades.filter(t => t.id !== id); updPairF(); renderAll(); }
+    function updPairF() { const s = document.getElementById('gal-pair'), cur = s.value, pairs = [...new Set(trades.map(t => t.pair))].sort(); s.innerHTML = '<option value="">All pairs</option>' + pairs.map(p => `<option${p === cur ? ' selected' : ''}>${p}</option>`).join(''); }
+    function renderAll() { renderStats(); const ap = n => document.getElementById('panel-' + n).classList.contains('active'); if (ap('overview')) renderOverview(); if (ap('log')) renderLog(); if (ap('gallery')) renderGallery(); if (ap('calendar')) renderCal(); if (ap('trend')) renderTrend(); }
+
+    // ── STATS ──────────────────────────────
+    function renderStats() {
+      const wp = trades.filter(t => t.pnl !== null && !isNaN(t.pnl)), wins = wp.filter(t => t.pnl > 0).length, tot = wp.reduce((s, t) => s + t.pnl, 0);
+      const vals = wp.map(t => t.pnl), best = vals.length ? Math.max(...vals) : null;
+      document.getElementById('k-total').textContent = trades.length;
+      document.getElementById('k-wr').textContent = wp.length ? ((wins / wp.length) * 100).toFixed(0) + '%' : '—';
+      const pe = document.getElementById('k-pnl'); pe.textContent = (tot >= 0 ? '+$' : '-$') + Math.abs(tot).toFixed(2); pe.className = 'kpi-val ' + (tot > 0 ? 'pos' : tot < 0 ? 'neg' : '');
+      document.getElementById('k-php').textContent = wp.length ? fP(tot) : '';
+      document.getElementById('k-best').textContent = best !== null ? fU(best) : '—';
+    }
+
+    // ── OVERVIEW CHARTS ────────────────────
+    function renderOverview() {
+      renderStats();
+      const wp = trades.filter(t => t.pnl !== null && !isNaN(t.pnl)).slice().reverse();
+      [ovC, sC, wlC].forEach(c => { if (c) c.destroy(); }); ovC = sC = wlC = null;
+      if (!wp.length) return;
+      let cum = 0; const uD = wp.map(t => { cum += t.pnl; return parseFloat(cum.toFixed(2)); });
+      ovC = new Chart(document.getElementById('ovChart'), { type: 'line', data: { labels: wp.map((_, i) => '#' + (i + 1)), datasets: [{ data: uD, borderColor: '#0a7a50', backgroundColor: 'rgba(10,122,80,0.07)', pointRadius: 2, tension: 0.3, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 9 }, autoSkip: true } }, y: { ticks: { font: { size: 9 }, callback: v => (v >= 0 ? '+$' : '-$') + Math.abs(v) } } } } });
+      const sess = ['Asia', 'London', 'New York', 'Overlap'], sCol = ['#534AB7', '#1a5fa0', '#a06010', '#3a6a10'];
+      const sP = sess.map(s => parseFloat(wp.filter(t => t.session === s).reduce((a, t) => a + t.pnl, 0).toFixed(2)));
+      sC = new Chart(document.getElementById('sessChart'), { type: 'bar', data: { labels: ['Asia', 'London', 'NY', 'OL'], datasets: [{ data: sP, backgroundColor: sCol.map((c, i) => sP[i] >= 0 ? c + 'cc' : c + '55'), borderColor: sCol, borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } } });
+      const wins = wp.filter(t => t.pnl > 0).length, losses = wp.filter(t => t.pnl < 0).length, be = wp.filter(t => t.pnl === 0).length;
+      wlC = new Chart(document.getElementById('wlChart'), { type: 'doughnut', data: { labels: ['Win', 'Loss', 'B/E'], datasets: [{ data: [wins, losses, be], backgroundColor: ['#0a7a50', '#c0392b', '#999'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 9 }, boxWidth: 9, padding: 7 } } }, cutout: '65%' } });
+    }
+
+    // ── TREND CHARTS ───────────────────────
+    function renderTrend() {
+      const wp = trades.filter(t => t.pnl !== null && !isNaN(t.pnl)).slice().reverse();
+      [tC, s2C, pC].forEach(c => { if (c) c.destroy(); }); tC = s2C = pC = null;
+      if (!wp.length) return;
+      let cum = 0; const uD = wp.map(t => { cum += t.pnl; return parseFloat(cum.toFixed(2)); });
+      const pD = uD.map(v => parseFloat((v * phpR() / 100).toFixed(2)));
+      tC = new Chart(document.getElementById('trendChart'), { type: 'line', data: { labels: wp.map((_, i) => '#' + (i + 1)), datasets: [{ data: uD, borderColor: '#0a7a50', backgroundColor: 'rgba(10,122,80,0.07)', pointRadius: 2, tension: 0.3, fill: true }, { data: pD, borderColor: '#1a5fa0', backgroundColor: 'transparent', borderDash: [4, 3], pointRadius: 2, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 9 }, autoSkip: true } }, y: { ticks: { font: { size: 9 }, callback: v => (v >= 0 ? '+$' : '-$') + Math.abs(v) } } } } });
+      const sess = ['Asia', 'London', 'New York', 'Overlap'], sCol = ['#534AB7', '#1a5fa0', '#a06010', '#3a6a10'];
+      const sP = sess.map(s => parseFloat(wp.filter(t => t.session === s).reduce((a, t) => a + t.pnl, 0).toFixed(2)));
+      s2C = new Chart(document.getElementById('sessChart2'), { type: 'bar', data: { labels: ['Asia', 'London', 'NY', 'OL'], datasets: [{ data: sP, backgroundColor: sCol.map((c, i) => sP[i] >= 0 ? c + 'cc' : c + '55'), borderColor: sCol, borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } } });
+      const pairs = [...new Set(wp.map(t => t.pair))];
+      const ppnl = pairs.map(p => parseFloat(wp.filter(t => t.pair === p).reduce((a, t) => a + t.pnl, 0).toFixed(2)));
+      pC = new Chart(document.getElementById('pairChart'), { type: 'bar', data: { labels: pairs, datasets: [{ data: ppnl, backgroundColor: ppnl.map(v => v >= 0 ? '#0a7a5055' : '#c0392b55'), borderColor: ppnl.map(v => v >= 0 ? '#0a7a50' : '#c0392b'), borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 9 }, maxRotation: 30 } }, y: { ticks: { font: { size: 9 } } } } } });
+    }
+
+    // ── LOG ────────────────────────────────
+    function setView(v, btn) { logView = v; document.querySelectorAll('.filter-pills .pill').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const fd = document.getElementById('filterDate'); fd.style.display = v === 'daily' ? 'inline-block' : 'none'; if (v === 'daily' && !fd.value) fd.value = todayStr; renderLog(); }
+    function rowH(t) {
+      const hp = t.pnl !== null && !isNaN(t.pnl), pc = t.pnl > 0 ? 'wl-win' : t.pnl < 0 ? 'wl-loss' : '';
+      const res = t.result ? `<span class="badge ${t.result === 'Win' ? 'win-b' : t.result === 'Loss' ? 'loss-b' : ''}">${t.result}</span>` : '—';
+      const gr = t.grade ? `<span style="font-size:10px;font-weight:700;color:${t.grade === 'A' ? '#0a7a50' : t.grade === 'B' ? '#1a5fa0' : t.grade === 'C' ? '#a06010' : '#c0392b'}">${t.grade}</span>` : '—';
+      const wt = t.wouldTakeAgain === 'yes' ? '✅' : t.wouldTakeAgain === 'no' ? '❌' : '—';
+      const ph = t.photos && t.photos.length ? `<img class="thumb-xs" src="${t.photos[0]}" onclick="openLBt(${t.id},0)" alt="sc">${t.photos.length > 1 ? ` +${t.photos.length - 1}` : '`'}` :
+        '<span style="color:#ccc">—</span>';
+      return `<tr><td>${t.date}</td><td style="font-weight:500">${t.pair}</td><td><span class="badge ${t.dir === 'Buy' ? 'buy' : 'sell'}">${t.dir}</span></td><td><span class="badge ${sCls(t.session)}">${sKey(t.session)}</span></td><td>${res}</td><td class="${pc}">${hp ? fU(t.pnl) : '—'}</td><td class="${pc}">${hp ? fP(t.pnl) : '—'}</td><td>${gr}</td><td>${wt}</td><td>${ph}</td><td><button class="del-btn" onclick="deleteTrade(${t.id})">✕</button></td></tr>`;
+    }
+    const COLS = `<colgroup><col style="width:72px"><col style="width:80px"><col style="width:38px"><col style="width:48px"><col style="width:52px"><col style="width:62px"><col style="width:62px"><col style="width:32px"><col style="width:24px"><col style="width:36px"><col style="width:22px"></colgroup>`;
+    const THEAD = `<thead><tr><th>Date</th><th>Pair</th><th>Dir</th><th>Session</th><th>Result</th><th>P&L USD</th><th>P&L PHP</th><th>Grade</th><th>↺</th><th>Photo</th><th></th></tr></thead>`;
+    function renderLog() {
+      const wrap = document.getElementById('logWrap');
+      if (!trades.length) { wrap.innerHTML = '<div class="empty">No trades yet.</div>'; return; }
+      let fil = [...trades];
+      if (logView === 'daily') { const fd = document.getElementById('filterDate').value || todayStr; fil = trades.filter(t => t.date === fd); }
+      if (logView === 'all' || logView === 'daily') {
+        if (!fil.length) { wrap.innerHTML = '<div class="empty">No trades for this date.</div>'; return; }
+        wrap.innerHTML = `<div class="tbl-wrap"><table>${COLS}${THEAD}<tbody>${fil.map(rowH).join('')}</tbody></table></div>`;
+      } else {
+        const gFn = logView === 'weekly' ? getWK : getMK, lFn = logView === 'weekly' ? wkLbl : moLbl;
+        const groups = {}; trades.forEach(t => { const k = gFn(t.date); if (!groups[k]) groups[k] = []; groups[k].push(t); });
+        const keys = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+        let html = '';
+        keys.forEach(k => {
+          const ts = groups[k], wp = ts.filter(t => t.pnl !== null && !isNaN(t.pnl)), sum = wp.reduce((s, t) => s + t.pnl, 0), wins = wp.filter(t => t.pnl > 0).length;
+          const sumH = wp.length ? `<span style="color:${sum >= 0 ? '#0a7a50' : '#c0392b'}">${fU(sum)} / ${fP(sum)}</span> <span style="color:#aaa;font-size:10px">${wins}W / ${wp.length - wins}L</span>` : '—';
+          html += `<div class="grp-hdr"><span>${lFn(k)}</span><span>${sumH}</span></div><div class="tbl-wrap" style="margin-bottom:10px"><table>${COLS}${THEAD}<tbody>${ts.map(rowH).join('')}</tbody></table></div>`;
+        });
+        wrap.innerHTML = html;
+      }
+    }
+
+    // ── GALLERY ────────────────────────────
+    function renderGallery() {
+      const wrap = document.getElementById('galWrap');
+      const pF = document.getElementById('gal-pair').value, dF = document.getElementById('gal-dir').value, rF = document.getElementById('gal-res').value;
+      let fil = trades.filter(t => t.photos && t.photos.length > 0);
+      if (pF) fil = fil.filter(t => t.pair === pF); if (dF) fil = fil.filter(t => t.dir === dF);
+      if (rF === 'win') fil = fil.filter(t => t.pnl !== null && t.pnl > 0);
+      if (rF === 'loss') fil = fil.filter(t => t.pnl !== null && t.pnl < 0);
+      if (!fil.length) { wrap.innerHTML = '<div class="empty">' + (trades.filter(t => t.photos && t.photos.length).length === 0 ? 'No screenshots yet.' : 'No trades match the filter.') + '</div>'; return; }
+      const groups = {}; fil.forEach(t => { const k = getWK(t.date); if (!groups[k]) groups[k] = []; groups[k].push(t); });
+      const keys = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+      const allImgs = []; fil.forEach(t => {
+        const hp = t.pnl !== null && !isNaN(t.pnl); t.photos.forEach(s => allImgs.push({
+          src: s, info: t.pair + ' · ' + t.dir + ' · ' + t.session + (hp ? ' · ' + fU(t.pnl) : '')
+        }));
+      });
+      let imgIdx = 0, html = `<div style="font-size:10px;color:#bbb;margin-bottom:10px">${fil.length} trade${fil.length > 1 ? 's' : ''} · ${allImgs.length} screenshot${allImgs.length > 1 ? 's' : ''}</div>`;
+      keys.forEach(k => {
+        const ts = groups[k], wp = ts.filter(t => t.pnl !== null && !isNaN(t.pnl)), sum = wp.reduce((s, t) => s + t.pnl, 0);
+        const wkCls = wp.length ? (sum > 0 ? 'gal-week-pos' : sum < 0 ? 'gal-week-neg' : 'gal-week-neutral') : 'gal-week-neutral';
+        const wins = wp.filter(t => t.pnl > 0).length;
+        html += `<div class="gal-week-header ${wkCls}"><span>${wkLbl(k)}</span><span>${wp.length ? fU(sum) + ' / ' + fP(sum) : 'No P&L data'}&nbsp;<span style="font-size:10px;opacity:.7">${wp.length ? wins + 'W / ' + (wp.length - wins) + 'L' : ''}</span></span></div>`;
+        html += `<div class="gallery-grid">`;
+        ts.forEach(t => {
+          const hp = t.pnl !== null && !isNaN(t.pnl), pc = t.pnl > 0 ? '#0a7a50' : t.pnl < 0 ? '#c0392b' : '#888', fi = imgIdx;
+          let imgH = '';
+          if (t.photos.length === 1) { imgH = `<img class="gcard-img" src="${t.photos[0]}" onclick="openLBa(galCache,${fi})" alt="sc">`; imgIdx++; }
+          else { imgH = `<div class="gcard-multi" onclick="openLBa(galCache,${fi})" style="cursor:pointer">`; t.photos.slice(0, 4).forEach((s) => { imgH += `<img src="${s}" alt="sc">`; imgIdx++; }); imgH += `</div>`; }
+          const res = t.result ? `<span class="badge ${t.result === 'Win' ? 'win-b' : t.result === 'Loss' ? 'loss-b' : ''}" style="font-size:9px">${t.result}</span>` : '';
+          const gr = t.grade ? `<span style="font-size:10px;font-weight:700;color:${t.grade === 'A' ? '#0a7a50' : t.grade === 'B' ? '#1a5fa0' : t.grade === 'C' ? '#a06010' : '#c0392b'}">Grade ${t.grade}</span>` : '';
+          html += `<div class="gcard">${imgH}<div class="gcard-body"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:12px;font-weight:600;color:#111">${t.pair}</span><span class="badge ${t.dir === 'Buy' ? 'buy' : 'sell'}">${t.dir}</span></div><div style="font-size:10px;color:#999;margin-top:2px;display:flex;gap:5px;align-items:center"><span>${t.date}</span><span class="badge ${sCls(t.session)}" style="font-size:9px">${sKey(t.session)}</span>${res}</div>${hp ? `<div style="font-size:11px;font-weight:600;color:${pc};margin-top:3px">${fU(t.pnl)} <span style="font-size:10px;opacity:.7">${fP(t.pnl)}</span></div>` : ''}${gr ? `<div style="margin-top:3px">${gr}</div>` : ''}</div></div>`;
+        });
+        html += `</div>`;
+      });
+      wrap.innerHTML = html; window.galCache = allImgs;
+    }
+
+    // ── CALENDAR ───────────────────────────
+    function renderCal() {
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      document.getElementById('calTitle').textContent = months[cM] + ' ' + cY;
+      let html = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => `<div class="cal-dow">${d}</div>`).join('');
+      const first = new Date(cY, cM, 1).getDay(), dim = new Date(cY, cM + 1, 0).getDate(), dm = {};
+      trades.forEach(t => { if (!t.date) return; const [y, m, d] = t.date.split('-').map(Number); if (y === cY && m === cM + 1) { if (!dm[d]) dm[d] = []; dm[d].push(t); } });
+      for (let i = 0; i < first; i++)html += `<div class="cal-day empty"></div>`;
+      for (let d = 1; d <= dim; d++) {
+        const ds = cY + '-' + String(cM + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        const isT = ds === todayStr, ts = dm[d] || [], wp = ts.filter(t => t.pnl !== null && !isNaN(t.pnl)), dp = wp.reduce((s, t) => s + t.pnl, 0);
+        const bg = wp.length ? (dp > 0 ? 'cw' : dp < 0 ? 'cl' : 'cb') : '';
+        const ps = wp.length ? (dp >= 0 ? '+$' : '-$') + Math.abs(dp).toFixed(2) : '';
+        html += `<div class="cal-day ${bg}${isT ? ' today' : ''}${ts.length ? ' has-t' : ''}" onclick="showDay(${d})"><div class="cal-day-num">${d}</div>${ps ? `<div class="${dp > 0 ? 'cp' : 'cn'}">${ps}</div>` : ''}${ts.length ? `<div class="cct">${ts.length}t</div>` : ''}</div>`;
+      }
+      document.getElementById('calGrid').innerHTML = html; document.getElementById('dayDetail').innerHTML = '';
+    }
+    function showDay(d) {
+      const ds = cY + '-' + String(cM + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const ts = trades.filter(t => t.date === ds);
+      if (!ts.length) { document.getElementById('dayDetail').innerHTML = ''; return; }
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const rows = ts.map(t => { const hp = t.pnl !== null && !isNaN(t.pnl), pc = t.pnl > 0 ? 'wl-win' : t.pnl < 0 ? 'wl-loss' : ''; const th = t.photos && t.photos.length ? t.photos.map((s, i) => `<img class="thumb-xs" src="${s}" onclick="openLBt(${t.id},${i})" alt="sc">`).join(' ') : '—'; return `<tr><td style="font-weight:500">${t.pair}</td><td><span class="badge ${t.dir === 'Buy' ? 'buy' : 'sell'}">${t.dir}</span></td><td><span class="badge ${sCls(t.session)}">${sKey(t.session)}</span></td><td class="${pc}">${hp ? fU(t.pnl) : '—'}</td><td class="${pc}">${hp ? fP(t.pnl) : '—'}</td><td>${th}</td></tr>`; }).join('');
+      document.getElementById('dayDetail').innerHTML = `<div class="dd"><div class="grp-hdr"><span>${months[cM]} ${d} — ${ts.length} trade${ts.length > 1 ? 's' : ''}</span></div><div class="tbl-wrap"><table><thead><tr><th>Pair</th><th>Dir</th><th>Session</th><th>USD</th><th>PHP</th><th>Photos</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    }
+    function chMon(d) { cM += d; if (cM > 11) { cM = 0; cY++; } if (cM < 0) { cM = 11; cY--; } renderCal(); document.getElementById('dayDetail').innerHTML = ''; }
+
+    // ── CHECKLIST ──────────────────────────
+    const DEF_CL = ['Check higher timeframe trend direction', 'Identify key support / resistance levels', 'Price action entry signal confirmed', 'Stop-loss placed before entering', 'Risk-reward minimum 1:2', 'No major news events in next hour', 'Position size within risk management rules', 'Clear mindset — no revenge trading'];
+    let clItems = DEF_CL.map((t, i) => ({ id: i, text: t, chk: false })), clId = DEF_CL.length;
+    function renderCl() {
+      const tot = clItems.length, done = clItems.filter(i => i.chk).length, pct = tot ? Math.round(done / tot * 100) : 0;
+      document.getElementById('clScore').textContent = done + '/' + tot;
+      document.getElementById('clPb').style.width = pct + '%';
+      document.getElementById('clItems').innerHTML = clItems.map(it => `<div class="cl-item"><input type="checkbox" id="cl${it.id}" ${it.chk ? 'checked' : ''} onchange="togCl(${it.id})"><label for="cl${it.id}" class="cl-lbl ${it.chk ? 'chk' : ''}">${it.text}</label><button class="del-btn" onclick="rmCl(${it.id})">✕</button></div>`).join('');
+    }
+    function togCl(id) { const it = clItems.find(i => i.id === id); if (it) it.chk = !it.chk; renderCl(); }
+    function addClItem() { const inp = document.getElementById('clNew'), txt = inp.value.trim(); if (!txt) return; clItems.push({ id: clId++, text: txt, chk: false }); inp.value = ''; renderCl(); }
+    function rmCl(id) { clItems = clItems.filter(i => i.id !== id); renderCl(); }
+    function resetCl() { clItems = clItems.map(i => ({ ...i, chk: false })); renderCl(); }
+
+    // ── INIT ───────────────────────────────
+    buildRubric(); renderStats(); renderCl();
+  </script>
+</body>
+
+</html>
