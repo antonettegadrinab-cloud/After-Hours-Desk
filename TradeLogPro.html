@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TradeLog Pro — Forex & Gold Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+/* ── GLOBAL ───────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#faf9fc;color:#1a1c1e}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+
+/* ── LANDING ──────────────────────────────────────── */
+#landing{display:block}
+#app{display:none}
+
+/* ─── NAVBAR ─── */
+.l-nav{background:rgba(250,249,252,.92);backdrop-filter:blur(12px);border-bottom:0.5px solid #e2e8f0;position:sticky;top:0;z-index:100;height:64px;display:flex;align-items:center}
+.l-container{max-width:1200px;margin:0 auto;padding:0 32px;width:100%}
+.l-nav-inner{display:flex;align-items:center;justify-content:space-between}
+.l-nav-logo{width:32px;height:32px;background:#002444;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.l-nav-brand-text{font-size:15px;font-weight:700;color:#002444;letter-spacing:-.02em}
+.l-nav-brand-sub{font-size:10px;color:#94a3b8;font-weight:500}
+.l-nav-links{display:flex;align-items:center;gap:28px}
+.l-nav-links a{font-size:13px;font-weight:500;color:#64748b;text-decoration:none;transition:color .15s}
+.l-nav-links a:hover{color:#002444}
+.l-btn-nav{background:#002444;color:#fff;font-size:12px;font-weight:700;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s;text-decoration:none;letter-spacing:.01em}
+.l-btn-nav:hover{opacity:.85}
+@media(max-width:640px){.l-nav-links{display:none}}
+
+/* ─── HERO ─── */
+.l-hero{padding:96px 0 80px;text-align:center;position:relative;overflow:hidden}
+.l-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,36,68,.06) 0%,transparent 70%);pointer-events:none}
+.l-eyebrow{display:inline-flex;align-items:center;gap:6px;background:#EAF3DE;color:#3B6D11;font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;margin-bottom:24px;letter-spacing:.04em;text-transform:uppercase}
+.l-live-dot{width:6px;height:6px;background:#3B6D11;border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.l-h1{font-size:clamp(36px,5vw,64px);font-weight:800;color:#002444;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px;font-family:'Work Sans',sans-serif}
+.l-h1 span{color:#006c46}
+.l-sub{font-size:clamp(15px,2vw,18px);color:#64748b;max-width:560px;margin:0 auto 40px;line-height:1.7}
+.l-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:64px}
+.l-btn-primary{background:#002444;color:#fff;font-size:14px;font-weight:700;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.l-btn-primary:hover{background:#003366;transform:translateY(-1px)}
+.l-btn-secondary{background:#fff;color:#002444;font-size:14px;font-weight:600;padding:14px 28px;border-radius:10px;border:1.5px solid #e2e8f0;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.l-btn-secondary:hover{border-color:#002444;transform:translateY(-1px)}
+.l-stats{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.l-stat-num{font-size:28px;font-weight:800;color:#002444;letter-spacing:-.02em;font-family:'Work Sans',sans-serif}
+.l-stat-lbl{font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.l-stat-div{width:1px;height:40px;background:#e2e8f0}
+
+/* ─── DASHBOARD PREVIEW ─── */
+.l-preview{padding:0 0 80px}
+.l-preview-wrap{background:#fff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 40px rgba(0,36,68,.08)}
+.l-preview-bar{background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:12px 16px;display:flex;align-items:center;gap:8px}
+.l-preview-dot{width:10px;height:10px;border-radius:50%}
+.l-preview-body{display:grid;grid-template-columns:160px 1fr;min-height:340px}
+.l-prev-sidebar{background:#fff;border-right:1px solid #f1f5f9;padding:12px 0}
+.l-prev-brand{padding:0 14px 12px;border-bottom:1px solid #f1f5f9;margin-bottom:6px}
+.l-prev-brand-t{font-size:11px;font-weight:700;color:#002444}
+.l-prev-brand-s{font-size:9px;color:#94a3b8}
+.l-prev-nav{display:flex;align-items:center;gap:6px;padding:6px 14px;font-size:10px;font-weight:500;color:#94a3b8}
+.l-prev-nav.active{background:#f0f4fa;border-left:3px solid #002444;color:#002444;font-weight:700;padding-left:11px}
+.l-prev-main{padding:14px;background:#faf9fc}
+.l-prev-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.l-prev-kpi{background:#fff;border:1px solid #e8edf2;border-radius:8px;padding:10px}
+.l-prev-kpi-lbl{font-size:8px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.l-prev-kpi-val{font-size:16px;font-weight:800;color:#002444;font-family:'Work Sans',sans-serif}
+.l-prev-kpi-val.g{color:#006c46}
+.l-prev-charts{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.l-prev-chart{background:#fff;border:1px solid #e8edf2;border-radius:8px;padding:10px}
+.l-prev-chart-t{font-size:9px;font-weight:700;color:#002444;margin-bottom:6px}
+.l-prev-bars{display:flex;align-items:flex-end;gap:3px;height:72px}
+.l-prev-bar{flex:1;border-radius:3px 3px 0 0}
+.l-prev-donut{position:relative;width:72px;height:72px;margin:0 auto}
+.l-prev-donut-lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* ─── SECTIONS ─── */
+.l-section{padding:80px 0}
+.l-section-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.l-section-title{font-size:clamp(28px,3.5vw,42px);font-weight:800;color:#002444;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px;font-family:'Work Sans',sans-serif}
+.l-section-sub{font-size:16px;color:#64748b;max-width:520px;line-height:1.7}
+
+/* ─── FEATURES ─── */
+.l-features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+@media(max-width:900px){.l-features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.l-features-grid{grid-template-columns:1fr}}
+.l-feat-card{background:#fff;border:1px solid #e8edf2;border-radius:14px;padding:26px;transition:all .2s;position:relative;overflow:hidden}
+.l-feat-card:hover{border-color:#c7d4e1;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,36,68,.07)}
+.l-feat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.l-feat-title{font-size:14px;font-weight:700;color:#002444;margin-bottom:6px}
+.l-feat-desc{font-size:12px;color:#64748b;line-height:1.65}
+.l-feat-badge{position:absolute;top:14px;right:14px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;text-transform:uppercase;letter-spacing:.04em}
+
+/* ─── RUBRIC ─── */
+.l-rubric-section{padding:80px 0;background:#fff;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9}
+.l-rubric-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:44px}
+@media(max-width:768px){.l-rubric-grid{grid-template-columns:1fr}}
+.l-rubric-card{background:#faf9fc;border:1px solid #e8edf2;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:all .2s;margin-bottom:10px}
+.l-rubric-card:hover{background:#f0f4fa;border-color:#c7d4e1}
+.l-rubric-num{width:38px;height:38px;border-radius:9px;background:#002444;color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.l-rubric-card-title{font-size:13px;font-weight:700;color:#002444;margin-bottom:2px}
+.l-rubric-card-sub{font-size:11px;color:#64748b}
+.l-grade-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:9px;border:1px solid transparent;margin-bottom:8px}
+.l-grade-letter{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;flex-shrink:0}
+
+/* ─── SESSIONS ─── */
+.l-sessions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+@media(max-width:900px){.l-sessions-grid{grid-template-columns:repeat(2,1fr)}}
+.l-session-card{border-radius:14px;padding:22px;border:1px solid transparent}
+.l-session-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;display:inline-block;text-transform:uppercase;letter-spacing:.04em}
+
+/* ─── TESTIMONIALS ─── */
+.l-testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:900px){.l-testimonials-grid{grid-template-columns:1fr}}
+.l-t-card{background:#fff;border:1px solid #e8edf2;border-radius:14px;padding:26px}
+.l-t-star{width:13px;height:13px;background:#FFB800;border-radius:2px;display:inline-block;margin-right:2px}
+
+/* ─── CTA ─── */
+.l-cta-section{padding:88px 0;text-align:center}
+.l-cta-card{background:#002444;border-radius:22px;padding:68px 44px;position:relative;overflow:hidden}
+.l-cta-card::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:rgba(255,255,255,.03);border-radius:50%}
+.l-cta-card::after{content:'';position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;background:rgba(0,108,70,.15);border-radius:50%}
+.l-btn-white{background:#fff;color:#002444;font-size:14px;font-weight:700;padding:14px 30px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1}
+.l-btn-white:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+
+/* ─── FOOTER ─── */
+.l-footer{padding:36px 0;border-top:1px solid #e8edf2}
+.l-footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+
+/* ── DASHBOARD ──────────────────────────────────────── */
+.sidebar-active{background:#f0f4fa !important;border-left:3px solid #002444 !important;color:#002444 !important;font-weight:700 !important;padding-left:13px !important}
+.view-hidden{display:none !important}
+.glass-card{background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid #e2e8f0}
+.star-btn{width:27px;height:27px;border-radius:6px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:11px;font-weight:700;color:#94a3b8;transition:all .15s;display:inline-flex;align-items:center;justify-content:center}
+.star-btn.active{background:#002444;color:#fff;border-color:#002444}
+.wt-btn{flex:1;padding:9px;border-radius:8px;border:1px solid #e2e8f0;cursor:pointer;background:#f8fafc;font-size:11px;font-weight:700;color:#94a3b8;transition:all .15s}
+.wt-btn.yes.active{background:#e6f7f0;color:#006c46;border-color:#006c46}
+.wt-btn.no.active{background:#fdeaea;color:#ba1a1a;border-color:#ba1a1a}
+.pill-btn{padding:5px 12px;border-radius:100px;border:1px solid #e2e8f0;background:transparent;font-size:11px;font-weight:700;color:#94a3b8;cursor:pointer;transition:all .15s}
+.pill-btn.active{background:#002444;color:#fff;border-color:#002444}
+.cal-day{min-height:68px;border-right:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;padding:7px;cursor:default;transition:background .15s}
+.cal-day.has-t:hover{background:#f8fafc;cursor:pointer}
+.lb{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center;flex-direction:column}
+.lb.open{display:flex}
+.upload-zone{border:2px dashed #e2e8f0;border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s}
+.upload-zone:hover{border-color:#002444;background:#f0f4fa}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  LANDING PAGE                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="landing">
+
+<nav class="l-nav">
+  <div class="l-container">
+    <div class="l-nav-inner">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="l-nav-logo">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12L6 8L9 10.5L13 5" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><circle cx="13" cy="5" r="1.5" fill="#94f3bf"/></svg>
+        </div>
+        <div>
+          <div class="l-nav-brand-text">TradeLog Pro</div>
+          <div class="l-nav-brand-sub">Forex & Gold Journal</div>
+        </div>
+      </div>
+      <div class="l-nav-links">
+        <a href="#features">Features</a>
+        <a href="#rubric">Execution</a>
+        <a href="#sessions">Sessions</a>
+        <a href="#testimonials">Reviews</a>
+      </div>
+      <button class="l-btn-nav" onclick="openApp()">Open Journal →</button>
+    </div>
+  </div>
+</nav>
+
+<section class="l-hero">
+  <div class="l-container" style="text-align:center">
+    <div class="l-eyebrow">
+      <div class="l-live-dot"></div>
+      Live USD/PHP · <span id="heroRate">Fetching…</span>
+    </div>
+    <h1 class="l-h1">Trade smarter.<br>Journal <span>every move.</span></h1>
+    <p class="l-sub">The professional trading journal built for Forex & Gold traders in the Philippines. Track P&L in USD and PHP, score your execution, and build real discipline.</p>
+    <div class="l-actions">
+      <button class="l-btn-primary" onclick="openApp()">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 12L6 7.5L9 9.5L13 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Open my journal
+      </button>
+      <a class="l-btn-secondary" href="#features">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="5.5" stroke="#002444" stroke-width="1.4"/><path d="M7.5 5v3.5M7.5 10.2v.3" stroke="#002444" stroke-width="1.4" stroke-linecap="round"/></svg>
+        See features
+      </a>
+    </div>
+    <div class="l-stats">
+      <div style="text-align:center"><div class="l-stat-num">8</div><div class="l-stat-lbl">Pages</div></div>
+      <div class="l-stat-div"></div>
+      <div style="text-align:center"><div class="l-stat-num">4</div><div class="l-stat-lbl">Rubric categories</div></div>
+      <div class="l-stat-div"></div>
+      <div style="text-align:center"><div class="l-stat-num">Live</div><div class="l-stat-lbl">PHP rate</div></div>
+      <div class="l-stat-div"></div>
+      <div style="text-align:center"><div class="l-stat-num">Free</div><div class="l-stat-lbl">Forever</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="l-preview">
+  <div class="l-container">
+    <div class="l-preview-wrap">
+      <div class="l-preview-bar">
+        <div class="l-preview-dot" style="background:#ff5f57"></div>
+        <div class="l-preview-dot" style="background:#febc2e"></div>
+        <div class="l-preview-dot" style="background:#28c840"></div>
+        <span style="font-size:10px;font-weight:600;color:#94a3b8;margin-left:8px;text-transform:uppercase;letter-spacing:.04em">TradeLog Pro — Journal Dashboard</span>
+      </div>
+      <div class="l-preview-body">
+        <div class="l-prev-sidebar">
+          <div class="l-prev-brand"><div class="l-prev-brand-t">TradeLog Pro</div><div class="l-prev-brand-s">Forex & Gold Journal</div></div>
+          <div class="l-prev-nav active"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3.5h4v3.5H2zM8 3.5h4v3.5H8z"/></svg>&nbsp;Quotes</div>
+          <div class="l-prev-nav"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/><rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/></svg>&nbsp;Overview</div>
+          <div class="l-prev-nav"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="12" height="12" rx="1.5"/><line x1="4" y1="5" x2="10" y2="5"/><line x1="4" y1="7" x2="10" y2="7"/><line x1="4" y1="9" x2="7" y2="9"/></svg>&nbsp;Trade Log</div>
+          <div class="l-prev-nav"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="5.5" height="5.5" rx="1"/><rect x="7.5" y="1" width="5.5" height="5.5" rx="1"/><rect x="1" y="7.5" width="5.5" height="5.5" rx="1"/><rect x="7.5" y="7.5" width="5.5" height="5.5" rx="1"/></svg>&nbsp;Gallery</div>
+          <div class="l-prev-nav"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="12" height="11" rx="1.5"/><line x1="1" y1="5.5" x2="13" y2="5.5"/></svg>&nbsp;Calendar</div>
+          <div class="l-prev-nav"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1,11 4,7 7,9 11,3 13,5"/></svg>&nbsp;Analytics</div>
+        </div>
+        <div class="l-prev-main">
+          <div class="l-prev-kpis">
+            <div class="l-prev-kpi"><div class="l-prev-kpi-lbl">Total Trades</div><div class="l-prev-kpi-val">24</div></div>
+            <div class="l-prev-kpi"><div class="l-prev-kpi-lbl">Win Rate</div><div class="l-prev-kpi-val g">67%</div></div>
+            <div class="l-prev-kpi"><div class="l-prev-kpi-lbl">Total P&L</div><div class="l-prev-kpi-val g">+$1,840</div></div>
+            <div class="l-prev-kpi"><div class="l-prev-kpi-lbl">Best Trade</div><div class="l-prev-kpi-val">+$420</div></div>
+          </div>
+          <div class="l-prev-charts">
+            <div class="l-prev-chart">
+              <div class="l-prev-chart-t">Cumulative P&L</div>
+              <div class="l-prev-bars">
+                <div class="l-prev-bar" style="height:20%;background:#e8f0f8"></div>
+                <div class="l-prev-bar" style="height:28%;background:#d0e0f0"></div>
+                <div class="l-prev-bar" style="height:22%;background:#e8f0f8"></div>
+                <div class="l-prev-bar" style="height:45%;background:#b8d4ec"></div>
+                <div class="l-prev-bar" style="height:60%;background:#002444"></div>
+                <div class="l-prev-bar" style="height:52%;background:#002444"></div>
+                <div class="l-prev-bar" style="height:70%;background:#002444"></div>
+                <div class="l-prev-bar" style="height:85%;background:#006c46"></div>
+                <div class="l-prev-bar" style="height:78%;background:#006c46"></div>
+                <div class="l-prev-bar" style="height:92%;background:#006c46"></div>
+              </div>
+            </div>
+            <div class="l-prev-chart">
+              <div class="l-prev-chart-t">Win / Loss</div>
+              <div class="l-prev-donut">
+                <svg viewBox="0 0 36 36" width="72" height="72">
+                  <path d="M18 2.08 a 15.92 15.92 0 0 1 0 31.84 a 15.92 15.92 0 0 1 0 -31.84" fill="none" stroke="#fdeaea" stroke-width="4" stroke-dasharray="100,100"/>
+                  <path d="M18 2.08 a 15.92 15.92 0 0 1 0 31.84 a 15.92 15.92 0 0 1 0 -31.84" fill="none" stroke="#006c46" stroke-width="4" stroke-dasharray="67,100"/>
+                </svg>
+                <div class="l-prev-donut-lbl"><div style="font-size:13px;font-weight:800;color:#002444">67%</div><div style="font-size:8px;color:#94a3b8;font-weight:600">WIN</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="l-section" id="features">
+  <div class="l-container">
+    <p class="l-section-eyebrow" style="color:#006c46">Everything you need</p>
+    <h2 class="l-section-title">Built for disciplined traders</h2>
+    <p class="l-section-sub">Every feature is designed around one goal — helping you trade better through structured self-review and data visibility.</p>
+    <div class="l-features-grid">
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#EAF3DE"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3B6D11" stroke-width="1.6"><polyline points="2,15 6,10 9,12 14,6 18,8"/><circle cx="18" cy="8" r="2" fill="#3B6D11" stroke="none"/></svg></div>
+        <div class="l-feat-title">Live PHP Conversion</div>
+        <div class="l-feat-desc">Auto-fetches real-time USD/PHP rate every hour. Every P&L value shown in both USD and Philippine Pesos throughout the app.</div>
+        <span class="l-feat-badge" style="background:#EAF3DE;color:#3B6D11">Live</span>
+      </div>
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#EEEDFE"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3C3489" stroke-width="1.6"><rect x="2" y="2" width="7" height="7" rx="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5"/></svg></div>
+        <div class="l-feat-title">Execution Quality Rubric</div>
+        <div class="l-feat-desc">Score every trade across 4 dimensions — Followed Plan, Entry Accuracy, Timing, and Emotional Control. Get an automatic A–D letter grade.</div>
+        <span class="l-feat-badge" style="background:#EEEDFE;color:#3C3489">Unique</span>
+      </div>
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#E6F1FB"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#185FA5" stroke-width="1.6"><rect x="2" y="3" width="16" height="14" rx="2"/><line x1="2" y1="8" x2="18" y2="8"/><line x1="6" y1="2" x2="6" y2="5"/><line x1="14" y1="2" x2="14" y2="5"/></svg></div>
+        <div class="l-feat-title">Calendar View</div>
+        <div class="l-feat-desc">Monthly calendar with green/red day coloring based on P&L. Click any day for a full trade breakdown with photos.</div>
+      </div>
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#FAEEDA"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#633806" stroke-width="1.6"><rect x="2" y="2" width="7" height="5.5" rx="1.5"/><rect x="11" y="2" width="7" height="5.5" rx="1.5"/><rect x="2" y="10" width="7" height="5.5" rx="1.5"/><rect x="11" y="10" width="7" height="5.5" rx="1.5"/></svg></div>
+        <div class="l-feat-title">Photo Gallery</div>
+        <div class="l-feat-desc">Upload up to 4 screenshots per trade. Gallery view groups by week with color-coded weekly P&L banners in green or red.</div>
+      </div>
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#FCEBEB"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#A32D2D" stroke-width="1.6"><path d="M10 2L12.5 7.5L18 8.3L14 12L15.1 17.5L10 14.8L4.9 17.5L6 12L2 8.3L7.5 7.5L10 2Z"/></svg></div>
+        <div class="l-feat-title">Daily Quotes</div>
+        <div class="l-feat-desc">Curated motivational quotes from Jesse Livermore, Paul Tudor Jones, Mark Douglas & more. Auto-rotates every 4 hours.</div>
+      </div>
+      <div class="l-feat-card">
+        <div class="l-feat-icon" style="background:#EAF3DE"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3B6D11" stroke-width="1.6"><polyline points="3,11 7,15 17,5"/></svg></div>
+        <div class="l-feat-title">Pre-trade Checklist</div>
+        <div class="l-feat-desc">8-item discipline checklist with live progress bar. Add custom items and reset between sessions. Includes session notes textarea.</div>
+        <span class="l-feat-badge" style="background:#EAF3DE;color:#3B6D11">New</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="l-rubric-section" id="rubric">
+  <div class="l-container">
+    <p class="l-section-eyebrow" style="color:#3C3489">Execution quality system</p>
+    <h2 class="l-section-title">Stop guessing why you lost</h2>
+    <p class="l-section-sub">The rubric forces you to evaluate every trade on 4 dimensions. Over time you'll see exactly where your execution breaks down — and fix it.</p>
+    <div class="l-rubric-grid">
+      <div>
+        <div class="l-rubric-card"><div class="l-rubric-num">1</div><div><div class="l-rubric-card-title">Followed Plan</div><div class="l-rubric-card-sub">Did you follow all checklist rules? Was it a clean, rule-based entry with no shortcuts?</div></div></div>
+        <div class="l-rubric-card"><div class="l-rubric-num">2</div><div><div class="l-rubric-card-title">Entry Accuracy</div><div class="l-rubric-card-sub">How precise was your entry? Did you enter exactly at the OB/FVG/key level or did you chase?</div></div></div>
+        <div class="l-rubric-card"><div class="l-rubric-num">3</div><div><div class="l-rubric-card-title">Timing</div><div class="l-rubric-card-sub">Were you early or late? Did you wait for full confirmation — CHOCH + displacement — before entering?</div></div></div>
+        <div class="l-rubric-card"><div class="l-rubric-num">4</div><div><div class="l-rubric-card-title">Emotional Control</div><div class="l-rubric-card-sub">Were you calm and patient? Or did fear, greed, or FOMO drive the decision?</div></div></div>
+      </div>
+      <div style="background:#faf9fc;border:1px solid #e8edf2;border-radius:16px;padding:28px">
+        <div style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;text-align:center;margin-bottom:18px">Final score = A, B, C, or D</div>
+        <div class="l-grade-item" style="background:#EAF3DE;border-color:#C0DD97"><div class="l-grade-letter" style="background:#006c46;color:#fff">A</div><div><div style="font-size:12px;font-weight:700;color:#3B6D11">Professional execution</div><div style="font-size:11px;color:#3B6D11;opacity:.8">16–20 points · System is working</div></div></div>
+        <div class="l-grade-item" style="background:#E6F1FB;border-color:#B5D4F4"><div class="l-grade-letter" style="background:#185FA5;color:#fff">B</div><div><div style="font-size:12px;font-weight:700;color:#185FA5">Decent, needs refinement</div><div style="font-size:11px;color:#185FA5;opacity:.8">11–15 points · Minor improvements</div></div></div>
+        <div class="l-grade-item" style="background:#FAEEDA;border-color:#FAC775"><div class="l-grade-letter" style="background:#a06010;color:#fff">C</div><div><div style="font-size:12px;font-weight:700;color:#633806">Inconsistent execution</div><div style="font-size:11px;color:#633806;opacity:.8">6–10 points · Review your process</div></div></div>
+        <div class="l-grade-item" style="background:#FCEBEB;border-color:#F7C1C1"><div class="l-grade-letter" style="background:#ba1a1a;color:#fff">D</div><div><div style="font-size:12px;font-weight:700;color:#A32D2D">Undisciplined trading</div><div style="font-size:11px;color:#A32D2D;opacity:.8">4–5 points · Full review required</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="l-section" id="sessions" style="padding:80px 0">
+  <div class="l-container">
+    <p class="l-section-eyebrow" style="color:#185FA5">Session tracking</p>
+    <h2 class="l-section-title">Know your best session</h2>
+    <p class="l-section-sub">Every trade is tagged to a trading session. Analytics show exactly which session makes you the most money — and which one drains you.</p>
+    <div class="l-sessions-grid">
+      <div class="l-session-card" style="background:#efedfe;border-color:#CECBF6"><div style="font-size:26px;margin-bottom:10px">🌏</div><div style="font-size:13px;font-weight:700;color:#3C3489;margin-bottom:3px">Asia Session</div><div style="font-size:11px;color:#534AB7;opacity:.8;margin-bottom:8px">12:00 AM – 8:00 AM PHT</div><span class="l-session-tag" style="background:#EEEDFE;color:#534AB7">Low volatility</span></div>
+      <div class="l-session-card" style="background:#e5f0fb;border-color:#B5D4F4"><div style="font-size:26px;margin-bottom:10px">🏙️</div><div style="font-size:13px;font-weight:700;color:#0C447C;margin-bottom:3px">London Session</div><div style="font-size:11px;color:#185FA5;opacity:.8;margin-bottom:8px">3:00 PM – 12:00 AM PHT</div><span class="l-session-tag" style="background:#E6F1FB;color:#185FA5">High liquidity</span></div>
+      <div class="l-session-card" style="background:#fef4e5;border-color:#FAC775"><div style="font-size:26px;margin-bottom:10px">🗽</div><div style="font-size:13px;font-weight:700;color:#633806;margin-bottom:3px">New York Session</div><div style="font-size:11px;color:#a06010;opacity:.8;margin-bottom:8px">8:00 PM – 5:00 AM PHT</div><span class="l-session-tag" style="background:#FAEEDA;color:#a06010">High volatility</span></div>
+      <div class="l-session-card" style="background:#eaf3de;border-color:#C0DD97"><div style="font-size:26px;margin-bottom:10px">⚡</div><div style="font-size:13px;font-weight:700;color:#27500A;margin-bottom:3px">London / NY Overlap</div><div style="font-size:11px;color:#3B6D11;opacity:.8;margin-bottom:8px">9:00 PM – 12:00 AM PHT</div><span class="l-session-tag" style="background:#EAF3DE;color:#3B6D11">Peak liquidity</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="l-section" id="testimonials" style="background:#fff;border-top:1px solid #f1f5f9;padding:80px 0">
+  <div class="l-container">
+    <p class="l-section-eyebrow" style="color:#006c46">From traders like you</p>
+    <h2 class="l-section-title">Built for the Filipino trader</h2>
+    <p class="l-section-sub">TradeLog Pro was designed specifically around the needs of retail Forex and Gold traders in the Philippines.</p>
+    <div class="l-testimonials-grid">
+      <div class="l-t-card"><div style="margin-bottom:12px"><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span></div><p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:18px;font-style:italic">"Finally a journal that shows PHP and USD together. The execution rubric made me realize I was entering too early every single time."</p><div style="display:flex;align-items:center;gap:9px"><div style="width:34px;height:34px;border-radius:50%;background:#EEEDFE;color:#3C3489;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">JR</div><div><div style="font-size:12px;font-weight:700;color:#002444">Jayson R.</div><div style="font-size:10px;color:#94a3b8">XAUUSD trader · Cebu</div></div></div></div>
+      <div class="l-t-card"><div style="margin-bottom:12px"><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span></div><p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:18px;font-style:italic">"The checklist and 'Would I take this trade again?' question changed how I review. I went from C-grade to B+ in 3 weeks of consistent logging."</p><div style="display:flex;align-items:center;gap:9px"><div style="width:34px;height:34px;border-radius:50%;background:#E6F1FB;color:#185FA5;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">MC</div><div><div style="font-size:12px;font-weight:700;color:#002444">Maria C.</div><div style="font-size:10px;color:#94a3b8">EUR/USD & GBP/USD · Manila</div></div></div></div>
+      <div class="l-t-card"><div style="margin-bottom:12px"><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span><span class="l-t-star"></span></div><p style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:18px;font-style:italic">"The gallery view with weekly P&L banners is genius. Seeing red weeks vs green weeks visually pushes me to be more careful with my entries."</p><div style="display:flex;align-items:center;gap:9px"><div style="width:34px;height:34px;border-radius:50%;background:#EAF3DE;color:#3B6D11;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">KL</div><div><div style="font-size:12px;font-weight:700;color:#002444">Karl L.</div><div style="font-size:10px;color:#94a3b8">Prop trader · Davao</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="l-cta-section">
+  <div class="l-container">
+    <div class="l-cta-card">
+      <div style="display:inline-block;background:rgba(148,243,191,.15);color:#94f3bf;font-size:10px;font-weight:700;padding:4px 13px;border-radius:100px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.05em;position:relative;z-index:1">Free · No signup required</div>
+      <h2 style="font-size:clamp(26px,4vw,46px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:14px;font-family:'Work Sans',sans-serif;position:relative;z-index:1">Start journaling<br>your trades today.</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px;position:relative;z-index:1;max-width:440px;margin-left:auto;margin-right:auto">No subscription. No account. Just open it and start logging. Your data stays in your browser.</p>
+      <button class="l-btn-white" onclick="openApp()">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 12L6 7.5L9 9.5L13 4" stroke="#002444" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Open TradeLog Pro
+      </button>
+      <p style="font-size:11px;color:rgba(255,255,255,.35);margin-top:14px;position:relative;z-index:1">Works in any modern browser · No download needed</p>
+    </div>
+  </div>
+</section>
+
+<footer class="l-footer">
+  <div class="l-container">
+    <div class="l-footer-inner">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#002444">TradeLog Pro</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:2px">Personal Forex & Gold Trading Journal · Philippines</div>
+      </div>
+      <div style="display:flex;gap:18px">
+        <a href="#features" style="font-size:12px;color:#94a3b8;text-decoration:none">Features</a>
+        <a href="#rubric" style="font-size:12px;color:#94a3b8;text-decoration:none">Execution</a>
+        <a href="#sessions" style="font-size:12px;color:#94a3b8;text-decoration:none">Sessions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /landing -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  DASHBOARD APP                                         -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="app">
+
+<!-- BACK TO LANDING -->
+<button onclick="backToLanding()" style="position:fixed;top:14px;left:185px;z-index:200;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s" onmouseover="this.style.borderColor='#002444';this.style.color='#002444'" onmouseout="this.style.borderColor='#e2e8f0';this.style.color='#64748b'">
+  ← Landing
+</button>
+
+<!-- SIDEBAR -->
+<nav style="position:fixed;left:0;top:0;height:100%;width:168px;border-right:1px solid #e2e8f0;background:#fff;box-shadow:2px 0 4px rgba(26,58,92,.04);display:flex;flex-direction:column;z-index:40;overflow-y:auto;font-family:'Work Sans',sans-serif">
+  <div style="padding:20px 14px 16px;border-bottom:1px solid #f1f5f9">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:26px;height:26px;background:#002444;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 11L5 7.5L7.5 9.5L10.5 5L13 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="13" cy="7" r="1.1" fill="#94f3bf"/></svg>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#002444">TradeLog Pro</div>
+        <div style="font-size:9px;color:#94a3b8;font-weight:500">Forex & Gold Journal</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;flex:1;padding:6px 0">
+    <div style="padding:10px 14px 3px;font-size:9px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.06em">Main</div>
+    <a class="sidebar-active" style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('quotes',this)"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">format_quote</span>Quotes</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('overview',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">dashboard</span>Overview</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('tradelog',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">list_alt</span>Trade Log</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('gallery',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">image</span>Gallery</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('calendar',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">calendar_today</span>Calendar</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('analytics',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">analytics</span>Analytics</a>
+    <div style="padding:10px 14px 3px;font-size:9px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.06em">Tools</div>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500" onclick="showView('checklist',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">fact_check</span>Checklist</a>
+    <a style="display:flex;align-items:center;padding:8px 16px;font-size:12px;color:#64748b;text-decoration:none;transition:all .15s;cursor:pointer;font-weight:500;margin-top:auto;border-top:1px solid #f1f5f9" onclick="showView('addtrade',this)" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''"><span class="material-symbols-outlined" style="margin-right:8px;font-size:16px">add_box</span>Add Trade</a>
+  </div>
+  <div style="padding:10px;border-top:1px solid #f1f5f9">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:9px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:9px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.04em">USD/PHP</span>
+        <span id="rateDot" style="width:7px;height:7px;border-radius:50%;background:#94a3b8;animation:pulse 2s infinite;display:inline-block"></span>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:#002444" id="rateVal">—</div>
+      <div style="font-size:9px;color:#94a3b8;margin-top:1px" id="rateSub">Fetching…</div>
+    </div>
+  </div>
+</nav>
+
+<!-- TOPBAR -->
+<header style="position:fixed;top:0;right:0;width:calc(100% - 168px);height:50px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;padding:0 20px;z-index:30;font-family:'Work Sans',sans-serif">
+  <div style="display:flex;align-items:center;gap:12px">
+    <span style="font-weight:700;font-size:14px;color:#002444" id="topbarTitle">Quotes</span>
+    <div style="height:14px;width:1px;background:#e2e8f0"></div>
+    <div style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#006c46">
+      <span class="material-symbols-outlined" style="font-size:13px">payments</span>
+      <span id="topbarRate">Live USD/PHP: —</span>
+    </div>
+  </div>
+  <div style="width:28px;height:28px;border-radius:50%;background:#002444;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'Work Sans'">TR</div>
+</header>
+
+<!-- MAIN -->
+<main style="margin-left:168px;padding-top:50px;min-height:100vh;background:#faf9fc">
+
+<!-- QUOTES -->
+<section id="view-quotes" style="max-width:640px;margin:0 auto;padding:36px 20px">
+  <div class="glass-card" style="border-radius:14px;padding:48px;text-align:center;position:relative;overflow:hidden;margin-bottom:20px">
+    <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:#f1f5f9"><div style="height:100%;background:#002444;transition:width 1s linear" id="quoteProgress"></div></div>
+    <span class="material-symbols-outlined" style="font-size:52px;color:#e2e8f0;display:block;margin-bottom:10px">format_quote</span>
+    <h1 style="font-size:17px;font-weight:600;font-style:italic;line-height:1.65;margin-bottom:18px;color:#002444;font-family:'Work Sans'" id="quoteText"></h1>
+    <p style="font-weight:600;color:#64748b;font-size:13px" id="quoteAuthor"></p>
+    <span style="display:inline-block;margin-top:10px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:#f1f5f9;color:#64748b;text-transform:uppercase;letter-spacing:.04em" id="quoteCat"></span>
+    <div style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:6px;color:#94a3b8;font-size:11px;font-weight:600">
+      <span class="material-symbols-outlined" style="font-size:14px">schedule</span>
+      <span id="quoteTimer">—</span>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="view-overview" class="view-hidden" style="padding:18px">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px">
+    <div style="background:#fff;padding:16px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)"><p style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Total Trades</p><h2 style="font-size:26px;font-weight:800;color:#002444;font-family:'Work Sans'" id="k-total">0</h2></div>
+    <div style="background:#fff;padding:16px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)"><p style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Win Rate</p><h2 style="font-size:26px;font-weight:800;color:#006c46;font-family:'Work Sans'" id="k-wr">—</h2><div style="width:100%;background:#f1f5f9;height:4px;border-radius:100px;margin-top:8px;overflow:hidden"><div style="height:100%;background:#006c46;transition:width .3s" id="k-wr-bar"></div></div></div>
+    <div style="background:#fff;padding:16px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)"><p style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Total P&L</p><h2 style="font-size:22px;font-weight:800;font-family:'Work Sans'" id="k-pnl">$0.00</h2><p style="font-size:11px;color:#94a3b8;margin-top:3px" id="k-php"></p></div>
+    <div style="background:#fff;padding:16px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)"><p style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Best Trade</p><h2 style="font-size:22px;font-weight:800;color:#002444;font-family:'Work Sans'" id="k-best">—</h2></div>
+  </div>
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-bottom:12px">
+    <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3 style="font-weight:600;font-size:13px;color:#002444;font-family:'Work Sans'">Cumulative P&L</h3></div>
+      <div style="position:relative;height:190px"><canvas id="ovChart"></canvas></div>
+    </div>
+    <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:flex;flex-direction:column">
+      <h3 style="font-weight:600;font-size:13px;color:#002444;margin-bottom:10px;font-family:'Work Sans'">Win / Loss</h3>
+      <div style="flex:1;position:relative;height:160px"><canvas id="wlChart"></canvas></div>
+    </div>
+  </div>
+  <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+    <h3 style="font-weight:600;font-size:13px;color:#002444;margin-bottom:12px;font-family:'Work Sans'">P&L by Session</h3>
+    <div style="position:relative;height:130px"><canvas id="sessChart"></canvas></div>
+  </div>
+</section>
+
+<!-- TRADE LOG -->
+<section id="view-tradelog" class="view-hidden" style="padding:18px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <h2 style="font-size:20px;font-weight:800;color:#002444;font-family:'Work Sans'">Trade Log</h2>
+    <div style="display:flex;gap:5px;align-items:center">
+      <button class="pill-btn active" onclick="setView('all',this)">All</button>
+      <button class="pill-btn" onclick="setView('daily',this)">Daily</button>
+      <button class="pill-btn" onclick="setView('weekly',this)">Weekly</button>
+      <button class="pill-btn" onclick="setView('monthly',this)">Monthly</button>
+      <input type="date" id="filterDate" style="display:none;font-size:11px;padding:5px 8px;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc;color:#111" onchange="renderLog()">
+    </div>
+  </div>
+  <div id="logWrap"></div>
+</section>
+
+<!-- GALLERY -->
+<section id="view-gallery" class="view-hidden" style="padding:18px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+    <h2 style="font-size:20px;font-weight:800;color:#002444;font-family:'Work Sans'">Trade Gallery</h2>
+    <div style="display:flex;gap:6px">
+      <select id="gal-pair" onchange="renderGallery()" style="font-size:11px;border:1px solid #e2e8f0;border-radius:7px;padding:5px 8px;background:#fff;color:#64748b;font-weight:600"><option value="">All pairs</option></select>
+      <select id="gal-dir" onchange="renderGallery()" style="font-size:11px;border:1px solid #e2e8f0;border-radius:7px;padding:5px 8px;background:#fff;color:#64748b;font-weight:600"><option value="">All</option><option>Buy</option><option>Sell</option></select>
+      <select id="gal-res" onchange="renderGallery()" style="font-size:11px;border:1px solid #e2e8f0;border-radius:7px;padding:5px 8px;background:#fff;color:#64748b;font-weight:600"><option value="">All results</option><option value="win">Wins</option><option value="loss">Losses</option></select>
+    </div>
+  </div>
+  <div id="galWrap"></div>
+</section>
+
+<!-- CALENDAR -->
+<section id="view-calendar" class="view-hidden" style="padding:18px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+    <h2 style="font-size:20px;font-weight:800;color:#002444;font-family:'Work Sans'" id="calTitle"></h2>
+    <div style="display:flex;gap:6px">
+      <button onclick="chMon(-1)" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;border-radius:8px;background:#fff;cursor:pointer"><span class="material-symbols-outlined" style="font-size:18px">chevron_left</span></button>
+      <button onclick="chMon(1)" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;border-radius:8px;background:#fff;cursor:pointer"><span class="material-symbols-outlined" style="font-size:18px">chevron_right</span></button>
+    </div>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:12px">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);background:#f8fafc;border-bottom:1px solid #f1f5f9">
+      <div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Sun</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Mon</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Tue</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Wed</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Thu</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Fri</div><div style="padding:10px 0;text-align:center;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Sat</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr)" id="calGrid"></div>
+  </div>
+  <div id="dayDetail"></div>
+</section>
+
+<!-- ANALYTICS -->
+<section id="view-analytics" class="view-hidden" style="padding:18px">
+  <h2 style="font-size:20px;font-weight:800;color:#002444;margin-bottom:16px;font-family:'Work Sans'">Performance Analytics</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+    <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+      <h3 style="font-weight:600;font-size:13px;color:#002444;margin-bottom:6px;font-family:'Work Sans'">Cumulative P&L (USD + PHP÷100)</h3>
+      <div style="display:flex;gap:12px;margin-bottom:10px;font-size:10px;color:#94a3b8"><span style="display:flex;align-items:center;gap:3px"><span style="width:10px;height:2px;background:#002444;display:inline-block"></span>USD</span><span style="display:flex;align-items:center;gap:3px"><span style="width:10px;height:0;border-top:2px dashed #006c46;display:inline-block"></span>PHP÷100</span></div>
+      <div style="position:relative;height:180px"><canvas id="trendChart"></canvas></div>
+    </div>
+    <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+      <h3 style="font-weight:600;font-size:13px;color:#002444;margin-bottom:12px;font-family:'Work Sans'">P&L by Session</h3>
+      <div style="position:relative;height:180px"><canvas id="sessChart2"></canvas></div>
+    </div>
+  </div>
+  <div style="background:#fff;padding:18px;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+    <h3 style="font-weight:600;font-size:13px;color:#002444;margin-bottom:12px;font-family:'Work Sans'">Trade Efficiency (P&L by Pair)</h3>
+    <div style="position:relative;height:160px"><canvas id="pairChart"></canvas></div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="view-checklist" class="view-hidden" style="padding:18px;max-width:640px;margin:0 auto">
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)">
+    <div style="padding:24px;background:#002444;color:#fff">
+      <h2 style="font-size:16px;font-weight:700;margin-bottom:12px;font-family:'Work Sans'">Pre-Session Protocol</h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="flex:1;height:5px;background:rgba(255,255,255,.2);border-radius:100px;overflow:hidden"><div style="height:100%;background:#94f3bf;transition:width .3s" id="clPb"></div></div>
+        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em" id="clScore">0/0</span>
+      </div>
+    </div>
+    <div style="padding:12px 16px" id="clItems"></div>
+    <div style="padding:10px 16px 12px;display:flex;gap:8px">
+      <input type="text" id="clNew" placeholder="Add custom checklist item…" style="flex:1;font-size:12px;padding:7px 10px;border:1px solid #e2e8f0;border-radius:8px;outline:none">
+      <button onclick="addClItem()" style="padding:7px 14px;background:#002444;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">Add</button>
+      <button onclick="resetCl()" style="padding:7px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-weight:600;color:#64748b;cursor:pointer;background:#fff">Reset</button>
+    </div>
+    <div style="padding:0 16px 16px">
+      <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Session Notes</div>
+      <textarea rows="4" style="width:100%;font-size:12px;padding:10px;border:1px solid #e2e8f0;border-radius:8px;outline:none;resize:none;font-family:'Inter',sans-serif" placeholder="Session intentions & mental state notes..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ADD TRADE -->
+<section id="view-addtrade" class="view-hidden" style="padding:18px;max-width:860px">
+  <h2 style="font-size:20px;font-weight:800;color:#002444;margin-bottom:18px;font-family:'Work Sans'">Journal New Trade</h2>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Asset Pair</label>
+        <select id="f-pair" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-weight:600;outline:none">
+          <option>XAUUSD (Gold)</option><option>EUR/USD</option><option>GBP/USD</option><option>USD/JPY</option><option>AUD/USD</option><option>USD/CAD</option><option>NZD/USD</option><option>EUR/JPY</option><option>GBP/JPY</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Session</label>
+        <select id="f-session" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-weight:600;outline:none"><option value="Asia">Asia</option><option value="London">London</option><option value="New York">New York</option><option value="Overlap">London/NY</option></select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Direction</label>
+        <div style="display:flex;gap:5px">
+          <button id="btn-buy" onclick="setDir('Buy')" style="flex:1;padding:8px;border:1px solid #e2e8f0;border-radius:8px;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;background:#fff;transition:all .15s">BUY</button>
+          <button id="btn-sell" onclick="setDir('Sell')" style="flex:1;padding:8px;border:1px solid #e2e8f0;border-radius:8px;font-size:11px;font-weight:700;color:#64748b;cursor:pointer;background:#fff;transition:all .15s">SELL</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Result</label>
+        <select id="f-result" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-weight:600;outline:none"><option value="">— Select —</option><option value="Win">✅ Win</option><option value="Loss">❌ Loss</option><option value="Breakeven">⚖️ Breakeven</option></select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Date</label>
+        <input type="date" id="f-date" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;outline:none">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #f1f5f9">
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Entry</label><input type="number" id="f-entry" step="any" placeholder="0.0000" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Exit</label><input type="number" id="f-exit" step="any" placeholder="0.0000" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Lots</label><input type="number" id="f-lot" step="any" placeholder="0.01" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L USD</label><input type="number" id="f-pnl" step="any" placeholder="Auto or manual" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Notes / Strategy</label><textarea id="f-notes" rows="2" placeholder="Setup, entry reason, lessons learned..." style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;resize:none;font-family:'Inter',sans-serif;outline:none"></textarea></div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <span style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Execution Quality Rubric</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="font-size:18px;font-weight:800;color:#002444;font-family:'Work Sans'" id="rubricTotal">0/20</div>
+          <div id="rubricGrade" style="font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:#f1f5f9;color:#94a3b8">—</div>
+        </div>
+      </div>
+      <div id="rubricRows" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:14px">
+      <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;margin-bottom:9px">Would I take this trade again?</div>
+      <div style="display:flex;gap:8px">
+        <button class="wt-btn yes" id="wtYes" onclick="setWT('yes')">✅ YES — System is working</button>
+        <button class="wt-btn no" id="wtNo" onclick="setWT('no')">❌ NO — Execution problem</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Evidence (Screenshots)</label>
+      <div class="upload-zone" onclick="document.getElementById('photoInput').click()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+        <span class="material-symbols-outlined" style="font-size:36px;color:#d1d5db;display:block;margin-bottom:8px">cloud_upload</span>
+        <p style="font-size:12px;color:#94a3b8;font-weight:500">Drag and drop MT4/TradingView screenshots here</p>
+        <p style="font-size:11px;color:#cbd5e1;margin-top:4px">PNG, JPG, WEBP — up to 4 images</p>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handleFiles(this.files)">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px" id="photoPreview"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:4px">
+      <button onclick="clearForm()" style="padding:10px 20px;font-size:12px;font-weight:700;color:#64748b;border:1px solid #e2e8f0;border-radius:9px;cursor:pointer;background:#fff">Clear</button>
+      <button onclick="addTrade()" style="padding:10px 28px;font-size:12px;font-weight:700;color:#fff;background:#002444;border:none;border-radius:9px;cursor:pointer;box-shadow:0 2px 8px rgba(0,36,68,.2);transition:opacity .15s" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Archive Trade</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+</div><!-- /app -->
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="lbBg(event)">
+  <button onclick="closeLB()" style="position:absolute;top:14px;right:18px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer">✕</button>
+  <img id="lbImg" src="" alt="screenshot" style="max-width:90%;max-height:74vh;border-radius:12px;object-fit:contain">
+  <div style="color:#fff;font-size:12px;margin-top:9px;text-align:center" id="lbInfo"></div>
+  <div style="display:flex;gap:12px;margin-top:9px">
+    <button onclick="lbStep(-1)" style="background:rgba(255,255,255,.15);border:none;color:#fff;font-size:15px;cursor:pointer;padding:5px 16px;border-radius:8px">&#8592;</button>
+    <button onclick="lbStep(1)" style="background:rgba(255,255,255,.15);border:none;color:#fff;font-size:15px;cursor:pointer;padding:5px 16px;border-radius:8px">&#8594;</button>
+  </div>
+  <div style="color:rgba(255,255,255,.4);font-size:10px;margin-top:5px" id="lbCtr"></div>
+</div>
+
+<script>
+// ── LANDING ─────────────────────────────────────────
+async function fetchHeroRate(){
+  try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');if(r.ok){const d=await r.json();if(d.rates&&d.rates.PHP){document.getElementById('heroRate').textContent='₱'+parseFloat(d.rates.PHP.toFixed(2))+' / $1';return;}}}catch(e){}
+  document.getElementById('heroRate').textContent='₱61.28 / $1';
+}
+fetchHeroRate();
+
+function openApp(){document.getElementById('landing').style.display='none';document.getElementById('app').style.display='block';fetchRate();window.scrollTo(0,0);}
+function backToLanding(){document.getElementById('app').style.display='none';document.getElementById('landing').style.display='block';window.scrollTo(0,0);}
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});
+});
+
+// ── APP STATE ────────────────────────────────────────
+let trades=[],pending=[],logView='all',wtChoice_='',tradeDir='';
+let ovC=null,wlC=null,sC=null,tC=null,s2C=null,pC=null;
+const now=new Date(),todayStr=now.toISOString().split('T')[0];
+let cY=now.getFullYear(),cM=now.getMonth(),lbImgs=[],lbI=0;
+let liveRate=61.28;
+document.getElementById('f-date').value=todayStr;
+
+// ── LIVE RATE ────────────────────────────────────────
+async function fetchRate(){
+  try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');if(r.ok){const d=await r.json();if(d.rates&&d.rates.PHP){liveRate=parseFloat(d.rates.PHP.toFixed(4));document.getElementById('rateVal').textContent='₱'+liveRate.toFixed(2);document.getElementById('rateSub').textContent='Live · updated';document.getElementById('rateDot').style.background='#006c46';document.getElementById('topbarRate').textContent='Live USD/PHP: ₱'+liveRate.toFixed(2);renderStats();return;}}}catch(e){}
+  document.getElementById('rateVal').textContent='₱'+liveRate.toFixed(2);document.getElementById('rateSub').textContent='Cached rate';document.getElementById('topbarRate').textContent='USD/PHP: ₱'+liveRate.toFixed(2);
+}
+setInterval(fetchRate,3600000);
+
+// ── QUOTES ──────────────────────────────────────────
+const QUOTES=[
+  {text:'The goal of a successful trader is to make the best trades. Money is secondary.',author:'Alexander Elder',cat:'Mindset'},
+  {text:'Risk comes from not knowing what you are doing.',author:'Warren Buffett',cat:'Risk'},
+  {text:'The market is a device for transferring money from the impatient to the patient.',author:'Warren Buffett',cat:'Discipline'},
+  {text:'Losers average losers.',author:'Paul Tudor Jones',cat:'Risk'},
+  {text:'I\'m always thinking about losing money as opposed to making money.',author:'Paul Tudor Jones',cat:'Risk'},
+  {text:'Cut your losses and let your profits run.',author:'Trading Proverb',cat:'Discipline'},
+  {text:'Plan the trade and trade the plan.',author:'Trading Proverb',cat:'Discipline'},
+  {text:'Markets are never wrong — opinions often are.',author:'Jesse Livermore',cat:'Wisdom'},
+  {text:'It\'s not about being right or wrong. It\'s about how much you make when you\'re right.',author:'George Soros',cat:'Mindset'},
+  {text:'Emotional discipline separates successful traders from everyone else.',author:'Mark Douglas',cat:'Discipline'},
+  {text:'A peak performance trader is totally focused on the present moment.',author:'Mark Douglas',cat:'Mindset'},
+  {text:'Trade the market in front of you, not the market you want.',author:'Unknown',cat:'Wisdom'},
+  {text:'Every loss is a tuition fee. Make sure you get your money\'s worth.',author:'Unknown',cat:'Motivation'},
+  {text:'Amateurs hope. Professionals work.',author:'Jesse Livermore',cat:'Mindset'},
+  {text:'Be patient with winning trades and impatient with losing trades.',author:'Michael Covel',cat:'Discipline'},
+  {text:'The elements of good trading are cutting losses, cutting losses, and cutting losses.',author:'Ed Seykota',cat:'Risk'},
+  {text:'Win or lose, everybody gets what they want out of the market.',author:'Ed Seykota',cat:'Wisdom'},
+  {text:'Do not anticipate and move without market confirmation.',author:'Jesse Livermore',cat:'Discipline'},
+  {text:'The best investment you can make is in yourself.',author:'Warren Buffett',cat:'Motivation'},
+  {text:'In trading, the impossible happens about twice a year.',author:'Henri M. Simoes',cat:'Wisdom'},
+];
+const QUOTE_MS=4*60*60*1000;
+let qIdx=Math.floor(Math.random()*QUOTES.length),qSetAt=Date.now();
+function showQuote(){const q=QUOTES[qIdx];document.getElementById('quoteText').textContent='\u201C'+q.text+'\u201D';document.getElementById('quoteAuthor').textContent='\u2014 '+q.author;document.getElementById('quoteCat').textContent=q.cat;}
+function startQTimer(){setInterval(()=>{const rem=QUOTE_MS-(Date.now()-qSetAt);if(rem<=0){qIdx=(qIdx+1)%QUOTES.length;qSetAt=Date.now();showQuote();}const h=Math.floor(Math.max(0,rem)/3600000),m=Math.floor((Math.max(0,rem)%3600000)/60000),s=Math.floor((Math.max(0,rem)%60000)/1000);document.getElementById('quoteTimer').textContent=`Next rotation in: ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;document.getElementById('quoteProgress').style.width=(100-Math.round(rem/QUOTE_MS*100))+'%';},1000);}
+showQuote();startQTimer();
+
+// ── RUBRIC ──────────────────────────────────────────
+const RUBRIC=[
+  {key:'plan',label:'Followed Plan',descs:['No Discipline','Poor Discipline','Partial Discipline','Minor Deviation','Perfect Discipline']},
+  {key:'entry',label:'Entry Accuracy',descs:['Very Poor Entry','Poor Entry','Average Entry','Good Entry','Sniper Entry']},
+  {key:'timing',label:'Timing',descs:['Terrible Timing','Bad Timing','Noticeable Mistake','Slightly Early/Late','Perfect Timing']},
+  {key:'emotion',label:'Emotional Control',descs:['No Control','High Emotion','Moderate Emotion','Slight Emotion','Fully Controlled']},
+];
+let rVals={plan:0,entry:0,timing:0,emotion:0};
+function buildRubric(){
+  document.getElementById('rubricRows').innerHTML=RUBRIC.map(r=>`
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:12px;font-weight:600;color:#475569;width:130px;flex-shrink:0">${r.label}</div>
+      <div style="display:flex;gap:4px" id="stars-${r.key}">${[1,2,3,4,5].map(n=>`<button class="star-btn" onclick="setRubric('${r.key}',${n})">${n}</button>`).join('')}</div>
+      <div style="font-size:10px;color:#94a3b8;flex:1" id="desc-${r.key}">—</div>
+    </div>`).join('');
+}
+function setRubric(key,val){
+  rVals[key]=val;
+  const item=RUBRIC.find(r=>r.key===key);
+  document.querySelectorAll(`#stars-${key} .star-btn`).forEach((b,i)=>b.classList.toggle('active',i<val));
+  document.getElementById(`desc-${key}`).textContent=item.descs[val-1];
+  const tot=Object.values(rVals).reduce((a,b)=>a+b,0);
+  document.getElementById('rubricTotal').textContent=tot+'/20';
+  let g='',bg='#f1f5f9',col='#94a3b8';
+  if(tot>=16){g='A — Professional';bg='#dcfce7';col='#16a34a';}
+  else if(tot>=11){g='B — Decent';bg='#dbeafe';col='#2563eb';}
+  else if(tot>=6){g='C — Inconsistent';bg='#fef3c7';col='#d97706';}
+  else if(tot>=4){g='D — Undisciplined';bg='#fee2e2';col='#dc2626';}
+  const el=document.getElementById('rubricGrade');el.textContent=g||'—';el.style.background=bg;el.style.color=col;
+}
+function resetRubric(){rVals={plan:0,entry:0,timing:0,emotion:0};buildRubric();}
+function setWT(v){wtChoice_=v;document.getElementById('wtYes').classList.toggle('active',v==='yes');document.getElementById('wtNo').classList.toggle('active',v==='no');}
+function setDir(v){
+  tradeDir=v;
+  document.getElementById('btn-buy').style.cssText=`flex:1;padding:8px;border:1px solid ${v==='Buy'?'#16a34a':'#e2e8f0'};border-radius:8px;font-size:11px;font-weight:700;color:${v==='Buy'?'#16a34a':'#64748b'};cursor:pointer;background:${v==='Buy'?'#f0fdf4':'#fff'};transition:all .15s`;
+  document.getElementById('btn-sell').style.cssText=`flex:1;padding:8px;border:1px solid ${v==='Sell'?'#dc2626':'#e2e8f0'};border-radius:8px;font-size:11px;font-weight:700;color:${v==='Sell'?'#dc2626':'#64748b'};cursor:pointer;background:${v==='Sell'?'#fef2f2':'#fff'};transition:all .15s`;
+}
+
+// ── NAV ─────────────────────────────────────────────
+const TITLES={quotes:'Quotes',overview:'Overview',tradelog:'Trade Log',gallery:'Gallery',calendar:'Calendar',analytics:'Analytics',checklist:'Checklist',addtrade:'Add Trade'};
+function showView(id,el){
+  document.querySelectorAll('main > section').forEach(s=>s.classList.add('view-hidden'));
+  document.getElementById('view-'+id).classList.remove('view-hidden');
+  document.querySelectorAll('#app nav a').forEach(a=>{a.classList.remove('sidebar-active');a.style.background='';a.style.color='#64748b';a.style.fontWeight='500';a.style.paddingLeft='16px';a.style.borderLeft='none';});
+  if(el){el.classList.add('sidebar-active');}
+  document.getElementById('topbarTitle').textContent=TITLES[id]||id;
+  if(id==='overview')renderOverview();
+  if(id==='tradelog')renderLog();
+  if(id==='gallery')renderGallery();
+  if(id==='calendar')renderCal();
+  if(id==='analytics')renderTrend();
+  if(id==='checklist')renderCl();
+  window.scrollTo(0,0);
+}
+
+// ── HELPERS ─────────────────────────────────────────
+function fU(v){return(v>=0?'+$':'-$')+Math.abs(v).toFixed(2);}
+function fP(v){const p=v*liveRate;return(p>=0?'+₱':'-₱')+Math.abs(p).toFixed(2);}
+function sKey(s){return s==='New York'?'NY':s==='Overlap'?'OL':s||'Asia';}
+function sCls(s){const m={Asia:'background:#ede9fe;color:#6d28d9',London:'background:#dbeafe;color:#1d4ed8','New York':'background:#fef3c7;color:#b45309',Overlap:'background:#dcfce7;color:#15803d'};return m[s]||'background:#f1f5f9;color:#64748b';}
+function getWK(d){const dt=new Date(d),day=dt.getDay(),diff=dt.getDate()-day+(day===0?-6:1),m=new Date(dt.setDate(diff));return m.toISOString().split('T')[0];}
+function getMK(d){return d.slice(0,7);}
+function wkLbl(k){const d=new Date(k),e=new Date(d);e.setDate(e.getDate()+6);return 'Week of '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' – '+e.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+function moLbl(k){const[y,m]=k.split('-');return new Date(y,m-1,1).toLocaleDateString('en-US',{month:'long',year:'numeric'});}
+
+// ── PHOTOS ──────────────────────────────────────────
+function handleFiles(f){Array.from(f).slice(0,4-pending.length).forEach(file=>{if(!file.type.startsWith('image/'))return;const r=new FileReader();r.onload=e=>{pending.push(e.target.result);renderPP();};r.readAsDataURL(file);});}
+function handleDrop(e){e.preventDefault();handleFiles(e.dataTransfer.files);}
+function renderPP(){document.getElementById('photoPreview').innerHTML=pending.map((s,i)=>`<div style="position:relative;display:inline-block"><img src="${s}" style="width:56px;height:40px;object-fit:cover;border-radius:7px;border:1px solid #e2e8f0;cursor:pointer" onclick="openLBs('${s}')"><button onclick="rmPh(${i})" style="position:absolute;top:-4px;right:-4px;width:14px;height:14px;border-radius:50%;background:#dc2626;color:#fff;border:none;font-size:8px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0">✕</button></div>`).join('');}
+function rmPh(i){pending.splice(i,1);renderPP();}
+function openLBs(src){lbImgs=[{src,info:''}];lbI=0;showLB();}
+function openLBt(tid,idx){const t=trades.find(x=>x.id===tid);if(!t||!t.photos.length)return;const hp=t.pnl!==null&&!isNaN(t.pnl);lbImgs=t.photos.map(s=>({src:s,info:t.pair+' · '+t.dir+' · '+t.session+(hp?' · '+fU(t.pnl):'')}));lbI=idx;showLB();}
+function openLBa(imgs,i){lbImgs=imgs;lbI=i;showLB();}
+function showLB(){const x=lbImgs[lbI];document.getElementById('lbImg').src=x.src;document.getElementById('lbInfo').textContent=x.info||'';document.getElementById('lbCtr').textContent=lbImgs.length>1?(lbI+1)+' / '+lbImgs.length:'';document.getElementById('lb').classList.add('open');}
+function closeLB(){document.getElementById('lb').classList.remove('open');}
+function lbBg(e){if(e.target===document.getElementById('lb'))closeLB();}
+function lbStep(d){lbI=(lbI+d+lbImgs.length)%lbImgs.length;showLB();}
+
+// ── ADD / DELETE ─────────────────────────────────────
+function addTrade(){
+  const date=document.getElementById('f-date').value,pair=document.getElementById('f-pair').value,session=document.getElementById('f-session').value,dir=tradeDir||'Buy',result=document.getElementById('f-result').value;
+  const entry=parseFloat(document.getElementById('f-entry').value),exit=parseFloat(document.getElementById('f-exit').value),lot=parseFloat(document.getElementById('f-lot').value);
+  const mp=document.getElementById('f-pnl').value,notes=document.getElementById('f-notes').value.trim();
+  if(!date||!pair){alert('Fill in date and pair.');return;}
+  let pnl=null;
+  if(mp!==''){pnl=parseFloat(mp);}else if(!isNaN(entry)&&!isNaN(exit)&&!isNaN(lot)){const d=dir==='Buy'?exit-entry:entry-exit;if(pair.includes('JPY'))pnl=parseFloat((d*lot*1000).toFixed(2));else if(pair.includes('XAU')||pair.includes('Gold'))pnl=parseFloat((d*lot*100).toFixed(2));else pnl=parseFloat((d*lot*100000).toFixed(2));}
+  const score=Object.values(rVals).reduce((a,b)=>a+b,0);
+  let grade='';if(score>=16)grade='A';else if(score>=11)grade='B';else if(score>=6)grade='C';else if(score>=4)grade='D';
+  trades.unshift({date,pair,dir,session,result,entry,exit,lot,pnl,notes,photos:[...pending],score,grade,wt:wtChoice_,id:Date.now()});
+  pending=[];renderPP();resetRubric();setWT('');setDir('');clearForm();updPairF();renderStats();
+  showView('tradelog',document.querySelectorAll('#app nav a')[2]);
+}
+function clearForm(){['f-entry','f-exit','f-lot','f-pnl','f-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-result').value='';document.getElementById('f-date').value=todayStr;}
+function deleteTrade(id){trades=trades.filter(t=>t.id!==id);updPairF();renderAll();}
+function updPairF(){const s=document.getElementById('gal-pair'),cur=s.value,pairs=[...new Set(trades.map(t=>t.pair))].sort();s.innerHTML='<option value="">All pairs</option>'+pairs.map(p=>`<option${p===cur?' selected':''}>${p}</option>`).join('');}
+function renderAll(){renderStats();const ap=n=>!document.getElementById('view-'+n).classList.contains('view-hidden');if(ap('overview'))renderOverview();if(ap('tradelog'))renderLog();if(ap('gallery'))renderGallery();if(ap('calendar'))renderCal();if(ap('analytics'))renderTrend();}
+
+// ── STATS ────────────────────────────────────────────
+function renderStats(){
+  const wp=trades.filter(t=>t.pnl!==null&&!isNaN(t.pnl)),wins=wp.filter(t=>t.pnl>0).length,tot=wp.reduce((s,t)=>s+t.pnl,0),best=wp.length?Math.max(...wp.map(t=>t.pnl)):null;
+  document.getElementById('k-total').textContent=trades.length;
+  document.getElementById('k-wr').textContent=wp.length?((wins/wp.length)*100).toFixed(1)+'%':'—';
+  document.getElementById('k-wr-bar').style.width=wp.length?((wins/wp.length)*100)+'%':'0%';
+  const pe=document.getElementById('k-pnl');pe.textContent=(tot>=0?'+$':'-$')+Math.abs(tot).toFixed(2);pe.style.color=tot>0?'#006c46':tot<0?'#dc2626':'#002444';
+  document.getElementById('k-php').textContent=wp.length?'\u2248 '+fP(tot):'';
+  document.getElementById('k-best').textContent=best!==null?fU(best):'—';
+}
+
+// ── CHARTS ──────────────────────────────────────────
+function renderOverview(){
+  renderStats();
+  const wp=trades.filter(t=>t.pnl!==null&&!isNaN(t.pnl)).slice().reverse();
+  [ovC,wlC,sC].forEach(c=>{if(c)c.destroy();});ovC=wlC=sC=null;
+  if(!wp.length)return;
+  let cum=0;const uD=wp.map(t=>{cum+=t.pnl;return parseFloat(cum.toFixed(2));});
+  ovC=new Chart(document.getElementById('ovChart'),{type:'line',data:{labels:wp.map((_,i)=>'#'+(i+1)),datasets:[{data:uD,borderColor:'#002444',backgroundColor:'rgba(0,36,68,.06)',pointRadius:2,tension:0.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},autoSkip:true}},y:{ticks:{font:{size:9},callback:v=>(v>=0?'+$':'-$')+Math.abs(v)}}}}});
+  const wins=wp.filter(t=>t.pnl>0).length,losses=wp.filter(t=>t.pnl<0).length,be=wp.filter(t=>t.pnl===0).length;
+  wlC=new Chart(document.getElementById('wlChart'),{type:'doughnut',data:{labels:['Wins','Losses','B/E'],datasets:[{data:[wins,losses,be],backgroundColor:['#006c46','#dc2626','#94a3b8'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:9,padding:7}}},cutout:'65%'}});
+  const sess=['Asia','London','New York','Overlap'],sCol=['#7c3aed','#1d4ed8','#b45309','#15803d'];
+  const sP=sess.map(s=>parseFloat(wp.filter(t=>t.session===s).reduce((a,t)=>a+t.pnl,0).toFixed(2)));
+  sC=new Chart(document.getElementById('sessChart'),{type:'bar',data:{labels:['Asia','London','NY','Overlap'],datasets:[{data:sP,backgroundColor:sCol.map((c,i)=>sP[i]>=0?c+'44':c+'33'),borderColor:sCol,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10}}},y:{ticks:{font:{size:9},callback:v=>(v>=0?'+$':'-$')+Math.abs(v)}}}}});
+}
+function renderTrend(){
+  const wp=trades.filter(t=>t.pnl!==null&&!isNaN(t.pnl)).slice().reverse();
+  [tC,s2C,pC].forEach(c=>{if(c)c.destroy();});tC=s2C=pC=null;
+  if(!wp.length)return;
+  let cum=0;const uD=wp.map(t=>{cum+=t.pnl;return parseFloat(cum.toFixed(2));});
+  const pD=uD.map(v=>parseFloat((v*liveRate/100).toFixed(2)));
+  tC=new Chart(document.getElementById('trendChart'),{type:'line',data:{labels:wp.map((_,i)=>'#'+(i+1)),datasets:[{label:'USD',data:uD,borderColor:'#002444',backgroundColor:'rgba(0,36,68,.06)',pointRadius:2,tension:0.3,fill:true},{label:'PHP÷100',data:pD,borderColor:'#006c46',backgroundColor:'transparent',borderDash:[4,3],pointRadius:2,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10},boxWidth:10}}},scales:{x:{ticks:{font:{size:9},autoSkip:true}},y:{ticks:{font:{size:9},callback:v=>(v>=0?'+$':'-$')+Math.abs(v)}}}}});
+  const sess=['Asia','London','New York','Overlap'],sCol=['#7c3aed','#1d4ed8','#b45309','#15803d'];
+  const sP=sess.map(s=>parseFloat(wp.filter(t=>t.session===s).reduce((a,t)=>a+t.pnl,0).toFixed(2)));
+  s2C=new Chart(document.getElementById('sessChart2'),{type:'bar',data:{labels:['Asia','London','NY','Overlap'],datasets:[{data:sP,backgroundColor:sCol.map((c,i)=>sP[i]>=0?c+'44':c+'33'),borderColor:sCol,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10}}},y:{ticks:{font:{size:9}}}}}});
+  const pairs=[...new Set(wp.map(t=>t.pair))],ppnl=pairs.map(p=>parseFloat(wp.filter(t=>t.pair===p).reduce((a,t)=>a+t.pnl,0).toFixed(2)));
+  pC=new Chart(document.getElementById('pairChart'),{type:'bar',data:{labels:pairs,datasets:[{data:ppnl,backgroundColor:ppnl.map(v=>v>=0?'rgba(0,108,70,.2)':'rgba(220,38,38,.15)'),borderColor:ppnl.map(v=>v>=0?'#006c46':'#dc2626'),borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:9},maxRotation:30}},y:{ticks:{font:{size:9},callback:v=>(v>=0?'+$':'-$')+Math.abs(v)}}}}});
+}
+
+// ── LOG ──────────────────────────────────────────────
+function setView(v,btn){logView=v;document.querySelectorAll('.pill-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const fd=document.getElementById('filterDate');fd.style.display=v==='daily'?'inline-block':'none';if(v==='daily'&&!fd.value)fd.value=todayStr;renderLog();}
+function renderLog(){
+  const wrap=document.getElementById('logWrap');
+  if(!trades.length){wrap.innerHTML='<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:40px;text-align:center;color:#94a3b8;font-size:13px">No trades yet. Use <b>Add Trade</b> to get started.</div>';return;}
+  let fil=[...trades];
+  if(logView==='daily'){const fd=document.getElementById('filterDate').value||todayStr;fil=trades.filter(t=>t.date===fd);}
+  const thead=`<thead style="background:#f8fafc;border-bottom:1px solid #f1f5f9"><tr>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap">Date</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Pair</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Dir</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Session</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Result</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L USD</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L PHP</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Grade</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">↺</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Photo</th>
+    <th style="padding:9px 10px"></th>
+  </tr></thead>`;
+  function rowH(t){
+    const hp=t.pnl!==null&&!isNaN(t.pnl),pCol=t.pnl>0?'#006c46':t.pnl<0?'#dc2626':'#1a1c1e',pw=t.pnl>0||t.pnl<0?'700':'400';
+    const res=t.result?`<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${t.result==='Win'?'background:#dcfce7;color:#16a34a':t.result==='Loss'?'background:#fee2e2;color:#dc2626':'background:#f1f5f9;color:#64748b'}">${t.result}</span>`:'—';
+    const gr=t.grade?`<span style="font-size:10px;font-weight:900;color:${t.grade==='A'?'#16a34a':t.grade==='B'?'#2563eb':t.grade==='C'?'#d97706':'#dc2626'}">${t.grade}</span>`:'—';
+    const ph=t.photos&&t.photos.length?`<img src="${t.photos[0]}" style="width:26px;height:18px;object-fit:cover;border-radius:4px;border:1px solid #e2e8f0;cursor:pointer;vertical-align:middle" onclick="openLBt(${t.id},0)">`:'<span style="color:#cbd5e1;font-size:11px">—</span>';
+    return `<tr style="border-bottom:1px solid #f8fafc" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background=''">
+      <td style="padding:8px 10px;font-size:11px;color:#64748b">${t.date}</td>
+      <td style="padding:8px 10px;font-size:12px;font-weight:700;color:#002444">${t.pair}</td>
+      <td style="padding:8px 10px"><span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${t.dir==='Buy'?'background:#dcfce7;color:#16a34a':'background:#fee2e2;color:#dc2626'}">${t.dir}</span></td>
+      <td style="padding:8px 10px"><span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${sCls(t.session)}">${sKey(t.session)}</span></td>
+      <td style="padding:8px 10px">${res}</td>
+      <td style="padding:8px 10px;font-size:12px;color:${pCol};font-weight:${pw}">${hp?fU(t.pnl):'—'}</td>
+      <td style="padding:8px 10px;font-size:12px;color:${pCol};font-weight:${pw}">${hp?fP(t.pnl):'—'}</td>
+      <td style="padding:8px 10px">${gr}</td>
+      <td style="padding:8px 10px;font-size:12px">${t.wt==='yes'?'✅':t.wt==='no'?'❌':'—'}</td>
+      <td style="padding:8px 10px">${ph}</td>
+      <td style="padding:8px 10px"><button onclick="deleteTrade(${t.id})" style="background:none;border:none;cursor:pointer;color:#cbd5e1;font-size:11px" onmouseover="this.style.color='#dc2626'" onmouseout="this.style.color='#cbd5e1'">✕</button></td>
+    </tr>`;
+  }
+  if(logView==='all'||logView==='daily'){
+    if(!fil.length){wrap.innerHTML='<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:32px;text-align:center;color:#94a3b8;font-size:13px">No trades for this date.</div>';return;}
+    wrap.innerHTML=`<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">${thead}<tbody>${fil.map(rowH).join('')}</tbody></table></div></div>`;
+  } else {
+    const gFn=logView==='weekly'?getWK:getMK,lFn=logView==='weekly'?wkLbl:moLbl;
+    const groups={};trades.forEach(t=>{const k=gFn(t.date);if(!groups[k])groups[k]=[];groups[k].push(t);});
+    const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+    let html='';
+    keys.forEach(k=>{
+      const ts=groups[k],wp=ts.filter(t=>t.pnl!==null&&!isNaN(t.pnl)),sum=wp.reduce((s,t)=>s+t.pnl,0),wins=wp.filter(t=>t.pnl>0).length;
+      html+=`<div style="display:flex;align-items:center;gap:10px;margin:14px 0 6px">
+        <h3 style="font-size:13px;font-weight:700;color:#002444;white-space:nowrap;font-family:'Work Sans'">${lFn(k)}</h3>
+        <div style="flex:1;height:1px;background:#e2e8f0"></div>
+        ${wp.length?`<span style="font-size:12px;font-weight:700;color:${sum>=0?'#006c46':'#dc2626'}">${fU(sum)} / ${fP(sum)}</span><span style="font-size:10px;color:#94a3b8;font-weight:600;margin-left:4px">${wins}W/${wp.length-wins}L</span>`:''}
+      </div>
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:10px"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">${thead}<tbody>${ts.map(rowH).join('')}</tbody></table></div></div>`;
+    });
+    wrap.innerHTML=html;
+  }
+}
+
+// ── GALLERY ──────────────────────────────────────────
+function renderGallery(){
+  const wrap=document.getElementById('galWrap');
+  const pF=document.getElementById('gal-pair').value,dF=document.getElementById('gal-dir').value,rF=document.getElementById('gal-res').value;
+  let fil=trades.filter(t=>t.photos&&t.photos.length>0);
+  if(pF)fil=fil.filter(t=>t.pair===pF);if(dF)fil=fil.filter(t=>t.dir===dF);
+  if(rF==='win')fil=fil.filter(t=>t.pnl!==null&&t.pnl>0);if(rF==='loss')fil=fil.filter(t=>t.pnl!==null&&t.pnl<0);
+  if(!fil.length){wrap.innerHTML='<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:40px;text-align:center;color:#94a3b8;font-size:13px">'+(trades.filter(t=>t.photos&&t.photos.length).length===0?'No screenshots yet. Add photos when logging trades.':'No trades match the filter.')+'</div>';return;}
+  const groups={};fil.forEach(t=>{const k=getWK(t.date);if(!groups[k])groups[k]=[];groups[k].push(t);});
+  const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+  const allImgs=[];fil.forEach(t=>{const hp=t.pnl!==null&&!isNaN(t.pnl);t.photos.forEach(s=>allImgs.push({src:s,info:t.pair+' · '+t.dir+' · '+t.session+(hp?' · '+fU(t.pnl):'')}));});
+  let imgIdx=0,html='';
+  keys.forEach(k=>{
+    const ts=groups[k],wp=ts.filter(t=>t.pnl!==null&&!isNaN(t.pnl)),sum=wp.reduce((s,t)=>s+t.pnl,0),wins=wp.filter(t=>t.pnl>0).length;
+    const wkBg=wp.length?(sum>0?'background:#f0fdf4;border-color:#bbf7d0;color:#16a34a':'background:#fef2f2;border-color:#fecaca;color:#dc2626'):'background:#f8fafc;border-color:#e2e8f0;color:#64748b';
+    html+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <h3 style="font-size:13px;font-weight:700;color:#002444;white-space:nowrap;font-family:'Work Sans'">${wkLbl(k)}</h3>
+      <div style="flex:1;height:1px;background:#e2e8f0"></div>
+      ${wp.length?`<span style="font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid;${wkBg}">${fU(sum)} · ${wins}W/${wp.length-wins}L</span>`:''}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:20px">`;
+    ts.forEach(t=>{
+      const hp=t.pnl!==null&&!isNaN(t.pnl),fi=imgIdx;
+      imgIdx+=t.photos.length;
+      html+=`<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);cursor:pointer" onclick="openLBa(galCache,${fi})">
+        <div style="position:relative">
+          <img src="${t.photos[0]}" style="width:100%;height:160px;object-fit:cover;filter:grayscale(100%);transition:filter .3s" onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(100%)'">
+          ${t.result?`<div style="position:absolute;top:8px;right:8px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${t.result==='Win'?'background:#16a34a;color:#fff':t.result==='Loss'?'background:#dc2626;color:#fff':'background:#475569;color:#fff'}">${t.result.toUpperCase()}</div>`:''}
+          ${t.photos.length>1?`<div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.5);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:5px">+${t.photos.length-1}</div>`:''}
+        </div>
+        <div style="padding:10px 12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px">
+            <span style="font-size:12px;font-weight:700;color:#002444">${t.pair}</span>
+            <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${t.dir==='Buy'?'background:#dcfce7;color:#16a34a':'background:#fee2e2;color:#dc2626'}">${t.dir}</span>
+          </div>
+          <div style="font-size:10px;color:#94a3b8;margin-bottom:4px">${t.date} · <span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:5px;${sCls(t.session)}">${sKey(t.session)}</span></div>
+          ${hp?`<div style="font-size:12px;font-weight:700;color:${t.pnl>0?'#006c46':'#dc2626'}">${fU(t.pnl)} <span style="font-size:10px;color:#94a3b8;font-weight:500">${fP(t.pnl)}</span></div>`:''}
+          ${t.grade?`<div style="font-size:10px;font-weight:700;margin-top:2px;color:${t.grade==='A'?'#16a34a':t.grade==='B'?'#2563eb':t.grade==='C'?'#d97706':'#dc2626'}">Grade ${t.grade}</div>`:''}
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  wrap.innerHTML=html;window.galCache=allImgs;
+}
+
+// ── CALENDAR ─────────────────────────────────────────
+function renderCal(){
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calTitle').textContent=months[cM]+' '+cY;
+  const first=new Date(cY,cM,1).getDay(),dim=new Date(cY,cM+1,0).getDate(),dm={};
+  trades.forEach(t=>{if(!t.date)return;const[y,m,d]=t.date.split('-').map(Number);if(y===cY&&m===cM+1){if(!dm[d])dm[d]=[];dm[d].push(t);}});
+  let html='';
+  for(let i=0;i<first;i++)html+=`<div class="cal-day" style="opacity:0;pointer-events:none"></div>`;
+  for(let d=1;d<=dim;d++){
+    const ds=cY+'-'+String(cM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isT=ds===todayStr,ts=dm[d]||[],wp=ts.filter(t=>t.pnl!==null&&!isNaN(t.pnl)),dp=wp.reduce((s,t)=>s+t.pnl,0);
+    const bg=wp.length?(dp>0?'background:#f0fdf4':'background:#fef2f2'):'background:#fff';
+    const ps=wp.length?(dp>=0?'+$':'-$')+Math.abs(dp).toFixed(2):'';
+    html+=`<div class="cal-day${ts.length?' has-t':''}" style="${bg}" onclick="showDay(${d})">
+      <span style="font-size:9px;font-weight:700;color:${isT?'#2563eb':'#94a3b8'}">${d}${isT?' ●':''}</span>
+      ${ps?`<div style="margin-top:5px;font-size:11px;font-weight:700;color:${dp>0?'#16a34a':'#dc2626'}">${ps}</div>`:''}
+      ${ts.length?`<div style="font-size:9px;color:#94a3b8;margin-top:2px">${ts.length}tr</div>`:''}
+    </div>`;
+  }
+  document.getElementById('calGrid').innerHTML=html;document.getElementById('dayDetail').innerHTML='';
+}
+function showDay(d){
+  const ds=cY+'-'+String(cM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+  const ts=trades.filter(t=>t.date===ds);
+  if(!ts.length){document.getElementById('dayDetail').innerHTML='';return;}
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const rows=ts.map(t=>{const hp=t.pnl!==null&&!isNaN(t.pnl),pc=t.pnl>0?'#006c46':t.pnl<0?'#dc2626':'#1a1c1e',pw=t.pnl>0||t.pnl<0?'700':'400';const th=t.photos&&t.photos.length?t.photos.map((s,i)=>`<img src="${s}" style="width:26px;height:18px;object-fit:cover;border-radius:4px;border:1px solid #e2e8f0;cursor:pointer;vertical-align:middle;margin-right:3px" onclick="openLBt(${t.id},${i})">`).join(''):'—';return `<tr style="border-bottom:1px solid #f8fafc" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background=''"><td style="padding:8px 10px;font-size:12px;font-weight:700;color:#002444">${t.pair}</td><td style="padding:8px 10px"><span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;${t.dir==='Buy'?'background:#dcfce7;color:#16a34a':'background:#fee2e2;color:#dc2626'}">${t.dir}</span></td><td style="padding:8px 10px;font-size:12px;color:${pc};font-weight:${pw}">${hp?fU(t.pnl):'—'}</td><td style="padding:8px 10px;font-size:12px;color:${pc};font-weight:${pw}">${hp?fP(t.pnl):'—'}</td><td style="padding:8px 10px">${th}</td></tr>`;}).join('');
+  document.getElementById('dayDetail').innerHTML=`<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)"><div style="padding:10px 14px;background:#f8fafc;border-bottom:1px solid #f1f5f9"><span style="font-size:12px;font-weight:700;color:#002444">${months[cM]} ${d} — ${ts.length} trade${ts.length>1?'s':''}</span></div><table style="width:100%;border-collapse:collapse"><thead style="background:#f8fafc;border-bottom:1px solid #f1f5f9"><tr><th style="padding:8px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase">Pair</th><th style="padding:8px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase">Dir</th><th style="padding:8px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase">USD</th><th style="padding:8px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase">PHP</th><th style="padding:8px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase">Photos</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function chMon(dir){cM+=dir;if(cM>11){cM=0;cY++;}if(cM<0){cM=11;cY--;}renderCal();document.getElementById('dayDetail').innerHTML='';}
+
+// ── CHECKLIST ────────────────────────────────────────
+const DEF_CL=['Check Forex Factory for high-impact news (Red Folders)','Identify Higher Timeframe (Daily/H4) trend & bias','Mark Key Support/Resistance and Liquidity pools','Price action entry signal confirmed','Stop-loss placed before entering','Risk-reward minimum 1:2','Position size within risk management rules','Clear mindset — no revenge trading'];
+let clItems=DEF_CL.map((t,i)=>({id:i,text:t,chk:false})),clId=DEF_CL.length;
+function renderCl(){
+  const tot=clItems.length,done=clItems.filter(i=>i.chk).length,pct=tot?Math.round(done/tot*100):0;
+  document.getElementById('clScore').textContent=done+'/'+tot+' — '+pct+'%';
+  document.getElementById('clPb').style.width=pct+'%';
+  document.getElementById('clItems').innerHTML=clItems.map(it=>`
+    <label style="display:flex;align-items:center;padding:10px 14px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all .15s" onmouseover="this.style.background='#f8fafc';this.style.borderColor='#f1f5f9'" onmouseout="this.style.background='';this.style.borderColor='transparent'">
+      <input type="checkbox" id="cl${it.id}" ${it.chk?'checked':''} onchange="togCl(${it.id})" style="width:16px;height:16px;border-radius:4px;accent-color:#002444;flex-shrink:0">
+      <span style="margin-left:12px;font-size:13px;color:${it.chk?'#94a3b8':'#374151'};flex:1;${it.chk?'text-decoration:line-through':''}">${it.text}</span>
+      <button onclick="rmCl(${it.id})" style="background:none;border:none;cursor:pointer;color:#d1d5db;font-size:11px;margin-left:6px" onmouseover="this.style.color='#dc2626'" onmouseout="this.style.color='#d1d5db'">✕</button>
+    </label>`).join('');
+}
+function togCl(id){const it=clItems.find(i=>i.id===id);if(it)it.chk=!it.chk;renderCl();}
+function addClItem(){const inp=document.getElementById('clNew'),txt=inp.value.trim();if(!txt)return;clItems.push({id:clId++,text:txt,chk:false});inp.value='';renderCl();}
+function rmCl(id){clItems=clItems.filter(i=>i.id!==id);renderCl();}
+function resetCl(){clItems=clItems.map(i=>({...i,chk:false}));renderCl();}
+
+// ── INIT ─────────────────────────────────────────────
+buildRubric();renderStats();renderCl();
+</script>
+</body>
+</html>
