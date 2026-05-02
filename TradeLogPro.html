@@ -613,10 +613,11 @@ body{font-family:'Inter',sans-serif;background:#faf9fc;color:#1a1c1e}
         <input type="date" id="f-date" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;outline:none">
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #f1f5f9">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #f1f5f9">
       <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Entry</label><input type="number" id="f-entry" step="any" placeholder="0.0000" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
       <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Exit</label><input type="number" id="f-exit" step="any" placeholder="0.0000" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
       <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Lots</label><input type="number" id="f-lot" step="any" placeholder="0.01" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">R:R Ratio</label><input type="number" id="f-rr" step="any" placeholder="e.g. 2.0" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
       <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L USD</label><input type="number" id="f-pnl" step="any" placeholder="Auto or manual" style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;font-family:'Courier New';outline:none"></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:4px"><label style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Notes / Strategy</label><textarea id="f-notes" rows="2" placeholder="Setup, entry reason, lessons learned..." style="font-size:12px;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;background:#fff;resize:none;font-family:'Inter',sans-serif;outline:none"></textarea></div>
@@ -810,18 +811,18 @@ function lbStep(d){lbI=(lbI+d+lbImgs.length)%lbImgs.length;showLB();}
 // ── ADD / DELETE ─────────────────────────────────────
 function addTrade(){
   const date=document.getElementById('f-date').value,pair=document.getElementById('f-pair').value,session=document.getElementById('f-session').value,dir=tradeDir||'Buy',result=document.getElementById('f-result').value;
-  const entry=parseFloat(document.getElementById('f-entry').value),exit=parseFloat(document.getElementById('f-exit').value),lot=parseFloat(document.getElementById('f-lot').value);
+  const entry=parseFloat(document.getElementById('f-entry').value),exit=parseFloat(document.getElementById('f-exit').value),lot=parseFloat(document.getElementById('f-lot').value),rr=parseFloat(document.getElementById('f-rr').value);
   const mp=document.getElementById('f-pnl').value,notes=document.getElementById('f-notes').value.trim();
   if(!date||!pair){alert('Fill in date and pair.');return;}
   let pnl=null;
   if(mp!==''){pnl=parseFloat(mp);}else if(!isNaN(entry)&&!isNaN(exit)&&!isNaN(lot)){const d=dir==='Buy'?exit-entry:entry-exit;if(pair.includes('JPY'))pnl=parseFloat((d*lot*1000).toFixed(2));else if(pair.includes('XAU')||pair.includes('Gold'))pnl=parseFloat((d*lot*100).toFixed(2));else pnl=parseFloat((d*lot*100000).toFixed(2));}
   const score=Object.values(rVals).reduce((a,b)=>a+b,0);
   let grade='';if(score>=16)grade='A';else if(score>=11)grade='B';else if(score>=6)grade='C';else if(score>=4)grade='D';
-  trades.unshift({date,pair,dir,session,result,entry,exit,lot,pnl,notes,photos:[...pending],score,grade,wt:wtChoice_,id:Date.now()});
+  trades.unshift({date,pair,dir,session,result,entry,exit,lot,rr,pnl,notes,photos:[...pending],score,grade,wt:wtChoice_,id:Date.now()});
   pending=[];renderPP();resetRubric();setWT('');setDir('');clearForm();updPairF();renderStats();
   showView('tradelog',document.querySelectorAll('#app nav a')[2]);
 }
-function clearForm(){['f-entry','f-exit','f-lot','f-pnl','f-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-result').value='';document.getElementById('f-date').value=todayStr;}
+function clearForm(){['f-entry','f-exit','f-lot','f-rr','f-pnl','f-notes'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-result').value='';document.getElementById('f-date').value=todayStr;}
 function deleteTrade(id){trades=trades.filter(t=>t.id!==id);updPairF();renderAll();}
 function updPairF(){const s=document.getElementById('gal-pair'),cur=s.value,pairs=[...new Set(trades.map(t=>t.pair))].sort();s.innerHTML='<option value="">All pairs</option>'+pairs.map(p=>`<option${p===cur?' selected':''}>${p}</option>`).join('');}
 function renderAll(){renderStats();const ap=n=>!document.getElementById('view-'+n).classList.contains('view-hidden');if(ap('overview'))renderOverview();if(ap('tradelog'))renderLog();if(ap('gallery'))renderGallery();if(ap('calendar'))renderCal();if(ap('analytics'))renderTrend();}
@@ -880,6 +881,7 @@ function renderLog(){
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Result</th>
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L USD</th>
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">P&L PHP</th>
+    <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">R:R</th>
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Grade</th>
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">↺</th>
     <th style="padding:9px 10px;text-align:left;font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em">Photo</th>
@@ -898,6 +900,7 @@ function renderLog(){
       <td style="padding:8px 10px">${res}</td>
       <td style="padding:8px 10px;font-size:12px;color:${pCol};font-weight:${pw}">${hp?fU(t.pnl):'—'}</td>
       <td style="padding:8px 10px;font-size:12px;color:${pCol};font-weight:${pw}">${hp?fP(t.pnl):'—'}</td>
+      <td style="padding:8px 10px;font-size:12px">${t.rr ? t.rr : '—'}</td>
       <td style="padding:8px 10px">${gr}</td>
       <td style="padding:8px 10px;font-size:12px">${t.wt==='yes'?'✅':t.wt==='no'?'❌':'—'}</td>
       <td style="padding:8px 10px">${ph}</td>
